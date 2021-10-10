@@ -3,17 +3,25 @@ import React, { Component } from 'react';
 class Counter extends Component {
   state = {
     count: 0,
+    tags: ['tag 1', 'tag 2', 'tag 3'],
   };
 
   render() {
     return (
       <React.Fragment>
-        <span className={`badge m-2 ${this.setBadgeColor()}`}>
-          {this.setCounterText()}
-        </span>
+        <span className={`badge m-2 ${this.setBadgeColor()}`}>{this.setCounterText()}</span>
         <button className="btn btn-secondary btn-sm">Increment</button>
+        <ul>
+          {this.state.tags.map((tag) => (
+            <li key={this.randomId()}>{tag}</li>
+          ))}
+        </ul>
       </React.Fragment>
     );
+  }
+
+  randomId() {
+    return Math.random();
   }
 
   setCounterText() {
