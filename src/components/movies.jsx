@@ -1,15 +1,29 @@
 import React, { Component } from 'react';
-import { getMovies, deleteMovie } from '../services/fakeMovieService';
+import { getMovies } from '../services/fakeMovieService';
 
 class Movies extends Component {
   state = {
     movies: getMovies(),
   };
 
+  deleteMovie(movie) {
+    let movies = this.state.movies.filter((_m) => _m._id !== movie._id);
+    this.setState({ movies });
+  }
+
+  manageEmptyState() {
+    return this.state.movies.length > 1
+      ? `Showing ${this.state.movies.length} Movies`
+      : `Showing ${this.state.movies.length} Movie`;
+  }
+
   render() {
+    if (this.state.movies.length === 0) {
+      return <p className="m-2 my-2">You've no movies to show...</p>;
+    }
     return (
-      <div className="container">
-        <p className="m-2 my-2">{this.emptyState()}...</p>
+      <React.Fragment>
+        <p className="m-2 my-2">{this.manageEmptyState()}...</p>
         <table className="table table-hover">
           <thead>
             <tr>
@@ -22,16 +36,13 @@ class Movies extends Component {
           </thead>
           <tbody>
             {this.state.movies.map((movie) => (
-              <tr key={this.randomId()}>
+              <tr key={movie._id}>
                 <td>{movie.title}</td>
                 <td>{movie.genre.name}</td>
                 <td>{movie.numberInStock}</td>
                 <td>{movie.dailyRentalRate}</td>
                 <td>
-                  <button
-                    onClick={() => this.updateTable(movie._id)}
-                    className="btn btn-danger btn-sm"
-                  >
+                  <button onClick={() => this.deleteMovie(movie)} className="btn btn-danger btn-sm">
                     Delete
                   </button>
                 </td>
@@ -39,25 +50,8 @@ class Movies extends Component {
             ))}
           </tbody>
         </table>
-      </div>
+      </React.Fragment>
     );
-  }
-
-  emptyState() {
-    if (this.state.movies.length === 0) {
-      return `You've no movies to show`;
-    }
-    return this.state.movies.length > 1
-      ? `Showing ${this.state.movies.length} Movies`
-      : `Showing ${this.state.movies.length} Movie`;
-  }
-
-  updateTable(id) {
-    this.setState(deleteMovie(id));
-  }
-
-  randomId() {
-    return Math.random();
   }
 }
 
