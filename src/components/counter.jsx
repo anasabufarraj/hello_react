@@ -6,9 +6,25 @@ class Counter extends Component {
     tags: ['tag 1', 'tag 2', 'tag 3'],
   };
 
-  constructor(props) {
-    super(props);
-    this.incrementCounter = this.incrementCounter.bind(this);
+  incrementCounter(id) {
+    console.log(id);
+    this.setState({ count: this.state.count + 1 });
+  }
+
+  emptyState() {
+    if (this.state.tags.length) {
+      return this.state.tags.map((tag) => <li key={tag}>{tag}</li>);
+    }
+    return <span>You have no tags!</span>;
+  }
+
+  setCounterText() {
+    let { count } = this.state; // destructuring assignment
+    return count === 0 ? <span>Nothing</span> : count;
+  }
+
+  setBadgeColor() {
+    return this.state.count === 0 ? 'bg-warning' : 'bg-primary';
   }
 
   render() {
@@ -21,31 +37,6 @@ class Counter extends Component {
         <ul>{this.emptyState()}</ul>
       </React.Fragment>
     );
-  }
-
-  incrementCounter(id) {
-    console.log(id);
-    this.setState({ count: this.state.count + 1 });
-  }
-
-  emptyState() {
-    if (this.state.tags.length) {
-      return this.state.tags.map((tag) => <li key={this.randomId()}>{tag}</li>);
-    }
-    return <span>You have no tags!</span>;
-  }
-
-  randomId() {
-    return Math.random();
-  }
-
-  setCounterText() {
-    let { count } = this.state; // destructuring assignment
-    return count === 0 ? <span>Nothing</span> : count;
-  }
-
-  setBadgeColor() {
-    return this.state.count === 0 ? 'bg-warning' : 'bg-primary';
   }
 }
 
