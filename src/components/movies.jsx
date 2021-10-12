@@ -16,16 +16,18 @@ class Movies extends Component {
               <th scope="col">Movie</th>
               <th scope="col">Genre</th>
               <th scope="col">In Stock</th>
+              <th scope="col">Rate</th>
               <th scope="col">Handle</th>
             </tr>
           </thead>
           <tbody>
             {this.state.movies.map((movie) => (
               <tr key={this.randomId()}>
-                <td key={this.randomId()}>{movie.title}</td>
-                <td key={this.randomId()}>{movie.genre.name}</td>
-                <td key={this.randomId()}>{movie.numberInStock}</td>
-                <td key={this.randomId()}>
+                <td>{movie.title}</td>
+                <td>{movie.genre.name}</td>
+                <td>{movie.numberInStock}</td>
+                <td>{movie.dailyRentalRate}</td>
+                <td>
                   <button
                     onClick={() => this.updateTable(movie._id)}
                     className="btn btn-danger btn-sm"
