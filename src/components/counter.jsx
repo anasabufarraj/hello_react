@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 
 class Counter extends Component {
   state = {
-    count: 0,
-    // tags: ['tag 1', 'tag 2', 'tag 3'],
+    value: this.props.value,
   };
 
   constructor(props) {
@@ -11,35 +10,30 @@ class Counter extends Component {
     this.incrementCounter = this.incrementCounter.bind(this);
   }
 
-  incrementCounter(id) {
-    console.log(id);
-    this.setState({ count: this.state.count + 1 });
+  incrementCounter() {
+    this.setState({ value: this.state.value + 1 });
   }
 
-  // manageEmptyState() {
-  //   if (this.state.tags.length) {
-  //     return this.state.tags.map((tag) => <li key={tag}>{tag}</li>);
-  //   }
-  //   return <span>You have no tags!</span>;
-  // }
-
   setCounterText() {
-    let { count } = this.state; // destructuring assignment
-    return count === 0 ? <span>Zero</span> : count;
+    let { value } = this.state;
+    return value === 0 ? <span>0</span> : value;
   }
 
   setBadgeColor() {
-    return this.state.count === 0 ? 'bg-warning' : 'bg-primary';
+    return this.state.value === 0 ? 'bg-warning' : 'bg-primary';
   }
 
   render() {
     return (
       <div>
-        <button onClick={() => this.incrementCounter(2)} className="btn btn-secondary btn-sm m-1">
-          Increment
+        <span className="p-2">{this.props.id}</span>
+        <button onClick={this.incrementCounter} className="btn btn-secondary">
+          Increase
         </button>
-        <span className={`badge m-2 ${this.setBadgeColor()}`}>{this.setCounterText()}</span>
-        {/*<ul>{this.manageEmptyState()}</ul>*/}
+        <button onClick={this.props.onDelete} className="btn btn-danger m-2">
+          Delete
+        </button>
+        <span className={`badge p-2 ${this.setBadgeColor()}`}>{this.setCounterText()}</span>
       </div>
     );
   }
