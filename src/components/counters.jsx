@@ -32,7 +32,7 @@ class Counters extends Component {
 
   handleIncrement(counter) {
     let counters = [...this.state.counters];
-    let index = this.state.counters.indexOf(counter);
+    let index = counters.indexOf(counter);
     counters[index].value++;
     this.setState({ counters });
   }
