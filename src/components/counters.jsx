@@ -38,6 +38,9 @@ class Counters extends Component {
   }
 
   render() {
+    if (this.state.counters.length === 0) {
+      return <div className="text-secondary m-4">You have no counters!</div>;
+    }
     return (
       <React.Fragment>
         <button onClick={this.handleReset} className="btn btn-outline-danger m-4">
