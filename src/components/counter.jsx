@@ -20,7 +20,10 @@ class Counter extends Component {
         >
           Add
         </button>
-        <button onClick={this.props.onDelete} className="btn btn-danger m-2">
+        <button
+          onClick={() => this.props.onDelete(this.props.counter.id)}
+          className="btn btn-danger m-2"
+        >
           Delete
         </button>
         <span className={`badge p-2 ${this.setBadgeColor()}`}>

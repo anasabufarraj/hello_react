@@ -17,11 +17,6 @@ class Counters extends Component {
     this.handleReset = this.handleReset.bind(this);
   }
 
-  handleDelete(id) {
-    let counters = this.state.counters.filter((_c) => _c.id !== id.id);
-    this.setState({ counters });
-  }
-
   handleReset() {
     let counters = this.state.counters.map((_c) => {
       _c.value = 0;
@@ -37,6 +32,11 @@ class Counters extends Component {
     this.setState({ counters });
   }
 
+  handleDelete(id) {
+    let counters = this.state.counters.filter((_c) => _c.id !== id);
+    this.setState({ counters });
+  }
+
   render() {
     if (this.state.counters.length === 0) {
       return <div className="text-secondary m-4">You have no counters!</div>;
@@ -49,7 +49,7 @@ class Counters extends Component {
         {this.state.counters.map((counter) => (
           <Counter
             key={counter.id}
-            onDelete={() => this.handleDelete(counter)}
+            onDelete={() => this.handleDelete(counter.id)}
             onIncrement={() => this.handleIncrement(counter)}
             counter={counter}
           />
