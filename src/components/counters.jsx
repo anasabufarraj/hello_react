@@ -38,9 +38,9 @@ class Counters extends Component {
   }
 
   render() {
-    if (this.state.counters.length === 0) {
-      return <div className="text-secondary m-4">You have no counters!</div>;
-    }
+    // if (this.state.counters.length === 0) {
+    //   return <div className="text-secondary m-4">You have no counters!</div>;
+    // }
     return (
       <React.Fragment>
         <button onClick={this.handleReset} className="btn btn-outline-danger m-4">
@@ -49,8 +49,8 @@ class Counters extends Component {
         {this.state.counters.map((counter) => (
           <Counter
             key={counter.id}
-            onDelete={() => this.handleDelete(counter.id)}
             onIncrement={() => this.handleIncrement(counter)}
+            onDelete={() => this.handleDelete(counter.id)}
             counter={counter}
           />
         ))}
