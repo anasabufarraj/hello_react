@@ -50,7 +50,7 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <NavBar />
+        <NavBar items={this.state.counters.length} />
         <main className="container">
           <Counters
             onReset={this.handleReset}
