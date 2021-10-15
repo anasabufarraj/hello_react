@@ -10,6 +10,11 @@ class Counter extends Component {
     return this.props.counter.value === 0 ? 'bg-warning' : 'bg-primary';
   }
 
+  // TODO: Remove for production
+  componentWillUnmount() {
+    console.log('Unmount - Counter');
+  }
+
   render() {
     return (
       <div>

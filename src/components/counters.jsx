@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import Counter from './counter';
 
 class Counters extends Component {
+  // TODO: Remove for production
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props !== prevProps) {
+      console.log('Properties did changed - Counters');
+    }
+  }
+
   render() {
     return (
       <React.Fragment>
