@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 class Counter extends Component {
   componentWillUnmount() {
-    // TODO: Remove function for production
     console.log('Unmount - Counter');
   }
 

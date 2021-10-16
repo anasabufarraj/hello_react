@@ -3,7 +3,6 @@ import Counter from './counter';
 
 class Counters extends Component {
   componentDidUpdate(prevProps, prevState) {
-    // TODO: Remove function for production
     if (this.props !== prevProps) {
       console.log('Properties did changed - Counters');
     }
