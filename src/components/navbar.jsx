@@ -2,7 +2,7 @@
 function NavBar(props) {
   return (
     <nav className="navbar navbar-dark bg-dark">
-      <div className="container-fluid">
+      <div className="container">
         <a className="navbar-brand" href="http://localhost:3000/">
           MENU
         </a>

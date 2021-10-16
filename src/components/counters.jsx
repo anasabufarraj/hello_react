@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Counter from './counter';
 
 class Counters extends Component {
-  // TODO: Remove for production
   componentDidUpdate(prevProps, prevState) {
+    // TODO: Remove function for production
     if (this.props !== prevProps) {
       console.log('Properties did changed - Counters');
     }
@@ -19,6 +19,7 @@ class Counters extends Component {
           <Counter
             key={counter.id}
             onIncrement={() => this.props.onIncrement(counter)}
+            onDecrement={() => this.props.onDecrement(counter)}
             onDelete={() => this.props.onDelete(counter.id)}
             counter={counter}
           />

@@ -18,6 +18,7 @@ class App extends Component {
     super(props);
     this.handleReset = this.handleReset.bind(this);
     this.handleIncrement = this.handleIncrement.bind(this);
+    this.handleDecrement = this.handleDecrement.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
 
@@ -33,6 +34,13 @@ class App extends Component {
     let counters = [...this.state.counters];
     let index = counters.indexOf(counter);
     counters[index].value++;
+    this.setState({ counters });
+  }
+
+  handleDecrement(counter) {
+    let counters = [...this.state.counters];
+    let index = counters.indexOf(counter);
+    counters[index].value--;
     this.setState({ counters });
   }
 
@@ -55,6 +63,7 @@ class App extends Component {
           <Counters
             onReset={this.handleReset}
             onIncrement={this.handleIncrement}
+            onDecrement={this.handleDecrement}
             onDelete={this.handleDelete}
             counters={this.state.counters}
           />
