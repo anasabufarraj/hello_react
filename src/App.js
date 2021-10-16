@@ -10,13 +10,13 @@ class App extends Component {
       { id: 2, value: 0 },
       { id: 3, value: 0 },
       { id: 4, value: 0 },
-      { id: 5, value: 0 },
     ],
   };
 
   constructor(props) {
     super(props);
     this.handleReset = this.handleReset.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
     this.handleIncrement = this.handleIncrement.bind(this);
     this.handleDecrement = this.handleDecrement.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -28,6 +28,11 @@ class App extends Component {
       return _c;
     });
     this.setState({ counters });
+  }
+
+  handleAdd() {
+    this.state.counters.push({ id: this.state.counters.slice(-1)[0].id + 1, value: 0 });
+    this.setState(this.state.counters);
   }
 
   handleIncrement(counter) {
@@ -62,6 +67,7 @@ class App extends Component {
         <main className="container">
           <Counters
             onReset={this.handleReset}
+            onAdd={this.handleAdd}
             onIncrement={this.handleIncrement}
             onDecrement={this.handleDecrement}
             onDelete={this.handleDelete}

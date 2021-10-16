@@ -13,7 +13,10 @@ class Counters extends Component {
     return (
       <React.Fragment>
         <button onClick={this.props.onReset} className="btn btn-outline-danger m-4">
-          Reset Quantity
+          Reset Quantities
+        </button>
+        <button onClick={this.props.onAdd} className="btn btn-outline-danger">
+          Add Counter
         </button>
         {this.props.counters.map((counter) => (
           <Counter

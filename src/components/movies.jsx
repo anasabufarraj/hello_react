@@ -24,13 +24,12 @@ class Movies extends Component {
     return (
       <React.Fragment>
         <p className="m-2 my-2">{this.manageEmptyState()}...</p>
-        <table className="table table-hover">
+        <table className="table">
           <thead>
             <tr>
               <th scope="col">Movie</th>
               <th scope="col">Genre</th>
               <th scope="col">In Stock</th>
-              <th scope="col">Rate</th>
               <th scope="col">Handle</th>
             </tr>
           </thead>
@@ -40,9 +39,11 @@ class Movies extends Component {
                 <td>{movie.title}</td>
                 <td>{movie.genre.name}</td>
                 <td>{movie.numberInStock}</td>
-                <td>{movie.dailyRentalRate}</td>
                 <td>
-                  <button onClick={() => this.deleteMovie(movie)} className="btn btn-danger btn-sm">
+                  <button
+                    onClick={() => this.deleteMovie(movie)}
+                    className="btn btn-danger btn-sm"
+                  >
                     Delete
                   </button>
                 </td>
