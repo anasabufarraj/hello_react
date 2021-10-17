@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import { movies } from '../services/fakeMovieService';
 import Like from './common/like';
+import Pagination from './common/pagination';
 
 class Movies extends Component {
   state = {
     movies: movies,
+    itemsInPage: 4,
+    currentPage: 1,
   };
+
+  constructor(props) {
+    super(props);
+    this.handlePageChange = this.handlePageChange.bind(this);
+  }
 
   deleteMovie(movie) {
     let movies = this.state.movies.filter((_m) => _m._id !== movie._id);
@@ -25,6 +33,10 @@ class Movies extends Component {
     this.setState({ movies });
   }
 
+  handlePageChange(page) {
+    this.setState({ currentPage: page });
+  }
+
   render() {
     if (this.state.movies.length === 0) {
       return <p className="m-2 my-2">You've no movies to show...</p>;
@@ -32,7 +44,7 @@ class Movies extends Component {
     return (
       <React.Fragment>
         <p className="m-2 my-2">{this.manageEmptyState()}...</p>
-        <table className="table">
+        <table className="table m-3">
           <thead>
             <tr>
               <th scope="col">Movie</th>
@@ -63,6 +75,12 @@ class Movies extends Component {
             ))}
           </tbody>
         </table>
+        <Pagination
+          itemsInTable={this.state.movies.length}
+          itemsInPage={this.state.itemsInPage}
+          currentPage={this.state.currentPage}
+          onPageChange={this.handlePageChange}
+        />
       </React.Fragment>
     );
   }
