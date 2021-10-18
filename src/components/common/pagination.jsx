@@ -1,20 +1,19 @@
 import React from 'react';
-import _ from 'lodash'; // or import lodash from 'lodash'
+import _ from 'lodash';
 
 function Pagination(props) {
-  let nodes = Math.ceil(props.itemsInTable / props.itemsInPage);
-  let nodesArray = _.range(1, nodes + 1);
+  let nodes = _.range(1, Math.ceil(props.itemsInTable / props.maxItemsInPage) + 1);
 
-  return nodesArray.length === 1 ? null : (
+  return nodes.length === 1 ? null : (
     <nav>
       <ul className="pagination m-3">
-        {nodesArray.map((page) => (
+        {nodes.map((page) => (
           <li
             style={{ cursor: 'pointer' }}
-            className={`page-item ${props.currentPage === page ? 'active' : ''}`}
+            className={props.activePage === page ? 'page-item active' : 'page-item'}
             key={page}
           >
-            <a className="page-link" onClick={() => props.onPageChange(page)}>
+            <a className="page-link" href="/#" onClick={() => props.onPageChange(page)}>
               {page}
             </a>
           </li>

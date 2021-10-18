@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { movies } from '../services/fakeMovieService';
 import Like from './common/like';
 import Pagination from './common/pagination';
+import paginate from '../util/paginate';
 
 class Movies extends Component {
   state = {
     movies: movies,
-    itemsInPage: 4,
-    currentPage: 1,
+    maxItemsInPage: 5,
+    activePage: 2,
   };
 
   constructor(props) {
@@ -34,13 +35,20 @@ class Movies extends Component {
   }
 
   handlePageChange(page) {
-    this.setState({ currentPage: page });
+    this.setState({ activePage: page });
   }
 
   render() {
     if (this.state.movies.length === 0) {
       return <p className="m-2 my-2">You've no movies to show...</p>;
     }
+
+    let moviesInPage = paginate(
+      this.state.movies,
+      this.state.activePage,
+      this.state.maxItemsInPage
+    );
+
     return (
       <React.Fragment>
         <p className="m-2 my-2">{this.manageEmptyState()}...</p>
@@ -55,7 +63,7 @@ class Movies extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.movies.map((movie) => (
+            {moviesInPage.map((movie) => (
               <tr key={movie._id}>
                 <td>{movie.title}</td>
                 <td>{movie.genre.name}</td>
@@ -75,10 +83,11 @@ class Movies extends Component {
             ))}
           </tbody>
         </table>
+        <p className="m-3">{moviesInPage.length} Movies</p>
         <Pagination
           itemsInTable={this.state.movies.length}
-          itemsInPage={this.state.itemsInPage}
-          currentPage={this.state.currentPage}
+          maxItemsInPage={this.state.maxItemsInPage}
+          activePage={this.state.activePage}
           onPageChange={this.handlePageChange}
         />
       </React.Fragment>
