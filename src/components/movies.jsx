@@ -10,7 +10,7 @@ class Movies extends Component {
   state = {
     movies: [],
     genres: [],
-    maxItemsInPage: 5,
+    maxItemsInPage: 4,
     activePage: 1,
   };
 
@@ -30,12 +30,6 @@ class Movies extends Component {
     this.setState({ movies });
   }
 
-  manageEmptyState() {
-    return this.state.movies.length > 1
-      ? `Showing ${this.state.movies.length} Movies`
-      : `Showing ${this.state.movies.length} Movie`;
-  }
-
   handleLike(movie) {
     let movies = [...this.state.movies];
     let index = movies.indexOf(movie);
@@ -48,7 +42,7 @@ class Movies extends Component {
   }
 
   handleGenreSelect(genre) {
-    this.setState({ selectedItem: genre });
+    this.setState({ selectedGenre: genre });
   }
 
   render() {
@@ -56,8 +50,14 @@ class Movies extends Component {
       return <p className="m-2 my-2">You've no movies to show...</p>;
     }
 
+    // DOC: Filtering movies before paginating
+    let filteredMovies = this.state.selectedGenre
+      ? this.state.movies.filter((_m) => _m.genre.name === this.state.selectedGenre.name)
+      : this.state.movies;
+
+    // DOC: Paginate filtered movies
     let moviesInPage = paginate(
-      this.state.movies,
+      filteredMovies,
       this.state.activePage,
       this.state.maxItemsInPage
     );
@@ -68,12 +68,17 @@ class Movies extends Component {
           <div className="col-5">
             <ListGroup
               items={this.state.genres}
-              selectedItem={this.state.selectedItem}
+              selectedItem={this.state.selectedGenre}
               onItemSelect={this.handleGenreSelect}
             />
           </div>
           <div className="col">
-            <p className="m-3">{this.manageEmptyState()}...</p>
+            <p className="m-3">
+              {filteredMovies.length > 1
+                ? `Showing ${filteredMovies.length} Movies`
+                : `Showing ${filteredMovies.length} Movie`}
+              ...
+            </p>
             <table className="table m-3">
               <thead>
                 <tr>
@@ -106,7 +111,7 @@ class Movies extends Component {
               </tbody>
             </table>
             <Pagination
-              itemsInTable={this.state.movies.length}
+              itemsInTable={filteredMovies.length}
               maxItemsInPage={this.state.maxItemsInPage}
               activePage={this.state.activePage}
               onPageChange={this.handlePageChange}
