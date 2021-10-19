@@ -12,15 +12,14 @@ class Movies extends Component {
     genres: [],
     maxItemsInPage: 5,
     activePage: 1,
-    activeList: -1,
   };
 
   constructor(props) {
     super(props);
     this.handlePageChange = this.handlePageChange.bind(this);
     this.handleGenreSelect = this.handleGenreSelect.bind(this);
-    this.handleGenresViewAll = this.handleGenresViewAll.bind(this);
   }
+
   componentDidMount() {
     // Get from server in real-world application
     this.setState({ movies: getMovies(), genres: getGenres() });
@@ -49,14 +48,7 @@ class Movies extends Component {
   }
 
   handleGenreSelect(genre) {
-    let movies = getMovies().filter((_m) => _m.genre.name === genre);
-    this.setState({ movies });
-  }
-
-  handleGenresViewAll() {
-    // FIXME: try adding an argument to keep the list
-    let movies = getMovies();
-    this.setState({ movies });
+    this.setState({ selectedItem: genre });
   }
 
   render() {
@@ -75,10 +67,9 @@ class Movies extends Component {
         <div className="row">
           <div className="col-5">
             <ListGroup
-              genresNames={this.state.genres}
-              onGenreSelect={this.handleGenreSelect}
-              onGenresView={this.handleGenresViewAll}
-              activeList={this.state.activeList}
+              items={this.state.genres}
+              selectedItem={this.state.selectedItem}
+              onItemSelect={this.handleGenreSelect}
             />
           </div>
           <div className="col">
