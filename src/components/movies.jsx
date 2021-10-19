@@ -18,7 +18,6 @@ class Movies extends Component {
     super(props);
     this.handlePageChange = this.handlePageChange.bind(this);
     this.handleGenreSelect = this.handleGenreSelect.bind(this);
-    // this.handleGenresSelectAll = this.handleGenresSelectAll.bind(this);
   }
 
   componentDidMount() {
@@ -76,9 +75,9 @@ class Movies extends Component {
           </div>
           <div className="col">
             <p className="m-3">
-              {filteredMovies.length > 1
-                ? `Showing ${filteredMovies.length} Movies`
-                : `Showing ${filteredMovies.length} Movie`}
+              {filteredMovies.length === 1
+                ? `Showing ${filteredMovies.length} Movie`
+                : `Showing ${filteredMovies.length} Movies`}
               ...
             </p>
             <table className="table m-3">
