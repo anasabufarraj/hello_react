@@ -47,6 +47,10 @@ class Movies extends Component {
     this.setState({ selectedGenre: genre });
   }
 
+  // handleGenresSelectAll(genre) {
+  //   this.setState({ selectedGenre: genre });
+  // }
+
   render() {
     if (this.state.movies.length === 0) {
       return <p className="m-2 my-2">You've no movies to show...</p>;
@@ -72,13 +76,14 @@ class Movies extends Component {
               items={this.state.genres}
               selectedItem={this.state.selectedGenre}
               onItemSelect={this.handleGenreSelect}
+              // onItemSelectAll={this.handleGenresSelectAll}
             />
           </div>
           <div className="col">
             <p className="m-3">
-              {filteredMovies.length > 1
-                ? `Showing ${filteredMovies.length} Movies`
-                : `Showing ${filteredMovies.length} Movie`}
+              {filteredMovies.length === 1
+                ? `Showing ${filteredMovies.length} Movie`
+                : `Showing ${filteredMovies.length} Movies`}
               ...
             </p>
             <table className="table m-3">
