@@ -18,6 +18,7 @@ class Movies extends Component {
     super(props);
     this.handlePageChange = this.handlePageChange.bind(this);
     this.handleGenreSelect = this.handleGenreSelect.bind(this);
+    // this.handleGenresSelectAll = this.handleGenresSelectAll.bind(this);
   }
 
   componentDidMount() {
@@ -41,7 +42,8 @@ class Movies extends Component {
     this.setState({ activePage: page });
   }
 
-  handleGenreSelect(genre) {
+  handleGenreSelect(genre = null) {
+    // DOC: Default argument is null, returns all items if no argument provided for 'All Genres'.
     this.setState({ selectedGenre: genre });
   }
 
