@@ -13,14 +13,15 @@ class App extends Component {
     ],
   };
 
-  constructor(props) {
-    super(props);
-    this.handleReset = this.handleReset.bind(this);
-    this.handleAdd = this.handleAdd.bind(this);
-    this.handleIncrement = this.handleIncrement.bind(this);
-    this.handleDecrement = this.handleDecrement.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-  }
+  // TODO: Uncomment before run
+  // constructor(props) {
+  //   super(props);
+  //   this.handleReset = this.handleReset.bind(this);
+  //   this.handleAdd = this.handleAdd.bind(this);
+  //   this.handleIncrement = this.handleIncrement.bind(this);
+  //   this.handleDecrement = this.handleDecrement.bind(this);
+  //   this.handleDelete = this.handleDelete.bind(this);
+  // }
 
   handleReset() {
     let counters = this.state.counters.map((_c) => {

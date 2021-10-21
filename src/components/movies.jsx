@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { getMovies } from '../services/fakeMovieService';
 import { getGenres } from '../services/fakeGenreService';
-import Like from './common/like';
 import Pagination from './common/pagination';
 import ListGroup from './common/ListGroup';
+import MoviesTable from './moviesTable';
 import paginate from '../util/paginate';
 
 class Movies extends Component {
@@ -16,21 +16,23 @@ class Movies extends Component {
 
   constructor(props) {
     super(props);
+    this.handleMovieDelete = this.handleMovieDelete.bind(this);
+    this.handleMovieLike = this.handleMovieLike.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
     this.handleGenreSelect = this.handleGenreSelect.bind(this);
   }
 
   componentDidMount() {
-    let genresPlusAllGenres = [{ _id: null, name: 'All Genres' }, ...getGenres()];
-    this.setState({ movies: getMovies(), genres: genresPlusAllGenres }); // Get from server
+    let allGenres = [{ _id: null, name: 'All Genres' }, ...getGenres()];
+    this.setState({ movies: getMovies(), genres: allGenres }); // Get from server
   }
 
-  deleteMovie(movie) {
+  handleMovieDelete(movie) {
     let movies = this.state.movies.filter((_m) => _m._id !== movie._id);
-    this.setState({ movies });
+    this.setState({ movies, activePage: 1 });
   }
 
-  handleLike(movie) {
+  handleMovieLike(movie) {
     let movies = [...this.state.movies];
     let index = movies.indexOf(movie);
     movies[index].liked = !movies[index].liked;
@@ -54,9 +56,7 @@ class Movies extends Component {
     // DOC: Filtering movies before paginating, excluding the 'All Genres' entry.
     let filteredMovies =
       this.state.selectedGenre && this.state.selectedGenre.name !== 'All Genres'
-        ? this.state.movies.filter(
-            (_m) => _m.genre.name === this.state.selectedGenre.name
-          )
+        ? this.state.movies.filter((_m) => _m.genre._id === this.state.selectedGenre._id)
         : this.state.movies;
 
     // DOC: Paginate filtered movies
@@ -83,39 +83,12 @@ class Movies extends Component {
                 : `Showing ${filteredMovies.length} Movies`}
               ...
             </p>
-            <table className="table m-3">
-              <thead>
-                <tr>
-                  <th scope="col">No.</th>
-                  <th scope="col">Movie</th>
-                  <th scope="col">Genre</th>
-                  <th scope="col">In Stock</th>
-                  <th scope="col">Favourite</th>
-                  <th scope="col">Handle</th>
-                </tr>
-              </thead>
-              <tbody>
-                {moviesInPage.map((movie) => (
-                  <tr key={movie._id}>
-                    <td>{this.state.movies.indexOf(movie) + 1}</td>
-                    <td>{movie.title}</td>
-                    <td>{movie.genre.name}</td>
-                    <td>{movie.numberInStock}</td>
-                    <td>
-                      <Like liked={movie.liked} onLike={() => this.handleLike(movie)} />
-                    </td>
-                    <td>
-                      <button
-                        onClick={() => this.deleteMovie(movie)}
-                        className="btn btn-danger btn-sm"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <MoviesTable
+              movies={this.state.movies}
+              moviesInPage={moviesInPage}
+              onDelete={this.handleMovieDelete}
+              onLike={this.handleMovieLike}
+            />
             <Pagination
               itemsInTable={filteredMovies.length}
               maxItemsInPage={this.state.maxItemsInPage}
