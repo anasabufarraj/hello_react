@@ -6,11 +6,41 @@ function MoviesTable(props) {
     <table className="table m-3">
       <thead>
         <tr>
-          <th scope="col">No.</th>
-          <th scope="col">Movie</th>
-          <th scope="col">Genre</th>
-          <th scope="col">In Stock</th>
-          <th scope="col">Favourite</th>
+          <th
+            style={{ cursor: 'pointer' }}
+            scope="col"
+            onClick={() => props.onSort('id')}
+          >
+            No. <i className="fa fa-caret-down">&nbsp;</i>
+          </th>
+          <th
+            style={{ cursor: 'pointer' }}
+            scope="col"
+            onClick={() => props.onSort('title')}
+          >
+            Title <i className="fa fa-caret-down">&nbsp;</i>
+          </th>
+          <th
+            style={{ cursor: 'pointer' }}
+            scope="col"
+            onClick={() => props.onSort('genre.name')}
+          >
+            Genre <i className="fa fa-caret-down">&nbsp;</i>
+          </th>
+          <th
+            style={{ cursor: 'pointer' }}
+            scope="col"
+            onClick={() => props.onSort('numberInStock')}
+          >
+            In Stock <i className="fa fa-caret-down">&nbsp;</i>
+          </th>
+          <th
+            style={{ cursor: 'pointer' }}
+            scope="col"
+            onClick={() => props.onSort('liked')}
+          >
+            Favourite <i className="fa fa-caret-down">&nbsp;</i>
+          </th>
           <th scope="col">Handle</th>
         </tr>
       </thead>

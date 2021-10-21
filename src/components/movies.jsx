@@ -23,7 +23,7 @@ class Movies extends Component {
   }
 
   componentDidMount() {
-    let allGenres = [{ _id: null, name: 'All Genres' }, ...getGenres()];
+    let allGenres = [{ _id: '', name: 'All Genres' }, ...getGenres()];
     this.setState({ movies: getMovies(), genres: allGenres }); // Get from server
   }
 
@@ -48,14 +48,18 @@ class Movies extends Component {
     this.setState({ selectedGenre: genre, activePage: 1 });
   }
 
+  handleSorting(column) {
+    console.log(column);
+  }
+
   render() {
     if (this.state.movies.length === 0) {
       return <p className="m-2 my-2">You've no movies to show...</p>;
     }
 
-    // DOC: Filtering movies before paginating, excluding the 'All Genres' entry.
+    // DOC: Filtering movies before paginating, excluding the 'All Genres' which id is ''.
     let filteredMovies =
-      this.state.selectedGenre && this.state.selectedGenre.name !== 'All Genres'
+      this.state.selectedGenre && this.state.selectedGenre._id !== ''
         ? this.state.movies.filter((_m) => _m.genre._id === this.state.selectedGenre._id)
         : this.state.movies;
 
@@ -88,6 +92,7 @@ class Movies extends Component {
               moviesInPage={moviesInPage}
               onDelete={this.handleMovieDelete}
               onLike={this.handleMovieLike}
+              onSort={this.handleSorting}
             />
             <Pagination
               itemsInTable={filteredMovies.length}
