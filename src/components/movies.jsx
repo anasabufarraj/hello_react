@@ -21,8 +21,8 @@ class Movies extends Component {
   }
 
   componentDidMount() {
-    // Get from server in real-world application
-    this.setState({ movies: getMovies(), genres: getGenres() });
+    let genresPlusAllGenres = [{ _id: null, name: 'All Genres' }, ...getGenres()];
+    this.setState({ movies: getMovies(), genres: genresPlusAllGenres }); // Get from server
   }
 
   deleteMovie(movie) {
@@ -41,9 +41,9 @@ class Movies extends Component {
     this.setState({ activePage: page });
   }
 
-  handleGenreSelect(genre = null) {
-    // DOC: Default argument is null, returns all items if no argument provided for 'All Genres'.
-    this.setState({ selectedGenre: genre });
+  handleGenreSelect(genre) {
+    // DOC: Returns all items if no argument passed. Use for 'All Genres' view.
+    this.setState({ selectedGenre: genre, activePage: 1 });
   }
 
   render() {
@@ -51,10 +51,13 @@ class Movies extends Component {
       return <p className="m-2 my-2">You've no movies to show...</p>;
     }
 
-    // DOC: Filtering movies before paginating
-    let filteredMovies = this.state.selectedGenre
-      ? this.state.movies.filter((_m) => _m.genre.name === this.state.selectedGenre.name)
-      : this.state.movies;
+    // DOC: Filtering movies before paginating, excluding the 'All Genres' entry.
+    let filteredMovies =
+      this.state.selectedGenre && this.state.selectedGenre.name !== 'All Genres'
+        ? this.state.movies.filter(
+            (_m) => _m.genre.name === this.state.selectedGenre.name
+          )
+        : this.state.movies;
 
     // DOC: Paginate filtered movies
     let moviesInPage = paginate(
@@ -66,7 +69,7 @@ class Movies extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-5">
+          <div className="col-6">
             <ListGroup
               items={this.state.genres}
               selectedItem={this.state.selectedGenre}
@@ -83,6 +86,7 @@ class Movies extends Component {
             <table className="table m-3">
               <thead>
                 <tr>
+                  <th scope="col">No.</th>
                   <th scope="col">Movie</th>
                   <th scope="col">Genre</th>
                   <th scope="col">In Stock</th>
@@ -93,6 +97,7 @@ class Movies extends Component {
               <tbody>
                 {moviesInPage.map((movie) => (
                   <tr key={movie._id}>
+                    <td>{this.state.movies.indexOf(movie) + 1}</td>
                     <td>{movie.title}</td>
                     <td>{movie.genre.name}</td>
                     <td>{movie.numberInStock}</td>
