@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { getMovies } from '../services/fakeMovieService';
 import { getGenres } from '../services/fakeGenreService';
 import Pagination from './common/pagination';
@@ -20,6 +21,7 @@ class Movies extends Component {
     this.handleMovieLike = this.handleMovieLike.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
     this.handleGenreSelect = this.handleGenreSelect.bind(this);
+    this.handleSorting = this.handleSorting.bind(this);
   }
 
   componentDidMount() {
@@ -49,7 +51,9 @@ class Movies extends Component {
   }
 
   handleSorting(column) {
-    console.log(column);
+    let sortedMovies = _.sortBy(this.state.movies, column);
+    this.setState({ movies: sortedMovies });
+    return true;
   }
 
   render() {
@@ -64,11 +68,7 @@ class Movies extends Component {
         : this.state.movies;
 
     // DOC: Paginate filtered movies
-    let moviesInPage = paginate(
-      filteredMovies,
-      this.state.activePage,
-      this.state.maxItemsInPage
-    );
+    let moviesInPage = paginate(filteredMovies, this.state.activePage, this.state.maxItemsInPage);
 
     return (
       <div className="container">

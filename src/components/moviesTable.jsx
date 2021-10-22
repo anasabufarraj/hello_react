@@ -6,41 +6,17 @@ function MoviesTable(props) {
     <table className="table m-3">
       <thead>
         <tr>
-          <th
-            style={{ cursor: 'pointer' }}
-            scope="col"
-            onClick={() => props.onSort('id')}
-          >
-            No. <i className="fa fa-caret-down">&nbsp;</i>
-          </th>
-          <th
-            style={{ cursor: 'pointer' }}
-            scope="col"
-            onClick={() => props.onSort('title')}
-          >
+          <th scope="col">No.</th>
+          <th style={{ cursor: 'pointer' }} scope="col" onClick={() => props.onSort('title')}>
             Title <i className="fa fa-caret-down">&nbsp;</i>
           </th>
-          <th
-            style={{ cursor: 'pointer' }}
-            scope="col"
-            onClick={() => props.onSort('genre.name')}
-          >
+          <th style={{ cursor: 'pointer' }} scope="col" onClick={() => props.onSort('genre.name')}>
             Genre <i className="fa fa-caret-down">&nbsp;</i>
           </th>
-          <th
-            style={{ cursor: 'pointer' }}
-            scope="col"
-            onClick={() => props.onSort('numberInStock')}
-          >
-            In Stock <i className="fa fa-caret-down">&nbsp;</i>
+          <th style={{ cursor: 'pointer' }} scope="col" onClick={() => props.onSort('numberInStock')}>
+            Rate <i className="fa fa-caret-down">&nbsp;</i>
           </th>
-          <th
-            style={{ cursor: 'pointer' }}
-            scope="col"
-            onClick={() => props.onSort('liked')}
-          >
-            Favourite <i className="fa fa-caret-down">&nbsp;</i>
-          </th>
+          <th scope="col">Like</th>
           <th scope="col">Handle</th>
         </tr>
       </thead>
@@ -50,15 +26,12 @@ function MoviesTable(props) {
             <td>{props.movies.indexOf(movie) + 1}</td>
             <td>{movie.title}</td>
             <td>{movie.genre.name}</td>
-            <td>{movie.numberInStock}</td>
+            <td>{movie.dailyRentalRate}</td>
             <td>
               <Like liked={movie.liked} onLike={() => props.onLike(movie)} />
             </td>
             <td>
-              <button
-                onClick={() => props.onDelete(movie)}
-                className="btn btn-danger btn-sm"
-              >
+              <button onClick={() => props.onDelete(movie)} className="btn btn-danger btn-sm">
                 Delete
               </button>
             </td>
