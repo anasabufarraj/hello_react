@@ -8,11 +8,13 @@ import MoviesTable from './moviesTable';
 import paginate from '../util/paginate';
 
 class Movies extends Component {
+  // MEMO: cannot mute component state directly
   state = {
     movies: [],
     genres: [],
     maxItemsInPage: 4,
     activePage: 1,
+    sortColumn: { column: 'title', order: 'asc' },
   };
 
   constructor(props) {
@@ -51,8 +53,15 @@ class Movies extends Component {
   }
 
   handleSorting(column) {
-    let sortedMovies = _.sortBy(this.state.movies, column);
-    this.setState({ movies: sortedMovies });
+    let sortColumn = this.state.sortColumn;
+    if (sortColumn.column === column) {
+      sortColumn.order = sortColumn.order === 'asc' ? 'desc' : 'asc';
+    } else {
+      sortColumn.column = column;
+      sortColumn.order = 'asc';
+    }
+
+    this.setState({ sortColumn });
   }
 
   render() {
@@ -60,17 +69,28 @@ class Movies extends Component {
       return <p className="m-2 my-2">You've no movies to show...</p>;
     }
 
-    // DOC: Filtering movies before paginating, excluding the 'All Genres' which id is ''.
+    // DOC: 1) Filtering movies, excluding the 'All Genres' which id is empty string.
     let filteredMovies =
       this.state.selectedGenre && this.state.selectedGenre._id !== ''
         ? this.state.movies.filter((_m) => _m.genre._id === this.state.selectedGenre._id)
         : this.state.movies;
 
-    // DOC: Paginate filtered movies
-    let moviesInPage = paginate(filteredMovies, this.state.activePage, this.state.maxItemsInPage);
+    // DOC: 2) Sorting filtered movies.
+    let sortedMovies = _.orderBy(
+      filteredMovies,
+      [this.state.sortColumn.column],
+      [this.state.sortColumn.order]
+    );
+
+    // DOC: 3) Paginate sorted movies.
+    let moviesInPage = paginate(
+      sortedMovies,
+      this.state.activePage,
+      this.state.maxItemsInPage
+    );
 
     return (
-      <div className="container">
+      <div className="container fw-light">
         <div className="row">
           <div className="col-6">
             <ListGroup
@@ -80,7 +100,7 @@ class Movies extends Component {
             />
           </div>
           <div className="col">
-            <p className="m-3">
+            <p className="m-3 fw-bold">
               {filteredMovies.length === 1
                 ? `Showing ${filteredMovies.length} Movie`
                 : `Showing ${filteredMovies.length} Movies`}
