@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TableHeader from './common/tableHeader';
+import TableBody from './common/tableBody';
 import Like from './common/like';
 
 class MoviesTable extends Component {
@@ -14,15 +15,26 @@ class MoviesTable extends Component {
         label: 'Genre',
       },
       {
-        path: 'numberInStock',
-        label: 'Stock',
-      },
-      {
         path: 'dailyRentalRate',
         label: 'Rate',
       },
+      {
+        path: 'like',
+        label: 'Like',
+        content: (movie) => <Like liked={movie.liked} onLike={() => this.props.onLike(movie)} />,
+      },
+      {
+        path: 'delete',
+        label: 'Handle',
+        content: (movie) => (
+          <button onClick={() => this.props.onDelete(movie)} className="btn btn-outline-danger btn-sm">
+            Delete
+          </button>
+        ),
+      },
     ],
   };
+
   render() {
     return (
       <table className="table m-3">
@@ -31,42 +43,7 @@ class MoviesTable extends Component {
           sortColumn={this.props.sortColumn}
           onSort={this.props.onSort}
         />
-        {/*<thead>*/}
-        {/*  <tr>*/}
-        {/*    <th style={{ cursor: 'pointer' }} onClick={() => this.raiseSort('title')}>*/}
-        {/*      Title{' '}*/}
-        {/*      <i className={this.props.sortColumn.order === 'asc' ? 'fa fa-caret-down' : 'fa fa-caret-up'}>*/}
-        {/*        &nbsp;*/}
-        {/*      </i>*/}
-        {/*    </th>*/}
-        {/*    <th style={{ cursor: 'pointer' }} onClick={() => this.raiseSort('genre.name')}>*/}
-        {/*      Genre{' '}*/}
-        {/*      <i className={this.props.sortColumn.order === 'asc' ? 'fa fa-caret-down' : 'fa fa-caret-up'}>*/}
-        {/*        &nbsp;*/}
-        {/*      </i>*/}
-        {/*    </th>*/}
-        {/*    <th>Rate</th>*/}
-        {/*    <th>Like</th>*/}
-        {/*    <th>Delete</th>*/}
-        {/*  </tr>*/}
-        {/*</thead>*/}
-        <tbody>
-          {this.props.moviesInPage.map((movie) => (
-            <tr key={movie._id}>
-              <td>{movie.title}</td>
-              <td>{movie.genre.name}</td>
-              <td>{movie.dailyRentalRate}</td>
-              <td>
-                <Like liked={movie.liked} onLike={() => this.props.onLike(movie)} />
-              </td>
-              <td>
-                <button onClick={() => this.props.onDelete(movie)} className="btn btn-danger btn-sm">
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
+        <TableBody data={this.props.moviesInPage} columns={this.state.columns} />
       </table>
     );
   }

@@ -14,7 +14,7 @@ class Movies extends Component {
     genres: [],
     maxItemsInPage: 4,
     activePage: 1,
-    sortColumn: { column: 'title', order: 'asc' },
+    sortColumn: { path: 'title', order: 'asc' },
   };
 
   constructor(props) {
@@ -52,8 +52,8 @@ class Movies extends Component {
     this.setState({ selectedGenre: genre, activePage: 1 });
   }
 
-  handleSorting(column) {
-    this.setState({ sortColumn: column });
+  handleSorting(path) {
+    this.setState({ sortColumn: path });
   }
 
   render() {
@@ -68,18 +68,10 @@ class Movies extends Component {
         : this.state.movies;
 
     // DOC: 2) Sorting filtered movies.
-    let sortedMovies = _.orderBy(
-      filteredMovies,
-      [this.state.sortColumn.column],
-      [this.state.sortColumn.order]
-    );
+    let sortedMovies = _.orderBy(filteredMovies, [this.state.sortColumn.path], [this.state.sortColumn.order]);
 
     // DOC: 3) Paginate sorted movies.
-    let moviesInPage = paginate(
-      sortedMovies,
-      this.state.activePage,
-      this.state.maxItemsInPage
-    );
+    let moviesInPage = paginate(sortedMovies, this.state.activePage, this.state.maxItemsInPage);
 
     return (
       <div className="container fw-light">
