@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 function Pagination(props) {
+  // MEMO: props are read-only arguments
   let nodes = _.range(1, Math.ceil(props.itemsInTable / props.maxItemsInPage) + 1);
 
   return nodes.length === 1 ? null : (

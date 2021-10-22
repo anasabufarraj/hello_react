@@ -1,4 +1,5 @@
 function ListGroup(props) {
+  // MEMO: props are read-only arguments
   return (
     <div className="list-group m-3">
       {/*<li*/}

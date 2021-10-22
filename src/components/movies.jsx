@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
+import MoviesTable from './moviesTable';
 import { getMovies } from '../services/fakeMovieService';
 import { getGenres } from '../services/fakeGenreService';
 import Pagination from './common/pagination';
 import ListGroup from './common/ListGroup';
-import MoviesTable from './moviesTable';
 import paginate from '../util/paginate';
+import _ from 'lodash';
 
 class Movies extends Component {
   // MEMO: cannot mute component state directly
@@ -53,15 +53,7 @@ class Movies extends Component {
   }
 
   handleSorting(column) {
-    let sortColumn = this.state.sortColumn;
-    if (sortColumn.column === column) {
-      sortColumn.order = sortColumn.order === 'asc' ? 'desc' : 'asc';
-    } else {
-      sortColumn.column = column;
-      sortColumn.order = 'asc';
-    }
-
-    this.setState({ sortColumn });
+    this.setState({ sortColumn: column });
   }
 
   render() {
@@ -107,11 +99,11 @@ class Movies extends Component {
               ...
             </p>
             <MoviesTable
-              movies={this.state.movies}
               moviesInPage={moviesInPage}
               onDelete={this.handleMovieDelete}
               onLike={this.handleMovieLike}
               onSort={this.handleSorting}
+              sortColumn={this.state.sortColumn}
             />
             <Pagination
               itemsInTable={filteredMovies.length}
