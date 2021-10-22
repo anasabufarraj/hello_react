@@ -1,27 +1,27 @@
 import React, { Component } from 'react';
 
 class TableHeader extends Component {
-  raiseSort(path) {
-    let sortColumn = this.props.sortColumn;
-    if (sortColumn.path === path) {
-      sortColumn.order = sortColumn.order === 'asc' ? 'desc' : 'asc';
-    } else {
-      sortColumn.path = path;
-      sortColumn.order = 'asc';
-    }
+  raiseSort(path, column) {
+    if (!column.content) {
+      let sortColumn = this.props.sortColumn;
+      if (sortColumn.path === path) {
+        sortColumn.order = sortColumn.order === 'asc' ? 'desc' : 'asc';
+      } else {
+        sortColumn.path = path;
+        sortColumn.order = 'asc';
+      }
 
-    this.props.onSort(sortColumn);
+      this.props.onSort(sortColumn);
+    }
   }
 
   renderIcon(column) {
-    if (!column.content) {
-      if (this.props.sortColumn.path === column.path) {
-        return this.props.sortColumn.order === 'asc' ? (
-          <i className="fa fa-caret-down">&nbsp;</i>
-        ) : (
-          <i className="fa fa-caret-up">&nbsp;</i>
-        );
-      }
+    if (!column.content && this.props.sortColumn.path === column.path) {
+      return this.props.sortColumn.order === 'asc' ? (
+        <i className="fa fa-caret-down">&nbsp;</i>
+      ) : (
+        <i className="fa fa-caret-up">&nbsp;</i>
+      );
     }
   }
 
@@ -39,7 +39,7 @@ class TableHeader extends Component {
             <th
               style={this.renderCursor(column)}
               key={column.path}
-              onClick={() => this.raiseSort(column.path)}
+              onClick={() => this.raiseSort(column.path, column)}
             >
               {column.label} {this.renderIcon(column)}
             </th>
