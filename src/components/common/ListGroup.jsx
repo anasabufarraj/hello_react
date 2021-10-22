@@ -1,18 +1,7 @@
 function ListGroup(props) {
-  // MEMO: props are read-only arguments
+  // MEMO: props are read-only arguments)
   return (
     <div className="list-group m-3">
-      {/*<li*/}
-      {/*  style={{ cursor: 'pointer' }}*/}
-      {/*  className={*/}
-      {/*    !props.selectedItem*/}
-      {/*      ? 'list-group-item list-group-item-action active'*/}
-      {/*      : 'list-group-item list-group-item-action'*/}
-      {/*  }*/}
-      {/*  onClick={() => props.onItemSelect()}*/}
-      {/*>*/}
-      {/*  All Genres*/}
-      {/*</li>*/}
       {props.items.map((genre) => (
         <li
           style={{ cursor: 'pointer' }}

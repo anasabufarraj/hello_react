@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 class TableHeader extends Component {
   raiseSort(path, column) {
@@ -15,7 +15,7 @@ class TableHeader extends Component {
     }
   }
 
-  renderIcon(column) {
+  renderSortIcon(column) {
     if (!column.content && this.props.sortColumn.path === column.path) {
       return this.props.sortColumn.order === 'asc' ? (
         <i className="fa fa-caret-down">&nbsp;</i>
@@ -29,6 +29,7 @@ class TableHeader extends Component {
     if (!column.content) {
       return { cursor: 'pointer' };
     }
+    return { cursor: 'default' };
   }
 
   render() {
@@ -41,7 +42,7 @@ class TableHeader extends Component {
               key={column.path}
               onClick={() => this.raiseSort(column.path, column)}
             >
-              {column.label} {this.renderIcon(column)}
+              {column.label} {this.renderSortIcon(column)}
             </th>
           ))}
         </tr>

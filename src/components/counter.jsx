@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 class Counter extends Component {
   componentWillUnmount() {
@@ -22,9 +22,7 @@ class Counter extends Component {
             <span className="m-3">{this.props.counter.id}</span>
           </div>
           <div className="col-1">
-            <span className={`badge p-2 ${this.setBadgeColor()}`}>
-              {this.setCounterText()}
-            </span>
+            <span className={`badge p-2 ${this.setBadgeColor()}`}>{this.setCounterText()}</span>
           </div>
           <div className="col">
             <button onClick={this.props.onDelete} className="btn btn-danger mx-2">

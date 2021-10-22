@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import TableHeader from './common/tableHeader';
 import TableBody from './common/tableBody';
 import Like from './common/like';

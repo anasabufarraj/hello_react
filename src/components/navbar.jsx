@@ -1,5 +1,5 @@
-// Stateless functional component
 function NavBar(props) {
+  // MEMO: props are read-only arguments
   return (
     <nav className="navbar navbar-dark bg-dark">
       <div className="container">
@@ -7,12 +7,7 @@ function NavBar(props) {
           MENU
         </a>
         <form className="d-flex">
-          <input
-            className="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
+          <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
           <button className="btn btn-outline-light" type="submit">
             Search
           </button>
