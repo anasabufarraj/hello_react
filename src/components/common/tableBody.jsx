@@ -15,7 +15,7 @@ class TableBody extends Component {
         {this.props.data.map((item) => (
           <tr key={item._id}>
             {this.props.columns.map((column) => (
-              <td key={column.path}>{this.renderCell(item, column)}</td>
+              <td key={item._id + column.path}>{this.renderCell(item, column)}</td>
             ))}
           </tr>
         ))}
