@@ -53,7 +53,6 @@ class Movies extends Component {
   handleSorting(column) {
     let sortedMovies = _.sortBy(this.state.movies, column);
     this.setState({ movies: sortedMovies });
-    return true;
   }
 
   render() {
