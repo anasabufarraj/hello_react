@@ -1,3 +1,5 @@
+import React from 'react';
+
 function Like(props) {
   // MEMO: props are read-only arguments
   let icon = props.liked ? 'fa-heart' : 'fa-heart-o';

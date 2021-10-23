@@ -1,18 +1,16 @@
-import { Component } from 'react';
+import React from 'react';
 
-class ListGroup extends Component {
+class ListGroup extends React.Component {
   selectDefaultGenre(genre) {
     if (!this.props.selectedItem && genre.name === 'All Genres') {
       return 'list-group-item list-group-item-action active';
-    } else {
-      return genre === this.props.selectedItem
-        ? 'list-group-item list-group-item-action active'
-        : 'list-group-item list-group-item-action';
     }
+    return genre === this.props.selectedItem
+      ? 'list-group-item list-group-item-action active'
+      : 'list-group-item list-group-item-action';
   }
 
   render() {
-    console.log(this.props.items.length);
     return (
       <div className="list-group m-3">
         {this.props.items.map((genre) => (

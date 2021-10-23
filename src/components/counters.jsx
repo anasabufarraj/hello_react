@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Counter from './counter';
 
-class Counters extends Component {
+class Counters extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.props !== prevProps) {
       console.log('Properties did changed - Counters');

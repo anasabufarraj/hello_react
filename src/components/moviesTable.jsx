@@ -1,38 +1,41 @@
-import { Component } from 'react';
+import React from 'react';
 import Like from './common/like';
 import Table from './common/table';
 
-class MoviesTable extends Component {
-  state = {
-    columns: [
-      {
-        path: 'title',
-        label: 'Title',
-      },
-      {
-        path: 'genre.name',
-        label: 'Genre',
-      },
-      {
-        path: 'dailyRentalRate',
-        label: 'Rate',
-      },
-      {
-        path: 'like',
-        label: 'Like',
-        content: (movie) => <Like liked={movie.liked} onLike={() => this.props.onLike(movie)} />,
-      },
-      {
-        path: 'delete',
-        label: 'Handle',
-        content: (movie) => (
-          <button onClick={() => this.props.onDelete(movie)} className="btn btn-outline-danger btn-sm">
-            Delete
-          </button>
-        ),
-      },
-    ],
-  };
+class MoviesTable extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      columns: [
+        {
+          path: 'title',
+          label: 'Title',
+        },
+        {
+          path: 'genre.name',
+          label: 'Genre',
+        },
+        {
+          path: 'dailyRentalRate',
+          label: 'Rate',
+        },
+        {
+          path: 'like',
+          label: 'Like',
+          content: (movie) => <Like liked={movie.liked} onLike={() => this.props.onLike(movie)} />,
+        },
+        {
+          path: 'delete',
+          label: 'Handle',
+          content: (movie) => (
+            <button onClick={() => this.props.onDelete(movie)} className="btn btn-outline-danger btn-sm">
+              Delete
+            </button>
+          ),
+        },
+      ],
+    };
+  }
 
   render() {
     return (

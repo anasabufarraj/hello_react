@@ -1,6 +1,6 @@
-import { Component } from 'react';
+import React from 'react';
 
-class TableHeader extends Component {
+class TableHeader extends React.Component {
   raiseSort(path, column) {
     if (!column.content) {
       let sortColumn = this.props.sortColumn;

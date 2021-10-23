@@ -1,24 +1,24 @@
-import { Component } from 'react';
-import MoviesTable from './moviesTable';
+import React from 'react';
 import { getMovies } from '../services/fakeMovieService';
 import { getGenres } from '../services/fakeGenreService';
 import Pagination from './common/pagination';
-import ListGroup from './common/ListGroup';
 import paginate from '../util/paginate';
+import MoviesTable from './moviesTable';
+import ListGroup from './common/ListGroup';
 import _ from 'lodash';
 
-class Movies extends Component {
-  // MEMO: cannot mute component state directly
-  state = {
-    movies: [],
-    genres: [],
-    maxItemsInPage: 4,
-    activePage: 1,
-    sortColumn: { path: 'title', order: 'asc' },
-  };
-
+class Movies extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      // MEMO: cannot mutate state directly
+      movies: [],
+      genres: [],
+      maxItemsInPage: 4,
+      activePage: 1,
+      sortColumn: { path: 'title', order: 'asc' },
+    };
+
     this.handleMovieDelete = this.handleMovieDelete.bind(this);
     this.handleMovieLike = this.handleMovieLike.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -56,24 +56,26 @@ class Movies extends Component {
     this.setState({ sortColumn: path });
   }
 
-  render() {
-    if (this.state.movies.length === 0) {
-      return <p className="m-2 my-2">You've no movies to show...</p>;
-    }
-
+  handleData() {
     // DOC: 1) Filtering movies, excluding the 'All Genres' which id is empty string.
     let filteredMovies =
       this.state.selectedGenre && this.state.selectedGenre._id !== ''
         ? this.state.movies.filter((_m) => _m.genre._id === this.state.selectedGenre._id)
         : this.state.movies;
 
-    // DOC: 2) Sorting filtered movies.
+    // DOC: 2) Sorting filtered movies, then paginate them.
     let sortedMovies = _.orderBy(filteredMovies, [this.state.sortColumn.path], [this.state.sortColumn.order]);
-
-    // DOC: 3) Paginate sorted movies.
     let moviesInPage = paginate(sortedMovies, this.state.activePage, this.state.maxItemsInPage);
 
-    return (
+    return { filteredMovies, moviesInPage };
+  }
+
+  render() {
+    let data = this.handleData();
+
+    return this.state.movies.length === 0 ? (
+      <p className="text-center m-5 fs-5 fw-light">You've no content to show!</p>
+    ) : (
       <div className="container fw-light">
         <div className="row">
           <div className="col-5">
@@ -85,20 +87,20 @@ class Movies extends Component {
           </div>
           <div className="col">
             <p className="m-3 fw-bold">
-              {filteredMovies.length === 1
-                ? `Showing ${filteredMovies.length} Movie`
-                : `Showing ${filteredMovies.length} Movies`}
+              {data.filteredMovies.length === 1
+                ? `Showing ${data.filteredMovies.length} Movie`
+                : `Showing ${data.filteredMovies.length} Movies`}
               ...
             </p>
             <MoviesTable
-              moviesInPage={moviesInPage}
+              moviesInPage={data.moviesInPage}
               onDelete={this.handleMovieDelete}
               onLike={this.handleMovieLike}
               onSort={this.handleSorting}
               sortColumn={this.state.sortColumn}
             />
             <Pagination
-              itemsInTable={filteredMovies.length}
+              itemsInTable={data.filteredMovies.length}
               maxItemsInPage={this.state.maxItemsInPage}
               activePage={this.state.activePage}
               onPageChange={this.handlePageChange}

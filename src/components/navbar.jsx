@@ -1,3 +1,5 @@
+import React from 'react';
+
 function NavBar(props) {
   // MEMO: props are read-only arguments
   return (

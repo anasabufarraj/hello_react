@@ -1,27 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
 import NavBar from './components/navbar';
 import Counters from './components/counters';
 import './App.css';
 
-class App extends Component {
-  state = {
-    counters: [
-      { id: 1, value: 0 },
-      { id: 2, value: 0 },
-      { id: 3, value: 0 },
-      { id: 4, value: 0 },
-    ],
-  };
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      counters: [
+        { id: 1, value: 0 },
+        { id: 2, value: 0 },
+        { id: 3, value: 0 },
+        { id: 4, value: 0 },
+      ],
+    };
 
-  // TODO: Uncomment before run
-  // constructor(props) {
-  //   super(props);
-  //   this.handleReset = this.handleReset.bind(this);
-  //   this.handleAdd = this.handleAdd.bind(this);
-  //   this.handleIncrement = this.handleIncrement.bind(this);
-  //   this.handleDecrement = this.handleDecrement.bind(this);
-  //   this.handleDelete = this.handleDelete.bind(this);
-  // }
+    // TODO: Uncomment before run
+    //   this.handleReset = this.handleReset.bind(this);
+    //   this.handleAdd = this.handleAdd.bind(this);
+    //   this.handleIncrement = this.handleIncrement.bind(this);
+    //   this.handleDecrement = this.handleDecrement.bind(this);
+    //   this.handleDelete = this.handleDelete.bind(this);
+  }
 
   handleReset() {
     let counters = this.state.counters.map((_c) => {
