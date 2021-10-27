@@ -3,8 +3,8 @@ import _ from 'lodash';
 
 class TableBody extends React.Component {
   renderCell(item, column) {
-    if (column.content) {
-      return column.content(item);
+    if (column.dynamic) {
+      return column.dynamic(item);
     }
     return _.get(item, column.path);
   }

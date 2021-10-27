@@ -1,6 +1,7 @@
 import React from 'react';
 import Like from './common/like';
 import Table from './common/table';
+import { Link } from 'react-router-dom';
 
 class MoviesTable extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class MoviesTable extends React.Component {
         {
           path: 'title',
           label: 'Title',
+          dynamic: (movie) => <Link to={`/movies/${movie._id}`}>{movie.title}</Link>,
         },
         {
           path: 'genre.name',
@@ -22,12 +24,12 @@ class MoviesTable extends React.Component {
         {
           path: 'like',
           label: 'Like',
-          content: (movie) => <Like liked={movie.liked} onLike={() => this.props.onLike(movie)} />,
+          dynamic: (movie) => <Like liked={movie.liked} onLike={() => this.props.onLike(movie)} />,
         },
         {
           path: 'delete',
           label: 'Handle',
-          content: (movie) => (
+          dynamic: (movie) => (
             <button onClick={() => this.props.onDelete(movie)} className="btn btn-outline-danger btn-sm">
               Delete
             </button>

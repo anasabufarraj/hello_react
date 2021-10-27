@@ -1,24 +1,23 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-function NavBar(props) {
-  // NOTE: props are read-only arguments
+function NavBar() {
   return (
-    <nav className="navbar navbar-dark bg-dark">
-      <div className="container">
-        <a className="navbar-brand" href="http://localhost:3000/">
-          MENU
-        </a>
-        <form className="d-flex">
-          <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-          <button className="btn btn-outline-light" type="submit">
-            Search
-          </button>
-        </form>
-        <span className="text-light">
-          <span className="badge bg-danger">
-            {props.items} {props.items === 1 ? 'Item' : 'Items'}
-          </span>
-        </span>
+    <nav className="navbar navbar-expand navbar-dark bg-dark">
+      <div className="container-fluid">
+        <Link className="navbar-brand" to="/movies">
+          Movies
+        </Link>
+        <div className="navbar-collapse">
+          <div className="navbar-nav">
+            <Link className="nav-link" to="/customers">
+              Customers
+            </Link>
+            <Link className="nav-link" to="/rentals">
+              Rentals
+            </Link>
+          </div>
+        </div>
       </div>
     </nav>
   );

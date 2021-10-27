@@ -74,38 +74,36 @@ class Movies extends React.Component {
     let data = this.handleData();
 
     return this.state.movies.length === 0 ? (
-      <p className="text-center m-5 fs-5 fw-light">You've no content to show!</p>
+      <p className="text-center mt-5 fs-5 fw-light">You've no content to show!</p>
     ) : (
-      <div className="container fw-light">
-        <div className="row">
-          <div className="col-5">
-            <ListGroup
-              items={this.state.genres}
-              selectedItem={this.state.selectedGenre}
-              onItemSelect={this.handleGenreSelect}
-            />
-          </div>
-          <div className="col">
-            <p className="m-3 fw-bold">
-              {data.filteredMovies.length === 1
-                ? `Showing ${data.filteredMovies.length} Movie`
-                : `Showing ${data.filteredMovies.length} Movies`}
-              ...
-            </p>
-            <MoviesTable
-              moviesInPage={data.moviesInPage}
-              onDelete={this.handleMovieDelete}
-              onLike={this.handleMovieLike}
-              onSort={this.handleSorting}
-              sortColumn={this.state.sortColumn}
-            />
-            <Pagination
-              itemsInTable={data.filteredMovies.length}
-              maxItemsInPage={this.state.maxItemsInPage}
-              activePage={this.state.activePage}
-              onPageChange={this.handlePageChange}
-            />
-          </div>
+      <div className="row">
+        <div className="col-5">
+          <ListGroup
+            items={this.state.genres}
+            selectedItem={this.state.selectedGenre}
+            onItemSelect={this.handleGenreSelect}
+          />
+        </div>
+        <div className="col">
+          <p className="m-3 fw-bold">
+            {data.filteredMovies.length === 1
+              ? `Showing ${data.filteredMovies.length} Movie`
+              : `Showing ${data.filteredMovies.length} Movies`}
+            ...
+          </p>
+          <MoviesTable
+            moviesInPage={data.moviesInPage}
+            onDelete={this.handleMovieDelete}
+            onLike={this.handleMovieLike}
+            onSort={this.handleSorting}
+            sortColumn={this.state.sortColumn}
+          />
+          <Pagination
+            itemsInTable={data.filteredMovies.length}
+            maxItemsInPage={this.state.maxItemsInPage}
+            activePage={this.state.activePage}
+            onPageChange={this.handlePageChange}
+          />
         </div>
       </div>
     );
