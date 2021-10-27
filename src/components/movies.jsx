@@ -11,7 +11,7 @@ class Movies extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // MEMO: cannot mutate state directly
+      // NOTE: cannot mutate state directly
       movies: [],
       genres: [],
       maxItemsInPage: 4,

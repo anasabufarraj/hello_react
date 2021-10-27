@@ -1,7 +1,7 @@
 import React from 'react';
 
 function NavBar(props) {
-  // MEMO: props are read-only arguments
+  // NOTE: props are read-only arguments
   return (
     <nav className="navbar navbar-dark bg-dark">
       <div className="container">

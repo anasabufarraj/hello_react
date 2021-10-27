@@ -4,7 +4,7 @@ import Movies from './components/movies';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import reportWebVitals from './reportWebVitals';
-import Playground from './playground';
+import Playground from './util/playground';
 
 ReactDOM.render(
   <React.StrictMode>

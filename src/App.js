@@ -15,12 +15,11 @@ class App extends React.Component {
       ],
     };
 
-    // TODO: Uncomment before run
-    //   this.handleReset = this.handleReset.bind(this);
-    //   this.handleAdd = this.handleAdd.bind(this);
-    //   this.handleIncrement = this.handleIncrement.bind(this);
-    //   this.handleDecrement = this.handleDecrement.bind(this);
-    //   this.handleDelete = this.handleDelete.bind(this);
+    this.handleReset = this.handleReset.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
+    this.handleIncrement = this.handleIncrement.bind(this);
+    this.handleDecrement = this.handleDecrement.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleReset() {
