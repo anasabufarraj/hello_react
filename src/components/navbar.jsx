@@ -5,7 +5,7 @@ function NavBar() {
   return (
     <nav className="navbar navbar-expand navbar-dark bg-dark">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/movies">
+        <Link className="navbar-brand" to="/">
           Movies
         </Link>
         <div className="navbar-collapse">

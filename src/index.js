@@ -7,11 +7,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 
-// TODO [x] Navbar: Movies, Customers, Rentals
-// TODO [x] Customers and Rentals pages with only headings
-// TODO [x] Not found page
-// TODO [] Items links to movie page with title, id, and button
-
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>

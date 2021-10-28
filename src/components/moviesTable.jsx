@@ -11,7 +11,11 @@ class MoviesTable extends React.Component {
         {
           path: 'title',
           label: 'Title',
-          dynamic: (movie) => <Link to={`/movies/${movie._id}`}>{movie.title}</Link>,
+          dynamic: (movie) => (
+            <Link style={{ textDecoration: 'none' }} to={`/movies/${movie._id}`}>
+              {movie.title}
+            </Link>
+          ),
         },
         {
           path: 'genre.name',

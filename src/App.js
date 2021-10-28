@@ -17,10 +17,10 @@ class App extends React.Component {
           <Switch>
             <Route path="/customers" component={Customers} />
             <Route path="/rentals" component={Rentals} />
-            <Route exact path="/movies" component={Movies} />
+            <Route exact path="/" component={Movies} />
             <Route path="/movies/:id" component={MovieDetails} />
-            <Route path="/404" component={NotFound} />
-            <Redirect to="404" />
+            <Route path="/not-found" component={NotFound} />
+            <Redirect to="not-found" />
           </Switch>
         </div>
         <Footer />
