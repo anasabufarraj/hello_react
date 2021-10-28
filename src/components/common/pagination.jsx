@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import { Link } from 'react-router-dom';
 
 function Pagination(props) {
   // NOTE: props are read-only arguments
@@ -14,9 +15,9 @@ function Pagination(props) {
             className={props.activePage === page ? 'page-item active' : 'page-item'}
             key={page}
           >
-            <a href="/#" className="page-link" onClick={() => props.onPageChange(page)}>
+            <Link to="#" className="page-link" onClick={() => props.onPageChange(page)}>
               {page}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

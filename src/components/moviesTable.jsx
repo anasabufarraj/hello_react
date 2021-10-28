@@ -11,7 +11,7 @@ class MoviesTable extends React.Component {
         {
           path: 'title',
           label: 'Title',
-          dynamic: (movie) => (
+          link: (movie) => (
             <Link style={{ textDecoration: 'none' }} to={`/movies/${movie._id}`}>
               {movie.title}
             </Link>
@@ -28,12 +28,12 @@ class MoviesTable extends React.Component {
         {
           path: 'like',
           label: 'Like',
-          dynamic: (movie) => <Like liked={movie.liked} onLike={() => this.props.onLike(movie)} />,
+          button: (movie) => <Like liked={movie.liked} onLike={() => this.props.onLike(movie)} />,
         },
         {
           path: 'delete',
           label: 'Handle',
-          dynamic: (movie) => (
+          button: (movie) => (
             <button onClick={() => this.props.onDelete(movie)} className="btn btn-outline-danger btn-sm">
               Delete
             </button>

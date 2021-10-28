@@ -57,13 +57,13 @@ class Movies extends React.Component {
   }
 
   handleData() {
-    // DOC: 1) Filtering movies, excluding the 'All Genres' which id is empty string.
+    // DOC: 1) Filtering movies, excluding the 'All Genres' which id is an empty string.
     let filteredMovies =
       this.state.selectedGenre && this.state.selectedGenre._id !== ''
         ? this.state.movies.filter((_m) => _m.genre._id === this.state.selectedGenre._id)
         : this.state.movies;
 
-    // DOC: 2) Sorting filtered movies, then paginate them.
+    // DOC: 2) Sorting filtered movies, then paginating.
     let sortedMovies = _.orderBy(filteredMovies, [this.state.sortColumn.path], [this.state.sortColumn.order]);
     let moviesInPage = paginate(sortedMovies, this.state.activePage, this.state.maxItemsInPage);
 

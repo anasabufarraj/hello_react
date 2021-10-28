@@ -2,7 +2,7 @@ import React from 'react';
 
 class TableHeader extends React.Component {
   raiseSort(path, column) {
-    if (!column.content) {
+    if (!column.button) {
       let sortColumn = this.props.sortColumn;
       if (sortColumn.path === path) {
         sortColumn.order = sortColumn.order === 'asc' ? 'desc' : 'asc';
@@ -16,7 +16,7 @@ class TableHeader extends React.Component {
   }
 
   renderSortIcon(column) {
-    if (!column.content && this.props.sortColumn.path === column.path) {
+    if (!column.button && this.props.sortColumn.path === column.path) {
       return this.props.sortColumn.order === 'asc' ? (
         <i className="fa fa-caret-down">&nbsp;</i>
       ) : (
@@ -26,7 +26,7 @@ class TableHeader extends React.Component {
   }
 
   renderCursor(column) {
-    if (!column.content) {
+    if (!column.button) {
       return { cursor: 'pointer' };
     }
     return { cursor: 'default' };
