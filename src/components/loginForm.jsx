@@ -3,12 +3,8 @@
 //------------------------------------------------------------------------------
 import React from 'react';
 
-function Rentals() {
-  return (
-    <div>
-      <h1>Rentals</h1>
-    </div>
-  );
+function LoginForm(props) {
+  return <div></div>;
 }
 
-export default Rentals;
+export default LoginForm;

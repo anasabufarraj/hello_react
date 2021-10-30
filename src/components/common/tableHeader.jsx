@@ -1,3 +1,6 @@
+//------------------------------------------------------------------------------
+// Copyright 2021. Anas Abu Farraj.
+//------------------------------------------------------------------------------
 import React from 'react';
 
 class TableHeader extends React.Component {
@@ -18,9 +21,9 @@ class TableHeader extends React.Component {
   renderSortIcon(column) {
     if (!column.button && this.props.sortColumn.path === column.path) {
       return this.props.sortColumn.order === 'asc' ? (
-        <i className="fa fa-caret-down">&nbsp;</i>
+        <i className="bi bi-caret-down-fill">&nbsp;</i>
       ) : (
-        <i className="fa fa-caret-up">&nbsp;</i>
+        <i className="bi bi-caret-up-fill">&nbsp;</i>
       );
     }
   }

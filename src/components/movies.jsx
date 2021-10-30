@@ -1,3 +1,6 @@
+//------------------------------------------------------------------------------
+// Copyright 2021. Anas Abu Farraj.
+//------------------------------------------------------------------------------
 import React from 'react';
 import { getMovies } from '../services/fakeMovieService';
 import { getGenres } from '../services/fakeGenreService';

@@ -1,3 +1,6 @@
+//------------------------------------------------------------------------------
+// Copyright 2021. Anas Abu Farraj.
+//------------------------------------------------------------------------------
 import React from 'react';
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
