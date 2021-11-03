@@ -4,13 +4,19 @@
 import React from 'react';
 
 class LoginForm extends React.Component {
+  handleSubmit(e) {
+    e.preventDefault(); // Prevent default form submission.
+
+    console.log('Submitted');
+  }
+
   render() {
     return (
       <React.Fragment>
         <h2 className="mb-3">Log In</h2>
         <div className="row">
           <div className="col-8">
-            <form>
+            <form onSubmit={this.handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="Email" className="form-label">
                   Email address
@@ -23,7 +29,7 @@ class LoginForm extends React.Component {
                 </label>
                 <input type="password" className="form-control" id="Password" />
               </div>
-              <button className="btn btn-primary">Submit</button>
+              <button className="btn btn-primary">Login</button>
             </form>
           </div>
         </div>
