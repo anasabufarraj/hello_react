@@ -7,7 +7,7 @@ import TableBody from './tableBody';
 function Table(props) {
   // NOTE: props are read-only arguments
   return (
-    <table className="table m-3">
+    <table className="table">
       <TableHeader columns={props.columns} sortColumn={props.sortColumn} onSort={props.onSort} />
       <TableBody columns={props.columns} data={props.data} />
     </table>

@@ -15,7 +15,7 @@ class ListGroup extends React.Component {
 
   render() {
     return (
-      <div className="list-group m-3">
+      <div className="list-group mb-3">
         {this.props.items.map((genre) => (
           <li
             style={{ cursor: 'pointer' }}

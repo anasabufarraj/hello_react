@@ -11,7 +11,7 @@ function Pagination(props) {
 
   return nodes.length === 1 ? null : (
     <nav>
-      <ul className="pagination m-3">
+      <ul className="pagination mb-3">
         {nodes.map((page) => (
           <li
             style={{ cursor: 'pointer' }}

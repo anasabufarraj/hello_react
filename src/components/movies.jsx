@@ -77,7 +77,7 @@ class Movies extends React.Component {
     let data = this.handleData();
 
     return this.state.movies.length === 0 ? (
-      <p className="text-center mt-5 fs-5 fw-light">You've no content to show!</p>
+      <p className="lead text-center text-muted">You've no content to show!</p>
     ) : (
       <div className="row">
         <div className="col-5">
@@ -88,7 +88,7 @@ class Movies extends React.Component {
           />
         </div>
         <div className="col">
-          <p className="m-3 fw-bold">
+          <p className="fw-normal">
             {data.filteredMovies.length === 1
               ? `Showing ${data.filteredMovies.length} Movie`
               : `Showing ${data.filteredMovies.length} Movies`}
