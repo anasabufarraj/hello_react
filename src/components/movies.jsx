@@ -43,7 +43,7 @@ class Movies extends React.Component {
     let movies = [...this.state.movies];
     let index = movies.indexOf(movie);
     movies[index].liked = !movies[index].liked;
-    this.setState({ movies });
+    this.setState(movies);
   }
 
   handlePageChange(page) {

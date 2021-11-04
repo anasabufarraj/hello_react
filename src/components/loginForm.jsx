@@ -4,10 +4,29 @@
 import React from 'react';
 
 class LoginForm extends React.Component {
-  handleSubmit(e) {
-    e.preventDefault(); // Prevent default form submission.
+  constructor(props) {
+    super(props);
+    this.state = {
+      account: { username: '', password: '' },
+    };
 
-    console.log('Submitted');
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  username = React.createRef();
+
+  handleSubmit(e) {
+    e.preventDefault(); // Prevent default form submission
+
+    console.log(this.username.current.value); // TODO: Remove
+  }
+
+  handleChange(e) {
+    let account = this.state.account;
+    account.username = e.currentTarget.value; // Set to current target value of the event listener
+    console.log(account.username); // TODO: Remove
+    this.setState(account);
   }
 
   render() {
@@ -18,10 +37,18 @@ class LoginForm extends React.Component {
           <div className="col-8">
             <form onSubmit={this.handleSubmit}>
               <div className="mb-3">
-                <label htmlFor="Email" className="form-label">
-                  Email address
+                <label htmlFor="Username" className="form-label">
+                  Username
                 </label>
-                <input type="email" className="form-control" id="Email" aria-describedby="emailHelp" />
+                <input
+                  ref={this.username}
+                  type="email"
+                  id="Username"
+                  className="form-control"
+                  value={this.state.account.username}
+                  onChange={this.handleChange}
+                  autoFocus={true}
+                />
               </div>
               <div className="mb-3">
                 <label htmlFor="Password" className="form-label">
