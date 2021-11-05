@@ -9,19 +9,29 @@ class LoginForm extends React.Component {
     super(props);
     this.state = {
       account: { username: '', password: '' },
+      errors: {},
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
+  handleValidation() {
+    // DOC: Return error messages to the user input.
+    return 'Username is required.';
+  }
+
   handleSubmit(e) {
+    // DOC: Prevent default for submission and handle validation error messages.
     e.preventDefault();
+    let errors = this.handleValidation();
+    this.setState({ errors });
   }
 
   handleChange(e) {
+    // DOC: Set an input element state using an event listener to the current target element.
     let account = this.state.account;
-    account[e.currentTarget.name] = e.currentTarget.value; // Set to current target value of the event listener
+    account[e.currentTarget.name] = e.currentTarget.value;
     this.setState(account);
   }
 
