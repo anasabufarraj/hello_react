@@ -2,26 +2,26 @@
 // Copyright 2021. Anas Abu Farraj.
 //------------------------------------------------------------------------------
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function NavBar() {
   return (
     <nav className="navbar navbar-expand navbar-dark bg-dark">
       <div className="container-fluid">
-        <Link className="nav-item navbar-brand" to="/">
+        <NavLink className="nav-item navbar-brand" to="/">
           Movies
-        </Link>
+        </NavLink>
         <div className="navbar-collapse">
           <div className="navbar-nav">
-            <Link className="nav-item nav-link" to="/customers">
+            <NavLink className="nav-item nav-link" to="/customers">
               Customers
-            </Link>
-            <Link className="nav-item nav-link" to="/rentals">
+            </NavLink>
+            <NavLink className="nav-item nav-link" to="/rentals">
               Rentals
-            </Link>
-            <Link className="nav-item nav-link" to="/login">
+            </NavLink>
+            <NavLink className="nav-item nav-link" to="/login">
               Login
-            </Link>
+            </NavLink>
           </div>
         </div>
       </div>
