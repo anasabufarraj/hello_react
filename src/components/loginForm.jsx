@@ -17,14 +17,27 @@ class LoginForm extends React.Component {
   }
 
   handleValidation() {
-    // DOC: Return error messages to the user input.
-    return 'Username is required.';
+    // DOC: Return error messages arrays.
+    let errors = {};
+
+    if (!this.state.account.username.trim()) {
+      errors.username = 'Username is required.';
+    }
+
+    if (!this.state.account.password.trim()) {
+      errors.password = 'Password is required.';
+    }
+
+    return Object.keys(errors).length === 0 ? 'Submitted' : errors; // FIXME: Remove 'Submitted'
   }
 
   handleSubmit(e) {
     // DOC: Prevent default for submission and handle validation error messages.
     e.preventDefault();
     let errors = this.handleValidation();
+
+    console.log(errors); //TODO: Remove
+
     this.setState({ errors });
   }
 
@@ -48,7 +61,7 @@ class LoginForm extends React.Component {
                 value={this.state.account.username}
                 onChange={this.handleChange}
                 name={'username'}
-                message={"We'll never share your information."}
+                message={this.state.errors.username} // FIXME: is null if no error
                 autofocus={true}
               />
               <Input
@@ -57,7 +70,7 @@ class LoginForm extends React.Component {
                 value={this.state.account.password}
                 onChange={this.handleChange}
                 name={'password'}
-                message={'Must be 8-20 characters long.'}
+                message={this.state.errors.password} // FIXME: is null if no error
               />
               <button className="btn btn-primary">Login</button>
             </form>
