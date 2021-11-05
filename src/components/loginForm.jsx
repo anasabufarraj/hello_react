@@ -59,19 +59,20 @@ class LoginForm extends React.Component {
 
   handleChange(e) {
     // DOC: Handle field validation errors,
-    let errors = this.state.errors;
-    let message = this.handleFieldValidation(e.currentTarget);
+    // let errors = this.state.errors;
+    // let message = this.handleFieldValidation(e.currentTarget);
 
-    if (errors) {
-      errors[e.currentTarget.name] = message;
-    } else {
-      delete errors[e.currentTarget.name];
-    }
+    // if (errors) {
+    //   errors[e.currentTarget.name] = message;
+    // } else {
+    //   delete errors[e.currentTarget.name];
+    // }
 
     // DOC: Update the state using an event listener to the current target value.
     let account = this.state.account;
     account[e.currentTarget.name] = e.currentTarget.value;
-    this.setState({ account, errors });
+
+    this.setState({ account }); // TODO: Add 'errors'
   }
 
   render() {
