@@ -14,18 +14,21 @@ class LoginForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  username = React.createRef();
+  // username = React.createRef(); // TODO: Remove
 
   handleSubmit(e) {
     e.preventDefault(); // Prevent default form submission
 
-    console.log(this.username.current.value); // TODO: Remove
+    // console.log(this.username.current.value); // TODO: Remove
   }
 
   handleChange(e) {
     let account = this.state.account;
-    account.username = e.currentTarget.value; // Set to current target value of the event listener
-    console.log(account.username); // TODO: Remove
+    account[e.currentTarget.name] = e.currentTarget.value; // Set to current target value of the event listener
+
+    // console.log(account.username); // TODO: Remove
+    // console.log(account.password); // TODO: Remove
+
     this.setState(account);
   }
 
@@ -41,12 +44,13 @@ class LoginForm extends React.Component {
                   Username
                 </label>
                 <input
-                  ref={this.username}
                   type="email"
-                  id="Username"
-                  className="form-control"
+                  /* ref={this.username} TODO: Remove */
                   value={this.state.account.username}
                   onChange={this.handleChange}
+                  className="form-control"
+                  id="Username"
+                  name="username"
                   autoFocus={true}
                 />
               </div>
@@ -54,7 +58,14 @@ class LoginForm extends React.Component {
                 <label htmlFor="Password" className="form-label">
                   Password
                 </label>
-                <input type="password" className="form-control" id="Password" />
+                <input
+                  type="password"
+                  value={this.state.account.password}
+                  onChange={this.handleChange}
+                  className="form-control"
+                  id="Password"
+                  name="password"
+                />
               </div>
               <button className="btn btn-primary">Login</button>
             </form>
