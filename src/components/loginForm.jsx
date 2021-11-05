@@ -28,17 +28,16 @@ class LoginForm extends React.Component {
       errors.password = 'Password is required.';
     }
 
-    return Object.keys(errors).length === 0 ? 'Submitted' : errors; // FIXME: Remove 'Submitted'
+    return Object.keys(errors).length === 0 ? null : errors;
   }
 
   handleSubmit(e) {
-    // DOC: Prevent default for submission and handle validation error messages.
+    // DOC: Prevent default form submission and handle validation error messages.
+    //  If no errors, set to empty object.
     e.preventDefault();
+
     let errors = this.handleValidation();
-
-    console.log(errors); //TODO: Remove
-
-    this.setState({ errors });
+    this.setState({ errors: errors || {} });
   }
 
   handleChange(e) {
@@ -61,7 +60,7 @@ class LoginForm extends React.Component {
                 value={this.state.account.username}
                 onChange={this.handleChange}
                 name={'username'}
-                message={this.state.errors.username} // FIXME: is null if no error
+                error={this.state.errors.username}
                 autofocus={true}
               />
               <Input
@@ -70,7 +69,7 @@ class LoginForm extends React.Component {
                 value={this.state.account.password}
                 onChange={this.handleChange}
                 name={'password'}
-                message={this.state.errors.password} // FIXME: is null if no error
+                error={this.state.errors.password}
               />
               <button className="btn btn-primary">Login</button>
             </form>

@@ -18,7 +18,7 @@ function Input(props) {
         className="form-control"
         autoFocus={props.autofocus}
       />
-      <div className="form-text fw-light text-danger">{props.message}</div>
+      <div className="form-text fw-light text-danger">{props.error}</div>
     </div>
   );
 }
