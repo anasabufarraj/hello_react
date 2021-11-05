@@ -12,8 +12,9 @@ class LoginForm extends React.Component {
       account: { username: '', password: '' },
       errors: {},
       schema: {
-        username: Joi.string().required(),
-        password: Joi.string().required(),
+        options: { abortEarly: false },
+        username: Joi.string().required().label('Username'),
+        password: Joi.string().required().label('Password'),
       },
     };
 
@@ -23,41 +24,37 @@ class LoginForm extends React.Component {
   }
 
   handleValidation() {
-    // DOC: Return error messages arrays.
-    let result = Joi.validate(this.state.account, this.state.schema, { abortEarly: false });
+    // DOC: Update errors state object using 'Joi' object.
+    let { error } = Joi.validate(this.state.account, this.state.schema, this.state.schema.options);
 
-    console.log(result.error.details); // TODO: Remove
-
-    let errors = {};
-
-    if (!this.state.account.username.trim()) {
-      errors.username = 'Username is required.';
+    if (!error) {
+      return null;
+    } else {
+      let errors = {};
+      for (let _i of error.details) {
+        errors[_i.path[0]] = _i.message;
+      }
+      return errors;
     }
-    if (!this.state.account.password.trim()) {
-      errors.password = 'Password is required.';
-    }
-
-    return Object.keys(errors).length === 0 ? null : errors;
   }
 
   handleSubmit(e) {
     // DOC: Prevent default form submission and handle submission validation error.
     e.preventDefault();
-
     let errors = this.handleValidation();
     this.setState({ errors: errors || {} }); // If no error, set to empty object.
   }
 
   handleFieldValidation(input) {
-    if (input.name === 'username') {
-      if (input.value.trim() === '') {
-        return 'Username is required.'; // TODO: Refactor
-      }
-    }
-
-    if (input.name === 'password') {
-      // validation
-    }
+    // if (input.name === 'username') {
+    //   if (input.value.trim() === '') {
+    //     return 'Username is required.'; // TODO: Refactor
+    //   }
+    // }
+    //
+    // if (input.name === 'password') {
+    //   // validation
+    // }
   }
 
   handleChange(e) {
