@@ -3,6 +3,7 @@
 //------------------------------------------------------------------------------
 import React from 'react';
 import Input from './common/input';
+import Joi from 'joi-browser';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -10,6 +11,10 @@ class LoginForm extends React.Component {
     this.state = {
       account: { username: '', password: '' },
       errors: {},
+      schema: {
+        username: Joi.string().required(),
+        password: Joi.string().required(),
+      },
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,12 +24,15 @@ class LoginForm extends React.Component {
 
   handleValidation() {
     // DOC: Return error messages arrays.
+    let result = Joi.validate(this.state.account, this.state.schema, { abortEarly: false });
+
+    console.log(result.error.details); // TODO: Remove
+
     let errors = {};
 
     if (!this.state.account.username.trim()) {
       errors.username = 'Username is required.';
     }
-
     if (!this.state.account.password.trim()) {
       errors.password = 'Password is required.';
     }
