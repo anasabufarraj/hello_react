@@ -1,8 +1,6 @@
 //------------------------------------------------------------------------------
 // Copyright 2021. Anas Abu Farraj.
 //------------------------------------------------------------------------------
-// noinspection JSUnresolvedFunction
-
 import React from 'react';
 import Input from './common/input';
 import Joi from 'joi-browser';
@@ -15,8 +13,8 @@ class LoginForm extends React.Component {
       errors: {},
       schema: {
         options: { abortEarly: false },
-        username: Joi.string().required().label('Username'),
-        password: Joi.string().required().label('Password'),
+        username: Joi.string().email().required().label('Username'),
+        password: Joi.string().min(6).required().label('Password'),
       },
     };
 
@@ -41,7 +39,7 @@ class LoginForm extends React.Component {
   }
 
   handleSubmit(e) {
-    // DOC: Prevent default form submission and handle submission validation error.
+    // DOC: Handle form validation error when submit.
     e.preventDefault();
     let errors = this.handleValidation();
     this.setState({ errors: errors || {} });
@@ -74,6 +72,11 @@ class LoginForm extends React.Component {
     this.setState({ errors, account });
   }
 
+  handleDisable() {
+    let errors = this.handleValidation();
+    return errors ? true : false;
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -98,7 +101,9 @@ class LoginForm extends React.Component {
                 name={'password'}
                 error={this.state.errors.password}
               />
-              <button className="btn btn-primary">Login</button>
+              <button className="btn btn-primary" disabled={this.handleDisable()}>
+                Login
+              </button>
             </form>
           </div>
         </div>
