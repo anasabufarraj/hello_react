@@ -1,6 +1,8 @@
 //------------------------------------------------------------------------------
 // Copyright 2021. Anas Abu Farraj.
 //------------------------------------------------------------------------------
+// noinspection JSUnresolvedFunction
+
 import React from 'react';
 import Input from './common/input';
 import Joi from 'joi-browser';
@@ -42,37 +44,34 @@ class LoginForm extends React.Component {
     // DOC: Prevent default form submission and handle submission validation error.
     e.preventDefault();
     let errors = this.handleValidation();
-    this.setState({ errors: errors || {} }); // If no error, set to empty object.
+    this.setState({ errors: errors || {} });
   }
 
-  handleFieldValidation(input) {
-    // if (input.name === 'username') {
-    //   if (input.value.trim() === '') {
-    //     return 'Username is required.'; // TODO: Refactor
-    //   }
-    // }
-    //
-    // if (input.name === 'password') {
-    //   // validation
-    // }
+  handleFieldValidation({ name, value }) {
+    // DOC: Validate input value against a specific input schema.
+    let input = { [name]: value };
+    let inputSchema = { [name]: this.state.schema[name] };
+    let { error } = Joi.validate(input, inputSchema);
+
+    return error ? error.details[0].message : null;
   }
 
   handleChange(e) {
-    // DOC: Handle field validation errors,
-    // let errors = this.state.errors;
-    // let message = this.handleFieldValidation(e.currentTarget);
+    // DOC: Handle field validation errors on input change.
+    let errors = this.state.errors;
+    let message = this.handleFieldValidation(e.currentTarget);
 
-    // if (errors) {
-    //   errors[e.currentTarget.name] = message;
-    // } else {
-    //   delete errors[e.currentTarget.name];
-    // }
+    if (errors) {
+      errors[e.currentTarget.name] = message;
+    } else {
+      delete errors[e.currentTarget.name];
+    }
 
     // DOC: Update the state using an event listener to the current target value.
     let account = this.state.account;
     account[e.currentTarget.name] = e.currentTarget.value;
 
-    this.setState({ account }); // TODO: Add 'errors'
+    this.setState({ errors, account });
   }
 
   render() {
