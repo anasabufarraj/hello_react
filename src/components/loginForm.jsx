@@ -72,11 +72,6 @@ class LoginForm extends React.Component {
     this.setState({ errors, account });
   }
 
-  handleDisable() {
-    let errors = this.handleValidation();
-    return errors ? true : false;
-  }
-
   render() {
     return (
       <React.Fragment>
@@ -101,7 +96,7 @@ class LoginForm extends React.Component {
                 name={'password'}
                 error={this.state.errors.password}
               />
-              <button className="btn btn-primary" disabled={this.handleDisable()}>
+              <button className="btn btn-primary" disabled={this.handleValidation()}>
                 Login
               </button>
             </form>
