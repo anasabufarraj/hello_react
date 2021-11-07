@@ -4,6 +4,7 @@
 import React from 'react';
 import NavBar from './components/navbar';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import RegisterForm from './components/registerForm';
 import LoginForm from './components/loginForm';
 import MovieForm from './components/movieForm';
 import Movies from './components/movies';
@@ -19,6 +20,7 @@ class App extends React.Component {
         <NavBar />
         <div className="container-fluid fw-light m-4">
           <Switch>
+            <Route path="/register" component={RegisterForm} />
             <Route path="/login" component={LoginForm} />
             <Route path="/movies/:id" component={MovieForm} />
             <Route path="/movies" component={Movies} />
