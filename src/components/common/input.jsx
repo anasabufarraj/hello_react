@@ -11,9 +11,9 @@ function Input(props) {
       </label>
       <input
         type={props.type}
+        name={props.name}
         value={props.value}
         onChange={props.onChange}
-        name={props.name}
         id={props.name}
         className="form-control"
         autoFocus={props.autofocus}

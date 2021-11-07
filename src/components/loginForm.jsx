@@ -4,7 +4,6 @@
 import React from 'react';
 import Form from './common/form';
 import Joi from 'joi-browser';
-import Input from './common/input';
 
 class LoginForm extends Form {
   constructor(props) {
@@ -31,26 +30,9 @@ class LoginForm extends Form {
         <div className="row">
           <div className="col-8">
             <form onSubmit={this.handleFormSubmit}>
-              <Input
-                label={'Username'}
-                type={'text'}
-                value={this.state.data.username}
-                onChange={this.handleInputChange}
-                name={'username'}
-                error={this.state.errors.username}
-                autofocus={true}
-              />
-              <Input
-                label={'Password'}
-                type={'password'}
-                value={this.state.data.password}
-                onChange={this.handleInputChange}
-                name={'password'}
-                error={this.state.errors.password}
-              />
-              <button className="btn btn-primary" disabled={this.handleFormValidation()}>
-                Login
-              </button>
+              {this.renderInput('Username', 'text', 'username', true)}
+              {this.renderInput('Password', 'password', 'password')}
+              {this.renderSubmitButton('Login')}
             </form>
           </div>
         </div>

@@ -3,6 +3,7 @@
 //------------------------------------------------------------------------------
 import React from 'react';
 import Joi from 'joi-browser';
+import Input from './input';
 
 class Form extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class Form extends React.Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleInputValidation = this.handleInputValidation.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.renderSubmitButton = this.renderSubmitButton.bind(this);
   }
 
   handleFormValidation() {
@@ -65,6 +67,28 @@ class Form extends React.Component {
     let data = this.state.data;
     data[e.currentTarget.name] = e.currentTarget.value;
     this.setState({ errors, data });
+  }
+
+  renderSubmitButton(label) {
+    return (
+      <button className="btn btn-primary" disabled={this.handleFormValidation()}>
+        {label}
+      </button>
+    );
+  }
+
+  renderInput(label, type, name, autoFocus = false) {
+    return (
+      <Input
+        label={label}
+        type={type}
+        name={name}
+        value={this.state.data[name]}
+        onChange={this.handleInputChange}
+        error={this.state.errors[name]}
+        autofocus={autoFocus}
+      />
+    );
   }
 }
 
