@@ -18,7 +18,6 @@ function Input(props) {
         className="form-control"
         autoFocus={props.autofocus}
       />
-      {/* TODO: Disable before validation completed*/}
       <div className="form-text fw-light text-danger">{props.error}</div>
     </div>
   );
