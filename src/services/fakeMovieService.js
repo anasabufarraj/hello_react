@@ -1,6 +1,6 @@
 import * as genresAPI from './fakeGenreService';
 
-export const movies = [
+const movies = [
   {
     _id: '5b21ca3eeb7f6fbccd471815',
     title: 'Terminator',
@@ -8,7 +8,7 @@ export const movies = [
     numberInStock: 6,
     dailyRentalRate: 2.5,
     publishDate: '2018-01-03T19:04:28.809Z',
-    liked: false,
+    liked: true,
   },
   {
     _id: '5b21ca3eeb7f6fbccd471816',
@@ -16,7 +16,6 @@ export const movies = [
     genre: { _id: '5b21ca3eeb7f6fbccd471818', name: 'Action' },
     numberInStock: 5,
     dailyRentalRate: 2.5,
-    liked: false,
   },
   {
     _id: '5b21ca3eeb7f6fbccd471817',
@@ -24,7 +23,6 @@ export const movies = [
     genre: { _id: '5b21ca3eeb7f6fbccd471820', name: 'Thriller' },
     numberInStock: 8,
     dailyRentalRate: 3.5,
-    liked: false,
   },
   {
     _id: '5b21ca3eeb7f6fbccd471819',
@@ -32,7 +30,6 @@ export const movies = [
     genre: { _id: '5b21ca3eeb7f6fbccd471814', name: 'Comedy' },
     numberInStock: 7,
     dailyRentalRate: 3.5,
-    liked: false,
   },
   {
     _id: '5b21ca3eeb7f6fbccd47181a',
@@ -40,7 +37,6 @@ export const movies = [
     genre: { _id: '5b21ca3eeb7f6fbccd471814', name: 'Comedy' },
     numberInStock: 7,
     dailyRentalRate: 3.5,
-    liked: false,
   },
   {
     _id: '5b21ca3eeb7f6fbccd47181b',
@@ -48,7 +44,6 @@ export const movies = [
     genre: { _id: '5b21ca3eeb7f6fbccd471814', name: 'Comedy' },
     numberInStock: 7,
     dailyRentalRate: 3.5,
-    liked: false,
   },
   {
     _id: '5b21ca3eeb7f6fbccd47181e',
@@ -56,7 +51,6 @@ export const movies = [
     genre: { _id: '5b21ca3eeb7f6fbccd471820', name: 'Thriller' },
     numberInStock: 7,
     dailyRentalRate: 4.5,
-    liked: false,
   },
   {
     _id: '5b21ca3eeb7f6fbccd47181f',
@@ -64,7 +58,6 @@ export const movies = [
     genre: { _id: '5b21ca3eeb7f6fbccd471820', name: 'Thriller' },
     numberInStock: 4,
     dailyRentalRate: 3.5,
-    liked: false,
   },
   {
     _id: '5b21ca3eeb7f6fbccd471821',
@@ -72,7 +65,6 @@ export const movies = [
     genre: { _id: '5b21ca3eeb7f6fbccd471818', name: 'Action' },
     numberInStock: 7,
     dailyRentalRate: 3.5,
-    liked: false,
   },
 ];
 
@@ -87,17 +79,14 @@ export function getMovie(id) {
 export function saveMovie(movie) {
   let movieInDb = movies.find((m) => m._id === movie._id) || {};
   movieInDb.title = movie.title;
-  movieInDb.genre = movie.genre;
-  // movieInDb.numberInStock = Number(movie.numberInStock);
+  movieInDb.genre = genresAPI.genres.find((g) => g._id === movie.genreId);
+  movieInDb.numberInStock = Number(movie.numberInStock);
   movieInDb.dailyRentalRate = Number(movie.dailyRentalRate);
 
   if (!movieInDb._id) {
-    movieInDb._id = Date.now();
+    movieInDb._id = Date.now().toString();
     movies.push(movieInDb);
   }
-
-  console.log(movieInDb);
-  // console.log(genresAPI.genres.find((g) => g._id === movie.genre._id));
   return movieInDb;
 }
 
@@ -106,7 +95,3 @@ export function deleteMovie(id) {
   movies.splice(movies.indexOf(movieInDb), 1);
   return movieInDb;
 }
-
-// FIXME: There are two bugs here
-// XXX FIXED: line 91.... movie.genreId => movie.genre._id).name
-// FIXED: line 89....movieInDb.name = movie.name => movieInDb.title = movie.title

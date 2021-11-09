@@ -4,6 +4,7 @@
 import React from 'react';
 import Joi from 'joi-browser';
 import Input from './input';
+import InputSelect from './inputSelect';
 
 class Form extends React.Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class Form extends React.Component {
 
   handleFormValidation() {
     // DOC: Update errors state object using 'Joi' object.
-    let { error } = Joi.validate(this.state.data, this.state.schema, this.state.schema.options);
+    let { error } = Joi.validate(this.state.data, this.schema, this.schema.options);
 
     if (!error) {
       return null;
@@ -45,7 +46,7 @@ class Form extends React.Component {
   handleInputValidation({ name, value }) {
     // DOC: Validate input value against 'Joi' schema.
     let input = { [name]: value };
-    let inputSchema = { [name]: this.state.schema[name] };
+    let inputSchema = { [name]: this.schema[name] };
     let { error } = Joi.validate(input, inputSchema);
 
     return error ? error.details[0].message : null;
@@ -86,6 +87,20 @@ class Form extends React.Component {
         onChange={this.handleInputChange}
         error={this.state.errors[name]}
         autofocus={autoFocus}
+      />
+    );
+  }
+
+  renderInputSelect(label, name, options, defaultValue) {
+    return (
+      <InputSelect
+        label={label}
+        name={name}
+        options={options}
+        value={this.state.data[name]}
+        onChange={this.handleInputChange}
+        defaultValue={defaultValue}
+        error={this.state.errors[name]}
       />
     );
   }
