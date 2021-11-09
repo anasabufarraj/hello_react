@@ -6,7 +6,8 @@ import NavBar from './components/navbar';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import RegisterForm from './components/registerForm';
 import LoginForm from './components/loginForm';
-import MovieForm from './components/movieForm';
+import MovieAddForm from './components/movieAddForm';
+import MovieEditForm from './components/movieEditForm';
 import Movies from './components/movies';
 import Customers from './components/customers';
 import Rentals from './components/rentals';
@@ -22,7 +23,8 @@ class App extends React.Component {
           <Switch>
             <Route path="/register" component={RegisterForm} />
             <Route path="/login" component={LoginForm} />
-            <Route path="/movies/:id" component={MovieForm} />
+            <Route path="/movies/new" component={MovieAddForm} />
+            <Route path="/movies/:id" component={MovieEditForm} />
             <Route path="/movies" component={Movies} />
             <Route path="/customers" component={Customers} />
             <Route path="/rentals" component={Rentals} />

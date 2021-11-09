@@ -13,7 +13,7 @@ class RegisterForm extends Form {
       errors: {},
       schema: {
         options: { abortEarly: false },
-        name: Joi.string().required().label('Full Name'),
+        name: Joi.string().required().label('Name'),
         email: Joi.string().email().required().label('Email'),
         password: Joi.string().min(6).required().label('Password'),
       },
@@ -21,7 +21,8 @@ class RegisterForm extends Form {
   }
 
   handleFormSubmitToServer() {
-    console.warn('Submitted to Server');
+    // TODO: Implement this
+    console.warn('Registered');
   }
 
   render() {
@@ -31,7 +32,7 @@ class RegisterForm extends Form {
         <div className="row">
           <div className="col-8">
             <form onSubmit={this.handleFormSubmit}>
-              {this.renderInput('Full Name', 'text', 'name', true)}
+              {this.renderInput('Name', 'text', 'name', true)}
               {this.renderInput('Email', 'email', 'email')}
               {this.renderInput('Password', 'password', 'password')}
               {this.renderSubmitButton('Register')}

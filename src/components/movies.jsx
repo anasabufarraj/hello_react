@@ -8,6 +8,7 @@ import Pagination from './common/pagination';
 import paginate from '../util/paginate';
 import MoviesTable from './moviesTable';
 import ListGroup from './common/ListGroup';
+import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
 class Movies extends React.Component {
@@ -86,6 +87,9 @@ class Movies extends React.Component {
             selectedItem={this.state.selectedGenre}
             onItemSelect={this.handleGenreSelect}
           />
+          <Link to="/movies/new" className="btn btn-primary d-grid g-1 mb-3">
+            Add Movie
+          </Link>
         </div>
         <div className="col">
           <p className="fw-normal">

@@ -86,16 +86,18 @@ export function getMovie(id) {
 
 export function saveMovie(movie) {
   let movieInDb = movies.find((m) => m._id === movie._id) || {};
-  movieInDb.name = movie.name;
-  movieInDb.genre = genresAPI.genres.find((g) => g._id === movie.genreId);
-  movieInDb.numberInStock = movie.numberInStock;
-  movieInDb.dailyRentalRate = movie.dailyRentalRate;
+  movieInDb.title = movie.title;
+  movieInDb.genre = movie.genre;
+  // movieInDb.numberInStock = Number(movie.numberInStock);
+  movieInDb.dailyRentalRate = Number(movie.dailyRentalRate);
 
   if (!movieInDb._id) {
     movieInDb._id = Date.now();
     movies.push(movieInDb);
   }
 
+  console.log(movieInDb);
+  // console.log(genresAPI.genres.find((g) => g._id === movie.genre._id));
   return movieInDb;
 }
 
@@ -104,3 +106,7 @@ export function deleteMovie(id) {
   movies.splice(movies.indexOf(movieInDb), 1);
   return movieInDb;
 }
+
+// FIXME: There are two bugs here
+// XXX FIXED: line 91.... movie.genreId => movie.genre._id).name
+// FIXED: line 89....movieInDb.name = movie.name => movieInDb.title = movie.title

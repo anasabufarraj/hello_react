@@ -35,11 +35,10 @@ class Form extends React.Component {
   }
 
   handleFormSubmit(e) {
-    // DOC: Handle form validation error before submit.
+    // DOC: Handle form validation and submit to server.
     e.preventDefault();
     let errors = this.handleFormValidation();
     this.setState({ errors: errors || {} });
-
     this.handleFormSubmitToServer();
   }
 
