@@ -15,7 +15,6 @@ class MovieForm extends Form {
       genres: [],
       errors: {},
       data: {
-        _id: '',
         title: '',
         genreId: '',
         numberInStock: '',
@@ -35,17 +34,17 @@ class MovieForm extends Form {
 
   componentDidMount() {
     let genres = getGenres();
-    this.setState({ genres });
-
     let movieId = this.props.match.params.id;
     let movie = this.state.movie;
+
+    this.setState({ genres });
 
     if (movieId === 'new') {
       return;
     }
 
     if (!movie) {
-      return this.props.history.replace('/not-found');
+      return this.props.history.push('/not-found');
     }
 
     this.setState({ data: this.handleAddingData(movie) });
@@ -67,7 +66,6 @@ class MovieForm extends Form {
   }
 
   handleDefaultSelect() {
-    // TODO: Yahoo!
     let movie = this.state.movie;
     if (movie) {
       return movie.genre.name;
@@ -78,8 +76,7 @@ class MovieForm extends Form {
   render() {
     return (
       <React.Fragment>
-        {/* TODO: Add movie name || New Movie*/}
-        <h2 className="mb-3">Movie </h2>
+        <h2 className="mb-3">{this.props.match.params.id === 'new' ? 'Add Movie' : 'Edit Movie'}</h2>
         <div className="row">
           <div className="col-8">
             <form onSubmit={this.handleFormSubmit}>
