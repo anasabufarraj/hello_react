@@ -22,7 +22,6 @@ class RegisterForm extends Form {
   };
 
   handleFormSubmitToServer() {
-    // TODO: Implement this
     console.warn('Registered');
   }
 

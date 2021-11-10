@@ -15,7 +15,6 @@ class Movies extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // NOTE: cannot mutate state directly
       movies: [],
       genres: [],
       maxItemsInPage: 4,
@@ -81,7 +80,7 @@ class Movies extends React.Component {
       <p className="lead text-center text-muted">You've no content to show!</p>
     ) : (
       <div className="row">
-        <div className="col-5">
+        <div className="col-6">
           <ListGroup
             items={this.state.genres}
             selectedItem={this.state.selectedGenre}
