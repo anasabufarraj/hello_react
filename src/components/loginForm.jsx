@@ -11,13 +11,14 @@ class LoginForm extends Form {
     this.state = {
       data: { username: '', password: '' },
       errors: {},
-      schema: {
-        options: { abortEarly: false },
-        username: Joi.string().email().required().label('Username'),
-        password: Joi.string().min(6).required().label('Password'),
-      },
     };
   }
+
+  schema = {
+    options: { abortEarly: false },
+    username: Joi.string().email().required().label('Username'),
+    password: Joi.string().min(6).required().label('Password'),
+  };
 
   handleFormSubmitToServer() {
     console.warn('Submitted to Server');

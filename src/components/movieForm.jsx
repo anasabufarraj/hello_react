@@ -12,7 +12,7 @@ class MovieForm extends Form {
     super(props);
     this.state = {
       movie: getMovie(this.props.match.params.id),
-      genres: [],
+      genres: getGenres(),
       errors: {},
       data: {
         title: '',
@@ -33,11 +33,8 @@ class MovieForm extends Form {
   };
 
   componentDidMount() {
-    let genres = getGenres();
     let movieId = this.props.match.params.id;
     let movie = this.state.movie;
-
-    this.setState({ genres });
 
     if (movieId === 'new') {
       return;

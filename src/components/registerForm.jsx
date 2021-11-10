@@ -11,14 +11,15 @@ class RegisterForm extends Form {
     this.state = {
       data: { name: '', email: '', password: '' },
       errors: {},
-      schema: {
-        options: { abortEarly: false },
-        name: Joi.string().required().label('Name'),
-        email: Joi.string().email().required().label('Email'),
-        password: Joi.string().min(6).required().label('Password'),
-      },
     };
   }
+
+  schema = {
+    options: { abortEarly: false },
+    name: Joi.string().required().label('Name'),
+    email: Joi.string().email().required().label('Email'),
+    password: Joi.string().min(6).required().label('Password'),
+  };
 
   handleFormSubmitToServer() {
     // TODO: Implement this
