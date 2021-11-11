@@ -18,7 +18,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <NavBar />
-        <div className="container-fluid fw-light m-4">
+        <div className="container fw-light my-4">
           <Switch>
             <Route path="/register" component={RegisterForm} />
             <Route path="/login" component={LoginForm} />

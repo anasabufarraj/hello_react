@@ -10,6 +10,7 @@ import MoviesTable from './moviesTable';
 import ListGroup from './common/ListGroup';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
+import Search from './common/search';
 
 class Movies extends React.Component {
   constructor(props) {
@@ -27,11 +28,12 @@ class Movies extends React.Component {
     this.handlePageChange = this.handlePageChange.bind(this);
     this.handleGenreSelect = this.handleGenreSelect.bind(this);
     this.handleSorting = this.handleSorting.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   componentDidMount() {
-    let allGenres = [{ _id: '', name: 'All Genres' }, ...getGenres()];
-    this.setState({ movies: getMovies(), genres: allGenres }); // Get from server
+    let genres = [{ _id: '', name: 'All Genres' }, ...getGenres()];
+    this.setState({ movies: getMovies(), genres });
   }
 
   handleMovieDelete(movie) {
@@ -60,7 +62,7 @@ class Movies extends React.Component {
   }
 
   handleData() {
-    // DOC: 1) Filtering movies, excluding the 'All Genres' which id is an empty string.
+    // DOC: 1) Filtering movies, excluding the newly created 'All Genres' which id is an empty string.
     let filteredMovies =
       this.state.selectedGenre && this.state.selectedGenre._id !== ''
         ? this.state.movies.filter((_m) => _m.genre._id === this.state.selectedGenre._id)
@@ -73,10 +75,24 @@ class Movies extends React.Component {
     return { filteredMovies, moviesInPage };
   }
 
+  handleSearch(e) {
+    // DOC: Reset genre filter on search and view all found matches
+    let userInput = e.currentTarget.value.toLowerCase();
+    let found = getMovies().filter((_m) => _m.title.toLowerCase().includes(userInput));
+
+    if (found && found.length !== 0) {
+      this.setState({ movies: found });
+    } else {
+      this.setState({ movies: getMovies() });
+    }
+
+    // this.setState({ selectedGenre: { _id: '', name: 'All Genres' }, activePage: 1 }); // TODO: Clear filter
+  }
+
   render() {
     let data = this.handleData();
 
-    return this.state.movies.length === 0 ? (
+    return getMovies().length === 0 ? (
       <p className="lead text-center text-muted">You've no content to show!</p>
     ) : (
       <div className="row">
@@ -97,6 +113,7 @@ class Movies extends React.Component {
               : `Showing ${data.filteredMovies.length} Movies`}
             ...
           </p>
+          <Search onChange={this.handleSearch} />
           <MoviesTable
             moviesInPage={data.moviesInPage}
             onDelete={this.handleMovieDelete}
