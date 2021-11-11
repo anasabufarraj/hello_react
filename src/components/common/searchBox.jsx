@@ -3,19 +3,21 @@
 //------------------------------------------------------------------------------
 import React from 'react';
 
-function Search(props) {
+function SearchBox(props) {
   return (
     <div className="input-group">
       <input
         type="text"
+        name="searchQuery"
+        value={props.value}
         id="search"
-        className="form-control"
-        onChange={props.onChange}
+        onChange={(e) => props.onChange(e.currentTarget.value)}
         placeholder="Search"
+        className="form-control"
         autoFocus={true}
       />
     </div>
   );
 }
 
-export default Search;
+export default SearchBox;

@@ -10,7 +10,7 @@ import MoviesTable from './moviesTable';
 import ListGroup from './common/ListGroup';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
-import Search from './common/search';
+import SearchBox from './common/searchBox';
 
 class Movies extends React.Component {
   constructor(props) {
@@ -19,6 +19,8 @@ class Movies extends React.Component {
       movies: [],
       genres: [],
       maxItemsInPage: 4,
+      searchQuery: '',
+      selectedGenre: null,
       activePage: 1,
       sortColumn: { path: 'title', order: 'asc' },
     };
@@ -54,7 +56,7 @@ class Movies extends React.Component {
 
   handleGenreSelect(genre) {
     // DOC: Returns all items if no argument passed. Use for 'All Genres' view.
-    this.setState({ selectedGenre: genre, activePage: 1 });
+    this.setState({ selectedGenre: genre, searchQuery: '', activePage: 1 });
   }
 
   handleSorting(path) {
@@ -75,18 +77,16 @@ class Movies extends React.Component {
     return { filteredMovies, moviesInPage };
   }
 
-  handleSearch(e) {
+  handleSearch(query) {
     // DOC: Reset genre filter on search and view all found matches
-    let userInput = e.currentTarget.value.toLowerCase();
-    let found = getMovies().filter((_m) => _m.title.toLowerCase().includes(userInput));
+    let userInput = query;
+    let found = getMovies().filter((_m) => _m.title.toLowerCase().includes(userInput.toLowerCase()));
 
     if (found && found.length !== 0) {
-      this.setState({ movies: found });
+      this.setState({ movies: found, searchQuery: query, selectedGenre: null, activePage: 1 });
     } else {
-      this.setState({ movies: getMovies() });
+      this.setState({ movies: getMovies(), searchQuery: query });
     }
-
-    // this.setState({ selectedGenre: { _id: '', name: 'All Genres' }, activePage: 1 }); // TODO: Clear filter
   }
 
   render() {
@@ -113,7 +113,7 @@ class Movies extends React.Component {
               : `Showing ${data.filteredMovies.length} Movies`}
             ...
           </p>
-          <Search onChange={this.handleSearch} />
+          <SearchBox value={this.state.searchQuery} onChange={this.handleSearch} />
           <MoviesTable
             moviesInPage={data.moviesInPage}
             onDelete={this.handleMovieDelete}
