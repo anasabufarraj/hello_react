@@ -6,11 +6,11 @@ import _ from 'lodash';
 import { Link } from 'react-router-dom';
 
 function Pagination(props) {
-  // NOTE: props are read-only arguments
   let nodes = _.range(1, Math.ceil(props.itemsInTable / props.maxItemsInPage) + 1);
 
   return nodes.length === 1 ? null : (
     <nav>
+      <p className="text-muted m-2">{props.itemsInTable ? '' : 'No match found.'}</p>
       <ul className="pagination mb-3">
         {nodes.map((page) => (
           <li

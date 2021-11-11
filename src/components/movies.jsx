@@ -31,6 +31,7 @@ class Movies extends React.Component {
     this.handleGenreSelect = this.handleGenreSelect.bind(this);
     this.handleSorting = this.handleSorting.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleClearSearch = this.handleClearSearch.bind(this);
   }
 
   componentDidMount() {
@@ -44,7 +45,7 @@ class Movies extends React.Component {
   }
 
   handleMovieLike(movie) {
-    let movies = [...this.state.movies];
+    let movies = this.state.movies;
     let index = movies.indexOf(movie);
     movies[index].liked = !movies[index].liked;
     this.setState({ movies });
@@ -64,35 +65,37 @@ class Movies extends React.Component {
   }
 
   handleData() {
-    // DOC: 1) Filtering movies, excluding the newly created 'All Genres' which id is an empty string.
-    let filteredMovies =
-      this.state.selectedGenre && this.state.selectedGenre._id !== ''
-        ? this.state.movies.filter((_m) => _m.genre._id === this.state.selectedGenre._id)
-        : this.state.movies;
+    let filteredMovies = this.state.movies;
+    let { searchQuery, selectedGenre, sortColumn, activePage, maxItemsInPage } = this.state;
 
-    // DOC: 2) Sorting filtered movies, then paginating.
-    let sortedMovies = _.orderBy(filteredMovies, [this.state.sortColumn.path], [this.state.sortColumn.order]);
-    let moviesInPage = paginate(sortedMovies, this.state.activePage, this.state.maxItemsInPage);
+    // DOC: Filtering movies by genres or search box, excluding the newly created 'All Genres' which id is an empty string.
+    if (searchQuery) {
+      filteredMovies = filteredMovies.filter((m) =>
+        m.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    } else if (selectedGenre && selectedGenre._id !== '') {
+      filteredMovies = filteredMovies.filter((_m) => _m.genre._id === selectedGenre._id);
+    }
+
+    // DOC: Sorting filtered movies, then paginating.
+    let sortedMovies = _.orderBy(filteredMovies, [sortColumn.path], [sortColumn.order]);
+    let moviesInPage = paginate(sortedMovies, activePage, maxItemsInPage);
 
     return { filteredMovies, moviesInPage };
   }
 
   handleSearch(query) {
-    // DOC: Reset genre filter on search and view all found matches
-    let userInput = query;
-    let found = getMovies().filter((_m) => _m.title.toLowerCase().includes(userInput.toLowerCase()));
+    this.setState({ searchQuery: query, selectedGenre: null, activePage: 1 });
+  }
 
-    if (found && found.length !== 0) {
-      this.setState({ movies: found, searchQuery: query, selectedGenre: null, activePage: 1 });
-    } else {
-      this.setState({ movies: getMovies(), searchQuery: query });
-    }
+  handleClearSearch() {
+    this.setState({ searchQuery: '' });
   }
 
   render() {
     let data = this.handleData();
 
-    return getMovies().length === 0 ? (
+    return this.state.movies.length === 0 ? (
       <p className="lead text-center text-muted">You've no content to show!</p>
     ) : (
       <div className="row">
@@ -109,11 +112,15 @@ class Movies extends React.Component {
         <div className="col">
           <p className="fw-normal">
             {data.filteredMovies.length === 1
-              ? `Showing ${data.filteredMovies.length} Movie`
-              : `Showing ${data.filteredMovies.length} Movies`}
+              ? `Showing ${data.filteredMovies.length} Movie in table`
+              : `Showing ${data.filteredMovies.length} Movies in table`}
             ...
           </p>
-          <SearchBox value={this.state.searchQuery} onChange={this.handleSearch} />
+          <SearchBox
+            value={this.state.searchQuery}
+            onChange={this.handleSearch}
+            onClear={this.handleClearSearch}
+          />
           <MoviesTable
             moviesInPage={data.moviesInPage}
             onDelete={this.handleMovieDelete}

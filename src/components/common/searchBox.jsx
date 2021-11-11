@@ -14,8 +14,10 @@ function SearchBox(props) {
         onChange={(e) => props.onChange(e.currentTarget.value)}
         placeholder="Search"
         className="form-control"
-        autoFocus={true}
       />
+      <button className="btn btn-primary" onClick={props.onClear} disabled={!props.value}>
+        Clear
+      </button>
     </div>
   );
 }
