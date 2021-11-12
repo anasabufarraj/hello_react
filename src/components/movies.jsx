@@ -18,7 +18,7 @@ class Movies extends React.Component {
     this.state = {
       movies: [],
       genres: [],
-      maxItemsInPage: 2,
+      maxItemsInPage: 4,
       activePage: 1,
       searchQuery: '',
       selectedGenre: null,
@@ -41,12 +41,12 @@ class Movies extends React.Component {
 
   handleMovieDelete(movie) {
     let movies = this.state.movies.filter((_m) => _m._id !== movie._id);
-    let itemsInActivePage = paginate(movies, this.state.activePage, this.state.maxItemsInPage).length;
-    let activePage = this.state.activePage;
-
     this.setState({ movies });
 
-    // DOC: Fallback to previous page if all items in the active page are deleted
+    // DOC: Fallback to previous page if all items are deleted in the active page.
+    let { maxItemsInPage, activePage } = this.state;
+    let itemsInActivePage = paginate(movies, activePage, maxItemsInPage).length;
+
     if (!itemsInActivePage) {
       let fallback = activePage - 1;
       this.setState({ activePage: fallback });
