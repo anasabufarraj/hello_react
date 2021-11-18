@@ -1,6 +1,5 @@
 {
-  "movieApiEndpoint": "http://localhost:3900/api/movies",
-  "genreApiEndpoint": "http://localhost:3900/api/genres",
+  "apiEndpointBase": "http://localhost:3900/api",
   "toastOptions": {
     "position": "bottom-left",
     "theme": "colored",

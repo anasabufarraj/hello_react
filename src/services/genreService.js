@@ -5,5 +5,5 @@ import httpService from './httpService';
 import config from '../config';
 
 export function getGenres() {
-  return httpService.get(config.genreApiEndpoint);
+  return httpService.get(`${config.apiEndpointBase}/genres`);
 }

@@ -5,12 +5,15 @@ import httpService from './httpService';
 import config from '../config';
 
 export function getMovies() {
-  return httpService.get(config.movieApiEndpoint);
+  return httpService.get(`${config.apiEndpointBase}/movies`);
+}
+
+export function deleteMovie(movieId) {
+  return httpService.delete(`${config.apiEndpointBase}/movies/${movieId}`);
 }
 
 // export function getMovie(id) {
-//   const { data } = await httpService.get(config.movieApiEndpoint);
-//   return data.find((m) => m._id === id);
+//   return movies.find((m) => m._id === id);
 // }
 
 // export function saveMovie(movie) {
@@ -26,7 +29,3 @@ export function getMovies() {
 //   }
 //   return movieInDb;
 // }
-
-export function deleteMovie(movieId) {
-  return httpService.delete(`${config.movieApiEndpoint}/${movieId}`);
-}
