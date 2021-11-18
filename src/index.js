@@ -9,6 +9,9 @@ import './scss/custom.css';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import logService from './services/logService';
+
+logService.init();
 
 ReactDOM.render(
   <React.StrictMode>

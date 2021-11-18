@@ -12,11 +12,14 @@ import Customers from './components/customers';
 import Rentals from './components/rentals';
 import NotFound from './components/notFound';
 import Footer from './components/footer';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class App extends React.Component {
   render() {
     return (
       <React.Fragment>
+        <ToastContainer />
         <NavBar />
         <div className="container fw-light my-4">
           <Switch>
