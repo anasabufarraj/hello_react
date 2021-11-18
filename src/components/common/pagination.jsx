@@ -6,7 +6,7 @@ import _ from 'lodash';
 import { Link } from 'react-router-dom';
 
 function Pagination(props) {
-  let nodes = _.range(1, Math.ceil(props.itemsInTable / props.maxItemsInPage) + 1);
+  const nodes = _.range(1, Math.ceil(props.itemsInTable / props.maxItemsInPage) + 1);
 
   return nodes.length === 1 ? null : (
     <nav>

@@ -6,6 +6,8 @@ import Joi from 'joi-browser';
 import Form from './common/form';
 import { getMovie, saveMovie } from '../services/fakeMovieService';
 import { getGenres } from '../services/fakeGenreService';
+import { toast } from 'react-toastify';
+import config from '../config.json';
 
 class MovieForm extends Form {
   constructor(props) {
@@ -33,8 +35,8 @@ class MovieForm extends Form {
   };
 
   componentDidMount() {
-    let movieId = this.props.match.params.id;
-    let movie = this.state.movie;
+    const movieId = this.props.match.params.id;
+    const movie = this.state.movie;
 
     if (movieId === 'new') {
       return;
@@ -60,10 +62,11 @@ class MovieForm extends Form {
   handleFormSubmitToServer() {
     saveMovie(this.state.data);
     this.props.history.replace('/movies');
+    toast.info('Successfully saved!', config.toastOptions);
   }
 
   handleDefaultSelect() {
-    let movie = this.state.movie;
+    const movie = this.state.movie;
     if (movie) {
       return movie.genre.name;
     }

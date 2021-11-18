@@ -38,24 +38,24 @@ class Form extends React.Component {
   handleFormSubmit(e) {
     // DOC: Handle form validation and submit to server.
     e.preventDefault();
-    let errors = this.handleFormValidation();
+    const errors = this.handleFormValidation();
     this.setState({ errors: errors || {} });
     this.handleFormSubmitToServer();
   }
 
   handleInputValidation({ name, value }) {
     // DOC: Validate input value against 'Joi' schema.
-    let input = { [name]: value };
-    let inputSchema = { [name]: this.schema[name] };
-    let { error } = Joi.validate(input, inputSchema);
+    const input = { [name]: value };
+    const inputSchema = { [name]: this.schema[name] };
+    const { error } = Joi.validate(input, inputSchema);
 
     return error ? error.details[0].message : null;
   }
 
   handleInputChange(e) {
     // DOC: Handle field validation error on input change.
-    let errors = this.state.errors;
-    let message = this.handleInputValidation(e.currentTarget);
+    const errors = this.state.errors;
+    const message = this.handleInputValidation(e.currentTarget);
 
     if (errors) {
       errors[e.currentTarget.name] = message;
@@ -64,7 +64,7 @@ class Form extends React.Component {
     }
 
     // DOC: Update the state with an event listener to the current target value.
-    let data = this.state.data;
+    const data = this.state.data;
     data[e.currentTarget.name] = e.currentTarget.value;
     this.setState({ errors, data });
   }

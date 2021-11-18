@@ -19,7 +19,7 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <ToastContainer />
+        <ToastContainer limit={3} />
         <NavBar />
         <div className="container fw-light my-4">
           <Switch>

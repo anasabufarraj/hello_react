@@ -6,7 +6,7 @@ import React from 'react';
 class TableHeader extends React.Component {
   raiseSort(path, column) {
     if (!column.button) {
-      let sortColumn = this.props.sortColumn;
+      const sortColumn = this.props.sortColumn;
       if (sortColumn.path === path) {
         sortColumn.order = sortColumn.order === 'asc' ? 'desc' : 'asc';
       } else {

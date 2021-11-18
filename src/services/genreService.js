@@ -1,9 +1,9 @@
 //------------------------------------------------------------------------------
 // Copyright 2021. Anas Abu Farraj.
 //------------------------------------------------------------------------------
-function paginate(items, activePage, itemsInPage) {
-  const sliceStart = (activePage - 1) * itemsInPage;
-  return items.slice(sliceStart, sliceStart + itemsInPage);
-}
+import httpService from './httpService';
+import config from '../config';
 
-export default paginate;
+export function getGenres() {
+  return httpService.get(config.genreApiEndpoint);
+}

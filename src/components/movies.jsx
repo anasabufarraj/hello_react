@@ -2,8 +2,8 @@
 // Copyright 2021. Anas Abu Farraj.
 //------------------------------------------------------------------------------
 import React from 'react';
-import { getMovies } from '../services/fakeMovieService';
-import { getGenres } from '../services/fakeGenreService';
+import { getMovies, deleteMovie } from '../services/movieService';
+import { getGenres } from '../services/genreService';
 import Pagination from './common/pagination';
 import paginate from '../util/paginate';
 import MoviesTable from './moviesTable';
@@ -11,6 +11,8 @@ import ListGroup from './common/ListGroup';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import SearchBox from './common/searchBox';
+import { toast } from 'react-toastify';
+import config from '../config.json';
 
 class Movies extends React.Component {
   constructor(props) {
@@ -34,28 +36,42 @@ class Movies extends React.Component {
     this.handleClearSearch = this.handleClearSearch.bind(this);
   }
 
-  componentDidMount() {
-    let genres = [{ _id: '', name: 'All Genres' }, ...getGenres()];
-    this.setState({ movies: getMovies(), genres });
+  async componentDidMount() {
+    const { data } = await getGenres();
+    const { data: movies } = await getMovies();
+    const genres = [{ _id: '', name: 'All Genres' }, ...data];
+    this.setState({ movies, genres });
   }
 
-  handleMovieDelete(movie) {
-    let movies = this.state.movies.filter((_m) => _m._id !== movie._id);
+  async handleMovieDelete(movie) {
+    const revert = this.state.movies;
+    const movies = revert.filter((_m) => _m._id !== movie._id);
     this.setState({ movies });
 
+    try {
+      await deleteMovie(movie._id);
+      toast.info('Successfully deleted!', config.toastOptions);
+    } catch (err) {
+      if (err.response && err.response.status === 404) {
+        toast.error('Movie already deleted!', config.toastOptions);
+      }
+
+      this.setState({ movies: revert });
+    }
+
     // DOC: Fallback to previous page if all items are deleted in the active page.
-    let { maxItemsInPage, activePage } = this.state;
-    let itemsInActivePage = paginate(movies, activePage, maxItemsInPage).length;
+    const { maxItemsInPage, activePage } = this.state;
+    const itemsInActivePage = paginate(movies, activePage, maxItemsInPage).length;
 
     if (!itemsInActivePage) {
-      let fallback = activePage - 1;
+      const fallback = activePage - 1;
       this.setState({ activePage: fallback });
     }
   }
 
   handleMovieLike(movie) {
-    let movies = this.state.movies;
-    let index = movies.indexOf(movie);
+    const movies = this.state.movies;
+    const index = movies.indexOf(movie);
     movies[index].liked = !movies[index].liked;
     this.setState({ movies });
   }
@@ -87,8 +103,8 @@ class Movies extends React.Component {
     }
 
     // DOC: Sorting filtered movies, then paginating.
-    let sortedMovies = _.orderBy(filteredMovies, [sortColumn.path], [sortColumn.order]);
-    let moviesInPage = paginate(sortedMovies, activePage, maxItemsInPage);
+    const sortedMovies = _.orderBy(filteredMovies, [sortColumn.path], [sortColumn.order]);
+    const moviesInPage = paginate(sortedMovies, activePage, maxItemsInPage);
 
     return { filteredMovies, moviesInPage };
   }
@@ -102,7 +118,7 @@ class Movies extends React.Component {
   }
 
   render() {
-    let data = this.handleData();
+    const data = this.handleData();
 
     return this.state.movies.length === 0 ? (
       <p className="lead text-center text-muted">You've no content to show!</p>

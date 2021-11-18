@@ -10,7 +10,7 @@ class Counter extends React.Component {
   }
 
   setCounterText() {
-    let { value } = this.props.counter;
+    const { value } = this.props.counter;
     return value === 0 ? 'Zero' : value;
   }
 
