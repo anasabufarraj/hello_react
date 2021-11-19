@@ -91,14 +91,16 @@ class Movies extends React.Component {
 
   handleData() {
     let filteredMovies = this.state.movies;
-    let { searchQuery, selectedGenre, sortColumn, activePage, maxItemsInPage } = this.state;
+    const { searchQuery, selectedGenre, sortColumn, activePage, maxItemsInPage } = this.state;
 
     // DOC: Filtering movies by genres or search box, excluding the newly created 'All Genres' which id is an empty string.
     if (searchQuery) {
-      filteredMovies = filteredMovies.filter((m) =>
-        m.title.toLowerCase().includes(searchQuery.toLowerCase())
+      filteredMovies = filteredMovies.filter((_m) =>
+        _m.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
-    } else if (selectedGenre && selectedGenre._id !== '') {
+    }
+
+    if (selectedGenre && selectedGenre._id !== '') {
       filteredMovies = filteredMovies.filter((_m) => _m.genre._id === selectedGenre._id);
     }
 

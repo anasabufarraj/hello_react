@@ -30,6 +30,7 @@ class MovieForm extends Form {
     _id: Joi.string(),
     title: Joi.string().required().label('Title'),
     genreId: Joi.string().required().label('Genre'),
+    genreName: Joi.string(),
     numberInStock: Joi.number().required().min(0).max(100).label('Number in Stock'),
     dailyRentalRate: Joi.number().required().min(0).max(10).label('Rate'),
   };
@@ -57,6 +58,7 @@ class MovieForm extends Form {
       _id: movie._id,
       title: movie.title,
       genreId: movie.genre._id,
+      genreName: movie.genre.name,
       numberInStock: movie.numberInStock,
       dailyRentalRate: movie.dailyRentalRate,
     };
@@ -68,19 +70,6 @@ class MovieForm extends Form {
     toast.info('Successfully saved!', config.toastOptions);
   }
 
-  // handleDefaultSelect(movieId) {
-  //   // TODO: Need to return genre name
-  //   // const genres = this.state.genres;
-  //   // const genre = genres.filter((_g) => _g._id === movieId);
-  //
-  //   if (movieId !== 'new') {
-  //     console.log(movieId);
-  //     return 'Comedy';
-  //   } else {
-  //     return '--Select--';
-  //   }
-  // }
-
   render() {
     return (
       <React.Fragment>
@@ -90,9 +79,6 @@ class MovieForm extends Form {
             <form onSubmit={this.handleFormSubmit}>
               {this.renderInput('Title', 'text', 'title', true)}
               {this.renderInputSelect('Genre', 'genreId', this.state.genres)}
-
-              {/*{this.renderSelect("genreId", "Genre", this.state.genres)}*/}
-
               {this.renderInput('Number in Stock', 'number', 'numberInStock')}
               {this.renderInput('Rate', 'number', 'dailyRentalRate')}
               {this.renderSubmitButton('Save')}

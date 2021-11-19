@@ -98,6 +98,7 @@ class Form extends React.Component {
         name={name}
         options={options}
         value={this.state.data[name]}
+        defaultValue={this.state.data.genreName || '--Select--'}
         onChange={this.handleInputChange}
         error={this.state.errors[name]}
       />
