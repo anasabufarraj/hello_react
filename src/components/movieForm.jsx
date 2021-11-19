@@ -4,8 +4,8 @@
 import React from 'react';
 import Joi from 'joi-browser';
 import Form from './common/form';
-import { getMovie, saveMovie } from '../services/fakeMovieService';
-import { getGenres } from '../services/fakeGenreService';
+import { getMovie, saveMovie } from '../services/movieService';
+import { getGenres } from '../services/genreService';
 import { toast } from 'react-toastify';
 import config from '../config.json';
 
@@ -13,15 +13,15 @@ class MovieForm extends Form {
   constructor(props) {
     super(props);
     this.state = {
-      movie: getMovie(this.props.match.params.id),
-      genres: getGenres(),
-      errors: {},
       data: {
         title: '',
         genreId: '',
         numberInStock: '',
         dailyRentalRate: '',
       },
+      movie: {},
+      genres: [],
+      errors: {},
     };
   }
 
@@ -30,20 +30,23 @@ class MovieForm extends Form {
     _id: Joi.string(),
     title: Joi.string().required().label('Title'),
     genreId: Joi.string().required().label('Genre'),
-    numberInStock: Joi.number().required().min(0).label('Number in Stock'),
+    numberInStock: Joi.number().required().min(0).max(100).label('Number in Stock'),
     dailyRentalRate: Joi.number().required().min(0).max(10).label('Rate'),
   };
 
-  componentDidMount() {
+  async componentDidMount() {
+    const { data: genres } = await getGenres();
+    this.setState({ genres });
+
     const movieId = this.props.match.params.id;
-    const movie = this.state.movie;
+    const { data: movie } = await getMovie(movieId);
 
     if (movieId === 'new') {
       return;
     }
 
     if (!movie) {
-      return this.props.history.push('/not-found');
+      return this.props.history.replace('/not-found');
     }
 
     this.setState({ data: this.handleAddingData(movie) });
@@ -65,13 +68,18 @@ class MovieForm extends Form {
     toast.info('Successfully saved!', config.toastOptions);
   }
 
-  handleDefaultSelect() {
-    const movie = this.state.movie;
-    if (movie) {
-      return movie.genre.name;
-    }
-    return '--Select--';
-  }
+  // handleDefaultSelect(movieId) {
+  //   // TODO: Need to return genre name
+  //   // const genres = this.state.genres;
+  //   // const genre = genres.filter((_g) => _g._id === movieId);
+  //
+  //   if (movieId !== 'new') {
+  //     console.log(movieId);
+  //     return 'Comedy';
+  //   } else {
+  //     return '--Select--';
+  //   }
+  // }
 
   render() {
     return (
@@ -81,7 +89,10 @@ class MovieForm extends Form {
           <div className="col-8">
             <form onSubmit={this.handleFormSubmit}>
               {this.renderInput('Title', 'text', 'title', true)}
-              {this.renderInputSelect('Genre', 'genreId', this.state.genres, this.handleDefaultSelect())}
+              {this.renderInputSelect('Genre', 'genreId', this.state.genres)}
+
+              {/*{this.renderSelect("genreId", "Genre", this.state.genres)}*/}
+
               {this.renderInput('Number in Stock', 'number', 'numberInStock')}
               {this.renderInput('Rate', 'number', 'dailyRentalRate')}
               {this.renderSubmitButton('Save')}

@@ -8,12 +8,13 @@ function InputSelect(props) {
     <div className="mb-3">
       <label htmlFor={props.name}>{props.label}</label>
       <select name={props.name} className="form-select" onChange={props.onChange} id={props.name}>
-        <option value="">{props.defaultValue}</option>
+        {/*<option value={props.defaultValue}>{props.defaultValue}</option>*/}
+        <option value="">--Select--</option>
         {props.options
-          .filter((_g) => _g.name !== props.defaultValue)
-          .map((_g) => (
-            <option key={_g._id} value={_g._id}>
-              {_g.name}
+          // .filter((_option) => _option.name !== props.defaultValue)
+          .map((_option) => (
+            <option key={_option._id} value={_option._id}>
+              {_option.name}
             </option>
           ))}
       </select>
@@ -23,3 +24,10 @@ function InputSelect(props) {
 }
 
 export default InputSelect;
+
+//         <option value="">--Select---</option>
+//         {options.map((option) => (
+//           <option key={option._id} value={option._id}>
+//             {option.name}
+//           </option>
+//         ))}

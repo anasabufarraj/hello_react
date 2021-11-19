@@ -91,7 +91,7 @@ class Form extends React.Component {
     );
   }
 
-  renderInputSelect(label, name, options, defaultValue) {
+  renderInputSelect(label, name, options) {
     return (
       <InputSelect
         label={label}
@@ -99,7 +99,6 @@ class Form extends React.Component {
         options={options}
         value={this.state.data[name]}
         onChange={this.handleInputChange}
-        defaultValue={defaultValue}
         error={this.state.errors[name]}
       />
     );
