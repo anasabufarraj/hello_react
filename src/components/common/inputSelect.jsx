@@ -14,9 +14,9 @@ function InputSelect(props) {
         className="form-select"
         onChange={props.onChange}
       >
-        <option value="">--</option>
+        <option value="">--Select--</option>
         {props.options.map((_g) => (
-          <option key={_g._id} value={_g._id}>
+          <option key={_g._id} value={_g.name}>
             {_g.name}
           </option>
         ))}
