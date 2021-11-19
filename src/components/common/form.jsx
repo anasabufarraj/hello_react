@@ -96,9 +96,8 @@ class Form extends React.Component {
       <InputSelect
         label={label}
         name={name}
-        options={options}
         value={this.state.data[name]}
-        defaultValue={this.state.data.genreName || '--Select--'}
+        options={options}
         onChange={this.handleInputChange}
         error={this.state.errors[name]}
       />

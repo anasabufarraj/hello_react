@@ -8,10 +8,6 @@ export function getMovies() {
   return httpService.get(`${config.apiEndpointBase}/movies`);
 }
 
-export function deleteMovie(movieId) {
-  return httpService.delete(`${config.apiEndpointBase}/movies/${movieId}`);
-}
-
 export function getMovie(movieId) {
   return httpService.get(`${config.apiEndpointBase}/movies/${movieId}`);
 }
@@ -28,4 +24,8 @@ export function saveMovie(movie) {
   //     movies.push(movieInDb);
   //   }
   //   return movieInDb;
+}
+
+export function deleteMovie(movieId) {
+  return httpService.delete(`${config.apiEndpointBase}/movies/${movieId}`);
 }
