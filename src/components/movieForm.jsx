@@ -39,17 +39,20 @@ class MovieForm extends Form {
     this.setState({ genres });
 
     const movieId = this.props.match.params.id;
-    const { data: movie } = await getMovie(movieId);
 
     if (movieId === 'new') {
       return;
     }
 
-    if (!movie) {
-      return this.props.history.replace('/not-found');
+    try {
+      const { data: movie } = await getMovie(movieId);
+      this.setState({ data: this.handleAddingData(movie) });
+    } catch (err) {
+      if (err.response && err.response.status === 404) {
+        toast.error('Movie not found', config.toastOptions);
+        this.props.history.replace('/not-found');
+      }
     }
-
-    this.setState({ data: this.handleAddingData(movie) });
   }
 
   handleAddingData(movie) {
