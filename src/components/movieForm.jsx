@@ -15,7 +15,7 @@ class MovieForm extends Form {
     this.state = {
       data: {
         title: '',
-        genre: '',
+        genreId: '',
         numberInStock: '',
         dailyRentalRate: '',
       },
@@ -28,7 +28,7 @@ class MovieForm extends Form {
     options: { abortEarly: false },
     _id: Joi.string(),
     title: Joi.string().required().label('Title'),
-    genre: Joi.string().required().label('Genre'),
+    genreId: Joi.string().required().label('Genre'),
     numberInStock: Joi.number().required().min(0).max(100).label('Number in Stock'),
     dailyRentalRate: Joi.number().required().min(0).max(10).label('Rate'),
   };
@@ -65,16 +65,16 @@ class MovieForm extends Form {
     return {
       _id: movie._id,
       title: movie.title,
-      genre: movie.genre.name,
+      genreId: movie.genre._id,
       numberInStock: movie.numberInStock,
       dailyRentalRate: movie.dailyRentalRate,
     };
   }
 
-  handleFormSubmitToServer() {
-    saveMovie(this.state.data);
-    this.props.history.replace('/movies');
+  async handleFormSubmitToServer() {
+    await saveMovie(this.state.data);
     toast.info('Successfully saved!', config.toastOptions);
+    this.props.history.replace('/movies');
   }
 
   render() {
@@ -85,7 +85,7 @@ class MovieForm extends Form {
           <div className="col-8">
             <form onSubmit={this.handleFormSubmit}>
               {this.renderInput('Title', 'text', 'title', true)}
-              {this.renderInputSelect('Genre', 'genre', this.state.genres)}
+              {this.renderInputSelect('Genre', 'genreId', this.state.genres)}
               {this.renderInput('Number in Stock', 'number', 'numberInStock')}
               {this.renderInput('Rate', 'number', 'dailyRentalRate')}
               {this.renderSubmitButton('Save')}

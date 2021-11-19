@@ -16,7 +16,7 @@ function InputSelect(props) {
       >
         <option value="">--Select--</option>
         {props.options.map((_g) => (
-          <option key={_g._id} value={_g.name}>
+          <option key={_g._id} value={_g._id}>
             {_g.name}
           </option>
         ))}

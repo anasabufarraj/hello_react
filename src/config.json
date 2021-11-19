@@ -1,5 +1,5 @@
 {
-  "apiEndpointBase": "http://localhost:3900/api",
+  "APIEndpointBase": "http://localhost:3900/api",
   "toastOptions": {
     "position": "bottom-left",
     "theme": "colored",
