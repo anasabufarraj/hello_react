@@ -19,7 +19,6 @@ class MovieForm extends Form {
         numberInStock: '',
         dailyRentalRate: '',
       },
-      movie: {},
       genres: [],
       errors: {},
     };
@@ -35,9 +34,16 @@ class MovieForm extends Form {
   };
 
   async componentDidMount() {
+    await this.populateGenres();
+    await this.populateMovies();
+  }
+
+  async populateGenres() {
     const { data: genres } = await getGenres();
     this.setState({ genres });
+  }
 
+  async populateMovies() {
     const movieId = this.props.match.params.id;
 
     if (movieId === 'new') {
