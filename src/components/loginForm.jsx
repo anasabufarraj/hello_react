@@ -4,6 +4,7 @@
 import React from 'react';
 import Form from './common/form';
 import Joi from 'joi-browser';
+import { login } from '../services/authService';
 
 class LoginForm extends Form {
   constructor(props) {
@@ -20,8 +21,10 @@ class LoginForm extends Form {
     password: Joi.string().min(6).required().label('Password'),
   };
 
-  handleFormSubmitToServer() {
-    console.warn('Submitted to Server');
+  async handleFormSubmitToServer() {
+    await login(this.state.data);
+    console.log('Welcome!');
+    this.props.history.replace('/');
   }
 
   render() {
