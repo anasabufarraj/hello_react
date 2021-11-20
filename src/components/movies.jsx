@@ -8,9 +8,9 @@ import Pagination from './common/pagination';
 import paginate from '../util/paginate';
 import MoviesTable from './moviesTable';
 import ListGroup from './common/ListGroup';
+import SearchBox from './common/searchBox';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
-import SearchBox from './common/searchBox';
 import { toast } from 'react-toastify';
 import config from '../config.json';
 

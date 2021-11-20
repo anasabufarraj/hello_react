@@ -1,5 +1,10 @@
+//------------------------------------------------------------------------------
+// Copyright 2021. Anas Abu Farraj.
+//------------------------------------------------------------------------------
 // import * as Sentry from '@sentry/react';
 // import { Integrations } from '@sentry/tracing';
+
+// TODO: Setup log Service before production deployment.
 
 function init() {
   // Sentry.init({
@@ -15,7 +20,6 @@ function init() {
 
 function log(err) {
   // Sentry.captureException(err);
-  console.log(err);
 }
 
 const logService = {

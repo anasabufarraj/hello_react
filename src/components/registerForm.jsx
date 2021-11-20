@@ -4,6 +4,9 @@
 import React from 'react';
 import Form from './common/form';
 import Joi from 'joi-browser';
+import { register } from '../services/userService';
+import { toast } from 'react-toastify';
+import config from '../config.json';
 
 class RegisterForm extends Form {
   constructor(props) {
@@ -21,8 +24,20 @@ class RegisterForm extends Form {
     password: Joi.string().min(6).required().label('Password'),
   };
 
-  handleFormSubmitToServer() {
-    console.warn('Registered');
+  async handleFormSubmitToServer() {
+    try {
+      await register(this.state.data);
+      toast.info('Successfully registered!', config.toastOptions);
+      this.props.history.replace('/');
+    } catch (err) {
+      if (err.response && err.response.status === 400) {
+        // DOC: Updating the errors object with email field error
+        const errors = this.state.errors;
+        errors.email = err.response.data;
+        this.setState({ errors });
+        toast.error('User already registered!', config.toastOptions);
+      }
+    }
   }
 
   render() {

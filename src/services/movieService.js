@@ -12,8 +12,12 @@ export function getMovie(movieId) {
   return httpService.get(`${config.APIEndpointBase}/movies/${movieId}`);
 }
 
+export function deleteMovie(movieId) {
+  return httpService.delete(`${config.APIEndpointBase}/movies/${movieId}`);
+}
+
 export function saveMovie(movie) {
-  // DOC: Save a movie to the database after pruning the id, since ids added automatically by mongodb.
+  // DOC: Save a movie to the database after pruning the id, since ids added automatically.
   if (movie._id) {
     const body = { ...movie };
     delete body._id;
@@ -21,8 +25,4 @@ export function saveMovie(movie) {
   }
 
   return httpService.post(`${config.APIEndpointBase}/movies`, movie);
-}
-
-export function deleteMovie(movieId) {
-  return httpService.delete(`${config.APIEndpointBase}/movies/${movieId}`);
 }

@@ -73,8 +73,8 @@ class MovieForm extends Form {
 
   async handleFormSubmitToServer() {
     await saveMovie(this.state.data);
+    this.props.history.replace('/');
     toast.info('Successfully saved!', config.toastOptions);
-    this.props.history.replace('/movies');
   }
 
   render() {
