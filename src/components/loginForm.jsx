@@ -24,14 +24,15 @@ class LoginForm extends Form {
   };
 
   async handleFormSubmitToServer() {
-    // DOC: Login the user and store the returned login token in browser's localStorage session.
+    // DOC: Login the user and store the returned login JSON Web Token (JWT) in the browser's localStorage object.
     try {
-      const { data: JWT } = await login(this.state.data);
-      localStorage.setItem('token', JWT);
-      this.props.history.push('/');
+      const { data: jwt } = await login(this.state.data);
+      localStorage.setItem('token', jwt);
+      toast.info('Successfully logged in!', config.toastOptions); // TODO: Remove when redirect.
+      this.props.history.replace('/');
     } catch (err) {
       if (err.response && err.response.status === 400) {
-        toast.error('Wrong username or password!', config.toastOptions);
+        toast.error('Invalid username or password!', config.toastOptions);
       }
     }
   }

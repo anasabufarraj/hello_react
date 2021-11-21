@@ -3,8 +3,8 @@
 //------------------------------------------------------------------------------
 import React from 'react';
 import Form from './common/form';
-import Joi from 'joi-browser';
 import { register } from '../services/userService';
+import Joi from 'joi-browser';
 import { toast } from 'react-toastify';
 import config from '../config.json';
 
@@ -25,9 +25,12 @@ class RegisterForm extends Form {
   };
 
   async handleFormSubmitToServer() {
+    // DOC: Register the user then automatically login the user by storing the login token
+    //  in the browser's localstorage object.
     try {
-      await register(this.state.data);
-      toast.info('Successfully registered!', config.toastOptions);
+      const { headers } = await register(this.state.data);
+      localStorage.setItem('token', headers['x-auth-token']);
+      toast.info('Successfully registered!', config.toastOptions); // TODO: Remove when redirect.
       this.props.history.replace('/');
     } catch (err) {
       if (err.response && err.response.status === 400) {
