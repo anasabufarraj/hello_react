@@ -4,31 +4,51 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-function NavBar() {
+function NavBar(props) {
   return (
-    <nav className="navbar navbar-expand navbar-dark bg-dark">
-      <div className="container-fluid">
-        <NavLink className="nav-item navbar-brand" to="/">
-          Movies
-        </NavLink>
-        <div className="navbar-collapse">
-          <div className="navbar-nav">
-            <NavLink className="nav-item nav-link" to="/customers">
-              Customers
-            </NavLink>
-            <NavLink className="nav-item nav-link" to="/rentals">
-              Rentals
-            </NavLink>
-            <NavLink className="nav-item nav-link" to="/login">
-              Login
-            </NavLink>
-            <NavLink className="nav-item nav-link" to="/register">
-              Register
+    <React.Fragment>
+      <nav className="navbar navbar-expand navbar-dark bg-dark">
+        <div className="container">
+          <NavLink className="nav-item navbar-brand" to="/">
+            Movies
+          </NavLink>
+          <div className="navbar-collapse">
+            <div className="navbar-nav">
+              <NavLink className="nav-item nav-link" to="/customers">
+                Customers
+              </NavLink>
+              <NavLink className="nav-item nav-link" to="/rentals">
+                Rentals
+              </NavLink>
+              {!props.user && (
+                <React.Fragment>
+                  <NavLink className="nav-item nav-link" to="/login">
+                    Login
+                  </NavLink>
+                  <NavLink className="nav-item nav-link" to="/register">
+                    Register
+                  </NavLink>
+                </React.Fragment>
+              )}
+              {props.user && (
+                <NavLink className="nav-item nav-link" to="/logout">
+                  Logout
+                </NavLink>
+              )}
+            </div>
+          </div>
+        </div>
+      </nav>
+      {props.user && (
+        <div className="bg-primary">
+          <div className="container text-end">
+            <NavLink className="nav-item nav-link text-white py-2" to="/profile">
+              Hello, {props.user.name} <i className="bi-person-circle ps-1" />
             </NavLink>
           </div>
         </div>
-      </div>
-    </nav>
+      )}
+    </React.Fragment>
   );
 }
 

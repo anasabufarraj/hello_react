@@ -20,24 +20,25 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {},
+      user: undefined,
     };
   }
 
   componentDidMount() {
-    const jwt = localStorage.getItem('token');
-    const user = jwtDecode(jwt);
-    this.setState({ user });
+    try {
+      const jwt = localStorage.getItem('token');
+      const user = jwtDecode(jwt);
+      this.setState({ user });
+    } catch (err) {
+      return null;
+    }
   }
 
   render() {
     return (
       <React.Fragment>
         <ToastContainer limit={3} />
-        <NavBar userNeme={this.state.user.name} />
-        <div className="bg-primary text-white">
-          <p className="text-end fw-light px-3 py-2">Hello, {this.state.user.name}</p>
-        </div>
+        <NavBar user={this.state.user} />
         <div className="container fw-light my-4">
           <Switch>
             <Route path="/register" component={RegisterForm} />

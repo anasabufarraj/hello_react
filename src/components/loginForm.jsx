@@ -24,12 +24,12 @@ class LoginForm extends Form {
   };
 
   async handleFormSubmitToServer() {
-    // DOC: Login the user and store the returned login JSON Web Token (JWT) in the browser's localStorage object.
+    // DOC: Login the user and store the returned login JSON Web Token (JWT) in the browser's
+    //  localStorage object. Finally, reset the current window location.
     try {
       const { data: jwt } = await login(this.state.data);
       localStorage.setItem('token', jwt);
-      toast.info('Successfully logged in!', config.toastOptions); // TODO: Remove when redirect.
-      this.props.history.replace('/');
+      window.location = '/';
     } catch (err) {
       if (err.response && err.response.status === 400) {
         toast.error('Invalid username or password!', config.toastOptions);

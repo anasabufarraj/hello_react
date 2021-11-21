@@ -25,13 +25,12 @@ class RegisterForm extends Form {
   };
 
   async handleFormSubmitToServer() {
-    // DOC: Register the user then automatically login the user by storing the login token
-    //  in the browser's localstorage object.
+    // DOC: Register the user then automatically login the user by storing the login JSON Web Token (JWT)
+    //  in the browser's localstorage object. Finally, reset the current window location.
     try {
       const { headers } = await register(this.state.data);
       localStorage.setItem('token', headers['x-auth-token']);
-      toast.info('Successfully registered!', config.toastOptions); // TODO: Remove when redirect.
-      this.props.history.replace('/');
+      window.location = '/';
     } catch (err) {
       if (err.response && err.response.status === 400) {
         // DOC: Updating the errors object with email field error
