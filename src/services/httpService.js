@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import config from '../config.json';
 // import logService from './logService';
 //
-// TODO: Setup log Service before production deployment.
+// TODO: Uncomment lines for log Service before production deployment.
 
 axios.interceptors.response.use(null, (err) => {
   const expectedErrors = err.response && err.response.status >= 400 && err.response.status < 500;

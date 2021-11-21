@@ -14,5 +14,3 @@ export function login(user) {
     password: user.password,
   });
 }
-
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTk5NDNmM2VkN2MxNDM3ZGVjYmM2YmYiLCJuYW1lIjoiQW5hcyBBYnUgRmFycmFqIiwiZW1haWwiOiJhbmFzLnIuYWJ1ZmFycmFqQGdtYWlsLmNvbSIsImlhdCI6MTYzNzQzNzc1Mn0.CcSUXM2srN7H_1z-70fx5KOrkmtv97pbW3FsH1Q4YZs

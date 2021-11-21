@@ -17,7 +17,7 @@ export function deleteMovie(movieId) {
 }
 
 export function saveMovie(movie) {
-  // DOC: Save a movie to the database after pruning the id, since ids added automatically.
+  // DOC: Save a movie to the database after removing the id, since ids added automatically.
   if (movie._id) {
     const body = { ...movie };
     delete body._id;

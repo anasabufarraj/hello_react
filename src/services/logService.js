@@ -4,7 +4,7 @@
 // import * as Sentry from '@sentry/react';
 // import { Integrations } from '@sentry/tracing';
 
-// TODO: Setup log Service before production deployment.
+// TODO: Uncomment lines for log Service before production deployment.
 
 function init() {
   // Sentry.init({

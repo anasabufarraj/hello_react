@@ -5,6 +5,8 @@ import React from 'react';
 import Form from './common/form';
 import Joi from 'joi-browser';
 import { login } from '../services/authService';
+import { toast } from 'react-toastify';
+import config from '../config.json';
 
 class LoginForm extends Form {
   constructor(props) {
@@ -17,14 +19,19 @@ class LoginForm extends Form {
 
   schema = {
     options: { abortEarly: false },
-    username: Joi.string().email().required().label('Username'),
-    password: Joi.string().min(6).required().label('Password'),
+    username: Joi.string().required().label('Username'),
+    password: Joi.string().required().label('Password'),
   };
 
   async handleFormSubmitToServer() {
-    await login(this.state.data);
-    console.log('Welcome!');
-    this.props.history.replace('/');
+    try {
+      await login(this.state.data);
+      this.props.history.replace('/');
+    } catch (err) {
+      if (err.response && err.response.status === 400) {
+        toast.error('Wrong username or password!', config.toastOptions);
+      }
+    }
   }
 
   render() {
