@@ -24,9 +24,11 @@ class LoginForm extends Form {
   };
 
   async handleFormSubmitToServer() {
+    // DOC: Login the user and store the returned login token in browser's localStorage session.
     try {
-      await login(this.state.data);
-      this.props.history.replace('/');
+      const { data: JWT } = await login(this.state.data);
+      localStorage.setItem('token', JWT);
+      this.props.history.push('/');
     } catch (err) {
       if (err.response && err.response.status === 400) {
         toast.error('Wrong username or password!', config.toastOptions);
