@@ -105,7 +105,18 @@ class Movies extends React.Component {
     }
 
     // DOC: Sorting filtered movies, then paginating.
-    const sortedMovies = _.orderBy(filteredMovies, [sortColumn.path], [sortColumn.order]);
+
+    let sortedMovies = _.orderBy(filteredMovies, [sortColumn.path], [sortColumn.order]);
+
+    if (sortColumn.path === 'title') {
+      // DOC: Case-sensitive sorting if sorted by 'title' column.
+      sortedMovies = _.orderBy(
+        filteredMovies,
+        [(filteredMovies) => filteredMovies.title.toLowerCase()],
+        [sortColumn.order]
+      );
+    }
+
     const moviesInPage = paginate(sortedMovies, activePage, maxItemsInPage);
 
     return { filteredMovies, moviesInPage };
