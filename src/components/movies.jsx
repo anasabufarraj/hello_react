@@ -93,7 +93,7 @@ class Movies extends React.Component {
     let filteredMovies = this.state.movies;
     const { searchQuery, selectedGenre, sortColumn, activePage, maxItemsInPage } = this.state;
 
-    // DOC: Filtering movies by genres or search box, excluding the newly created 'All Genres' which id is an empty string.
+    // DOC: Filtering movies by genres or search box, excluding the 'All Genres' genre, which id is empty.
     if (searchQuery) {
       filteredMovies = filteredMovies.filter((_m) =>
         _m.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -104,8 +104,7 @@ class Movies extends React.Component {
       filteredMovies = filteredMovies.filter((_m) => _m.genre._id === selectedGenre._id);
     }
 
-    // DOC: Sorting filtered movies, then paginating.
-
+    // DOC: Sorting filtered movies.
     let sortedMovies = _.orderBy(filteredMovies, [sortColumn.path], [sortColumn.order]);
 
     if (sortColumn.path === 'title') {
@@ -117,6 +116,7 @@ class Movies extends React.Component {
       );
     }
 
+    // DOC: Paginating sorted movies.
     const moviesInPage = paginate(sortedMovies, activePage, maxItemsInPage);
 
     return { filteredMovies, moviesInPage };

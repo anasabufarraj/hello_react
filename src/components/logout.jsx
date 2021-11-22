@@ -1,10 +1,17 @@
 //------------------------------------------------------------------------------
 // Copyright 2021. Anas Abu Farraj.
 //------------------------------------------------------------------------------
-function Logout() {
-  localStorage.removeItem('token');
-  window.location = '/';
-  return null;
+import React from 'react';
+
+class Logout extends React.Component {
+  componentDidMount() {
+    localStorage.removeItem('token');
+    window.location = '/';
+  }
+
+  render() {
+    return null;
+  }
 }
 
 export default Logout;

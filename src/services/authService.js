@@ -10,7 +10,7 @@ export function login(user) {
     //  data: { username: '', password: '' }
     //  email => email
     //  password => password
-    email: user.username,
+    email: user.username.toLowerCase(),
     password: user.password,
   });
 }
