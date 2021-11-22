@@ -6,5 +6,6 @@
     "autoClose": 5000,
     "pauseOnHover": false,
     "hideProgressBar": true
-  }
+  },
+  "tokenKey": "token"
 }

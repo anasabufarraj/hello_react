@@ -43,7 +43,7 @@ function NavBar(props) {
         <div className="bg-primary">
           <div className="container text-end">
             <NavLink className="nav-item nav-link text-white py-2" to="/profile">
-              Hello, {props.user.name} <i className="bi-person-circle ps-1" />
+              {props.user.name} <i className="bi-person-circle ps-1" />
             </NavLink>
           </div>
         </div>

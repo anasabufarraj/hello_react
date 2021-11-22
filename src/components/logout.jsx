@@ -2,10 +2,11 @@
 // Copyright 2021. Anas Abu Farraj.
 //------------------------------------------------------------------------------
 import React from 'react';
+import auth from '../services/authService';
 
 class Logout extends React.Component {
   componentDidMount() {
-    localStorage.removeItem('token');
+    auth.logout();
     window.location = '/';
   }
 

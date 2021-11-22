@@ -4,7 +4,6 @@
 import React from 'react';
 import NavBar from './components/navbar';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
 import RegisterForm from './components/registerForm';
 import LoginForm from './components/loginForm';
 import Logout from './components/logout';
@@ -15,24 +14,27 @@ import Rentals from './components/rentals';
 import NotFound from './components/notFound';
 import Footer from './components/footer';
 import { ToastContainer } from 'react-toastify';
+import auth from './services/authService';
 import 'react-toastify/dist/ReactToastify.css';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: undefined,
+      user: null,
     };
   }
 
   componentDidMount() {
-    try {
-      const jwt = localStorage.getItem('token');
-      const user = jwtDecode(jwt);
-      this.setState({ user });
-    } catch (err) {
-      return null;
-    }
+    const user = auth.getCurrentUser();
+    this.setState({ user });
+    // try {
+    //   const jwt = localStorage.getItem('token');
+    //   const user = jwtDecode(jwt);
+    //   this.setState({ user });
+    // } catch (err) {
+    //   return null;
+    // }
   }
 
   render() {

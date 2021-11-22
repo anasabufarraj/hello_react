@@ -4,7 +4,7 @@
 import React from 'react';
 import Form from './common/form';
 import Joi from 'joi-browser';
-import { login } from '../services/authService';
+import auth from '../services/authService';
 import { toast } from 'react-toastify';
 import config from '../config.json';
 
@@ -24,11 +24,9 @@ class LoginForm extends Form {
   };
 
   async handleFormSubmitToServer() {
-    // DOC: Login the user and store the returned login JSON Web Token (JWT) in the browser's
-    //  localStorage object. Finally, reset the current window location.
+    // DOC: Login the user then reset the current window location to the home page.
     try {
-      const { data: jwt } = await login(this.state.data);
-      localStorage.setItem('token', jwt);
+      await auth.login(this.state.data);
       window.location = '/';
     } catch (err) {
       if (err.response && err.response.status === 400) {

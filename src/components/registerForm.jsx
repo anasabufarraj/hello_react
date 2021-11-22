@@ -25,11 +25,9 @@ class RegisterForm extends Form {
   };
 
   async handleFormSubmitToServer() {
-    // DOC: Register the user then automatically login the user by storing the login JSON Web Token (JWT)
-    //  in the browser's localstorage object. Finally, reset the current window location.
+    // DOC: Register the user then reset the current window location.
     try {
-      const { headers } = await register(this.state.data);
-      localStorage.setItem('token', headers['x-auth-token']);
+      await register(this.state.data);
       window.location = '/';
     } catch (err) {
       if (err.response && err.response.status === 400) {
