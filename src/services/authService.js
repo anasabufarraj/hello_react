@@ -20,10 +20,12 @@ async function login(user) {
 }
 
 function autoLogin(jwt) {
+  // DOC: Automatically login the user by storing the given token in the browser's localstorage object.
   localStorage.setItem(config.tokenKey, jwt);
 }
 
 function getCurrentUser() {
+  // DOC: Get the current stored token if exist, then return the after decoding.
   try {
     const jwt = localStorage.getItem(config.tokenKey);
     return jwtDecode(jwt);
