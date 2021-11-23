@@ -5,6 +5,7 @@ import React from 'react';
 import Form from './common/form';
 import { register } from '../services/userService';
 import Joi from 'joi-browser';
+import auth from '../services/authService';
 import { toast } from 'react-toastify';
 import config from '../config.json';
 
@@ -25,13 +26,14 @@ class RegisterForm extends Form {
   };
 
   async handleFormSubmitToServer() {
-    // DOC: Register the user then reset the current window location.
+    // DOC: Register the user then reset the current window location and updating the
+    //  errors object with email field error
     try {
-      await register(this.state.data);
+      const { headers } = await register(this.state.data);
+      auth.autoLogin(headers['x-auth-token']);
       window.location = '/';
     } catch (err) {
       if (err.response && err.response.status === 400) {
-        // DOC: Updating the errors object with email field error
         const errors = this.state.errors;
         errors.email = err.response.data;
         this.setState({ errors });

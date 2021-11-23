@@ -19,6 +19,10 @@ async function login(user) {
   localStorage.setItem(config.tokenKey, jwt);
 }
 
+function autoLogin(jwt) {
+  localStorage.setItem(config.tokenKey, jwt);
+}
+
 function getCurrentUser() {
   try {
     const jwt = localStorage.getItem(config.tokenKey);
@@ -34,6 +38,7 @@ function logout() {
 
 const auth = {
   login,
+  autoLogin,
   getCurrentUser,
   logout,
 };

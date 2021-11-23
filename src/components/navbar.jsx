@@ -41,8 +41,8 @@ function NavBar(props) {
       </nav>
       {props.user && (
         <div className="bg-primary">
-          <div className="container text-end">
-            <NavLink className="nav-item nav-link text-white py-2" to="/profile">
+          <div className="container text-end py-2">
+            <NavLink className="nav-item nav-link text-white d-inline" to="/profile">
               {props.user.name} <i className="bi-person-circle ps-1" />
             </NavLink>
           </div>

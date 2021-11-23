@@ -28,13 +28,6 @@ class App extends React.Component {
   componentDidMount() {
     const user = auth.getCurrentUser();
     this.setState({ user });
-    // try {
-    //   const jwt = localStorage.getItem('token');
-    //   const user = jwtDecode(jwt);
-    //   this.setState({ user });
-    // } catch (err) {
-    //   return null;
-    // }
   }
 
   render() {
