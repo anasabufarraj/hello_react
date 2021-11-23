@@ -69,11 +69,22 @@ class Form extends React.Component {
     this.setState({ errors, data });
   }
 
+  handleCancel() {
+    window.location = '/';
+  }
+
   renderSubmitButton(label) {
     return (
-      <button className="btn btn-primary" disabled={this.handleFormValidation()}>
+      <button className="btn btn-primary me-3" disabled={this.handleFormValidation()}>
         {label}
       </button>
+    );
+  }
+
+  renderCancelButton(label) {
+    // DOC: Used <input type"button"/> instead of <button>, since <button> element will implicitly submits.
+    return (
+      <input type="button" className="btn btn-outline-dark me-3" value={label} onClick={this.handleCancel} />
     );
   }
 

@@ -5,7 +5,8 @@ import jwtDecode from 'jwt-decode';
 import httpService from './httpService';
 import config from '../config';
 
-httpService.includeDefaultHeaders(getToken());
+// DOC: Include the custom header in every request.
+httpService.includeCustomHeaders(getToken());
 
 function getToken() {
   return localStorage.getItem(config.tokenKey);

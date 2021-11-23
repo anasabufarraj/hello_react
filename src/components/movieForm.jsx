@@ -89,6 +89,7 @@ class MovieForm extends Form {
               {this.renderInput('Number in Stock', 'number', 'numberInStock')}
               {this.renderInput('Rate', 'number', 'dailyRentalRate')}
               {this.renderSubmitButton('Save')}
+              {this.props.match.params.id === 'new' ? null : this.renderCancelButton('Cancel')}
             </form>
           </div>
         </div>

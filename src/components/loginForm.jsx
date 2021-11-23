@@ -45,6 +45,7 @@ class LoginForm extends Form {
               {this.renderInput('Username', 'text', 'username', true)}
               {this.renderInput('Password', 'password', 'password')}
               {this.renderSubmitButton('Login')}
+              {this.renderCancelButton('Cancel')}
             </form>
           </div>
         </div>

@@ -55,6 +55,7 @@ class RegisterForm extends Form {
               {this.renderInput('Email', 'email', 'email')}
               {this.renderInput('Password', 'password', 'password')}
               {this.renderSubmitButton('Register')}
+              {this.renderCancelButton('Cancel')}
             </form>
           </div>
         </div>

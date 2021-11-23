@@ -1,7 +1,7 @@
 {
   "APIEndpointBase": "http://localhost:3900/api",
   "toastOptions": {
-    "position": "bottom-left",
+    "position": "bottom-right",
     "theme": "colored",
     "autoClose": 5000,
     "pauseOnHover": false,

@@ -18,7 +18,7 @@ axios.interceptors.response.use(null, (err) => {
   return Promise.reject(err);
 });
 
-function includeDefaultHeaders(jwt) {
+function includeCustomHeaders(jwt) {
   // DOC: Include the custom header 'x-auth-token' in every request.
   axios.defaults.headers.common['x-auth-token'] = jwt;
 }
@@ -28,7 +28,7 @@ const httpService = {
   post: axios.post,
   put: axios.put,
   delete: axios.delete,
-  includeDefaultHeaders,
+  includeCustomHeaders,
 };
 
 export default httpService;
