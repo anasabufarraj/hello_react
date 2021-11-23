@@ -20,7 +20,7 @@ async function login(user) {
 }
 
 function autoLogin(jwt) {
-  // DOC: Automatically login the user by storing the given token in the browser's localstorage object.
+  // DOC: Automatically login the user by storing the given token in the browser's local storage object.
   localStorage.setItem(config.tokenKey, jwt);
 }
 

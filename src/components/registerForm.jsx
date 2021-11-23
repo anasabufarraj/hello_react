@@ -26,13 +26,15 @@ class RegisterForm extends Form {
   };
 
   async handleFormSubmitToServer() {
-    // DOC: Register the user with autologin, then reset the current window location.
     try {
+      // DOC: Register the user with autologin by storing the returned token returned from
+      //  the custom header 'x-auth-token' when registering the user data.
+      //  Finally, reset the current window location.
       const { headers } = await register(this.state.data);
       auth.autoLogin(headers['x-auth-token']);
       window.location = '/';
     } catch (err) {
-      // DOC: If an error caught, update the errors state with only email field error.
+      // DOC: If an error caught, update the state with email field error.
       if (err.response && err.response.status === 400) {
         const errors = this.state.errors;
         errors.email = err.response.data;
