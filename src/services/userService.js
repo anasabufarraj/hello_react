@@ -13,7 +13,7 @@ export function register(user) {
     //  email => email
     //  password => password
     name: user.name,
-    email: user.email,
+    email: user.email.toLowerCase(),
     password: user.password,
   });
 }

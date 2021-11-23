@@ -6,22 +6,29 @@ import { toast } from 'react-toastify';
 import config from '../config.json';
 // import logService from './logService';
 
+// DOC: Handle unexpected errors.
 axios.interceptors.response.use(null, (err) => {
   const expectedErrors = err.response && err.response.status >= 400 && err.response.status < 500;
 
   if (!expectedErrors) {
     // logService.log(err); // TODO: Uncomment lines for log Service before production deployment.
-    toast.error('An unexpected err occurred!', config.toastOptions);
+    toast.error('An unexpected error occurred!', config.toastOptions);
   }
 
   return Promise.reject(err);
 });
+
+function includeDefaultHeaders(jwt) {
+  // DOC: Include the custom header 'x-auth-token' in every request.
+  axios.defaults.headers.common['x-auth-token'] = jwt;
+}
 
 const httpService = {
   get: axios.get,
   post: axios.post,
   put: axios.put,
   delete: axios.delete,
+  includeDefaultHeaders,
 };
 
 export default httpService;

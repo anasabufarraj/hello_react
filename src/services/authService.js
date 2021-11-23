@@ -5,6 +5,12 @@ import jwtDecode from 'jwt-decode';
 import httpService from './httpService';
 import config from '../config';
 
+httpService.includeDefaultHeaders(getToken());
+
+function getToken() {
+  return localStorage.getItem(config.tokenKey);
+}
+
 async function login(user) {
   // DOC: Get the data JSON Web Token (JWT) and store in the browser's localStorage object.
   const { data: jwt } = await httpService.post(`${config.APIEndpointBase}/auth`, {
@@ -27,7 +33,7 @@ function autoLogin(jwt) {
 function getCurrentUser() {
   // DOC: Get the current stored token if exist, then return the after decoding.
   try {
-    const jwt = localStorage.getItem(config.tokenKey);
+    const jwt = getToken();
     return jwtDecode(jwt);
   } catch (err) {
     return null;
