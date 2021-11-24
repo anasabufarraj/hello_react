@@ -12,6 +12,7 @@ import SearchBox from './common/searchBox';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import { toast } from 'react-toastify';
+import auth from '../services/authService';
 import config from '../config.json';
 
 class Movies extends React.Component {
@@ -143,7 +144,7 @@ class Movies extends React.Component {
             selectedItem={this.state.selectedGenre}
             onItemSelect={this.handleGenreSelect}
           />
-          {this.props.user && (
+          {auth.getCurrentUserToken() && (
             <Link to="/movies/new" className="btn btn-primary d-grid g-1 mb-3">
               Add Movie
             </Link>
@@ -167,7 +168,6 @@ class Movies extends React.Component {
             onLike={this.handleMovieLike}
             onSort={this.handleSorting}
             sortColumn={this.state.sortColumn}
-            user={this.props.user}
           />
           <Pagination
             itemsInTable={data.filteredMovies.length}

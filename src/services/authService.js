@@ -32,7 +32,7 @@ function autoLogin(jwt) {
 }
 
 function getCurrentUserToken() {
-  // DOC: Get the current stored token if exist, then return the after decoding.
+  // DOC: Get the current stored token if exist, then return after decoding.
   try {
     const jwt = getToken();
     return jwtDecode(jwt);

@@ -4,6 +4,8 @@
 import React from 'react';
 import NavBar from './components/navbar';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import ProtectedRoute from './components/common/protectedRoute';
+import HiddenRoute from './components/common/hiddenRoute';
 import RegisterForm from './components/registerForm';
 import LoginForm from './components/loginForm';
 import Logout from './components/logout';
@@ -39,44 +41,14 @@ class App extends React.Component {
         <NavBar user={user} isAdmin={auth.isAdmin(user)} />
         <div className="container fw-light my-4">
           <Switch>
-            <Route
-              path="/register"
-              render={(props) => {
-                // DOC: Prevent the access to 'RegisterForm' route if the user logged in.
-                //  Component's props include history, location, and match.
-                if (user) {
-                  return <Redirect to="/" />;
-                } else {
-                  return <RegisterForm {...props} />;
-                }
-              }}
-            />
-            <Route
-              path="/login"
-              render={(props) => {
-                // DOC: Prevent the access to 'LoginForm' route if the user logged in.
-                //  Component's props include history, location, and match.
-                if (user) {
-                  return <Redirect to="/" />;
-                } else {
-                  return <LoginForm {...props} />;
-                }
-              }}
-            />
+            {/* NOTE: Use the following method to add props to Route components. For example:
+                 <Route path="/movies" render={(props) => <Movies user={} {...props} />} />
+                 Component props include history, location, and match properties.*/}
+            <HiddenRoute path="/register" component={RegisterForm} />
+            <HiddenRoute path="/login" component={LoginForm} />
             <Route path="/logout" component={Logout} />
-            <Route
-              path="/movies/:id"
-              render={(props) => {
-                // DOC: Prevent the access to 'MovieForm' route if the user not logged in.
-                //  Component's props include history, location, and match.
-                if (!user) {
-                  return <Redirect to="/login" />;
-                } else {
-                  return <MovieForm {...props} />;
-                }
-              }}
-            />
-            <Route path="/movies" render={(props) => <Movies user={user} {...props} />} />
+            <ProtectedRoute path="/movies/:id" component={MovieForm} />
+            <Route path="/movies" component={Movies} />
             <Route path="/customers" component={Customers} />
             <Route path="/rentals" component={Rentals} />
             <Route path="/not-found" component={NotFound} />

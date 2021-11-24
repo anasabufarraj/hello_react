@@ -32,7 +32,7 @@ class MoviesTable extends React.Component {
   }
 
   handleTitleColumn() {
-    if (auth.isAdmin(this.props.user)) {
+    if (auth.getCurrentUserToken()) {
       return {
         path: 'title',
         label: 'Title',
@@ -51,7 +51,9 @@ class MoviesTable extends React.Component {
   }
 
   handleDeleteColumn() {
-    if (auth.isAdmin(this.props.user)) {
+    const user = auth.getCurrentUserToken();
+
+    if (auth.isAdmin(user)) {
       return {
         path: 'delete',
         label: 'Handle',
