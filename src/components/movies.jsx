@@ -137,7 +137,7 @@ class Movies extends React.Component {
       <p className="lead text-center text-muted">You've no content to show!</p>
     ) : (
       <div className="row">
-        <div className="col-6">
+        <div className="col-6 col-md-3">
           <ListGroup
             items={this.state.genres}
             selectedItem={this.state.selectedGenre}
@@ -149,7 +149,7 @@ class Movies extends React.Component {
             </Link>
           )}
         </div>
-        <div className="col">
+        <div className="col-12">
           <p className="fw-normal">
             {data.filteredMovies.length === 1
               ? `Showing ${data.filteredMovies.length} Movie in table`
