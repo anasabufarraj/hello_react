@@ -42,7 +42,12 @@ class MoviesTable extends React.Component {
           </Link>
         ),
       };
-    } else return { path: 'title', label: 'Title' };
+    } else {
+      return {
+        path: 'title',
+        label: 'Title',
+      };
+    }
   }
 
   handleDeleteColumn() {

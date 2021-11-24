@@ -59,7 +59,9 @@ class Form extends React.Component {
 
     if (errors) {
       errors[e.currentTarget.name] = message;
-    } else delete errors[e.currentTarget.name];
+    } else {
+      delete errors[e.currentTarget.name];
+    }
 
     // DOC: Update the state with an event listener to the current target value.
     const data = this.state.data;

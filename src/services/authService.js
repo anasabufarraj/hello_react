@@ -31,7 +31,7 @@ function autoLogin(jwt) {
   localStorage.setItem(config.tokenKey, jwt);
 }
 
-function getCurrentUser() {
+function getCurrentUserToken() {
   // DOC: Get the current stored token if exist, then return the after decoding.
   try {
     const jwt = getToken();
@@ -42,7 +42,7 @@ function getCurrentUser() {
 }
 
 function isAdmin(user) {
-  return user ? user.isAdmin : null;
+  return user ? user.isAdmin : false;
 }
 
 function logout() {
@@ -52,7 +52,7 @@ function logout() {
 const auth = {
   login,
   autoLogin,
-  getCurrentUser,
+  getCurrentUserToken,
   isAdmin,
   logout,
 };
