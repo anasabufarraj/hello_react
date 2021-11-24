@@ -5,21 +5,14 @@ import React from 'react';
 import Like from './common/like';
 import Table from './common/table';
 import { Link } from 'react-router-dom';
+import auth from '../services/authService';
 
 class MoviesTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       columns: [
-        {
-          path: 'title',
-          label: 'Title',
-          link: (movie) => (
-            <Link style={{ textDecoration: 'none' }} to={`/movies/${movie._id}`}>
-              {movie.title}
-            </Link>
-          ),
-        },
+        this.handleTitleColumn(),
         {
           path: 'genre.name',
           label: 'Genre',
@@ -38,8 +31,22 @@ class MoviesTable extends React.Component {
     };
   }
 
+  handleTitleColumn() {
+    if (auth.isAdmin(this.props.user)) {
+      return {
+        path: 'title',
+        label: 'Title',
+        link: (movie) => (
+          <Link style={{ textDecoration: 'none' }} to={`/movies/${movie._id}`}>
+            {movie.title}
+          </Link>
+        ),
+      };
+    } else return { path: 'title', label: 'Title' };
+  }
+
   handleDeleteColumn() {
-    if (this.props.user) {
+    if (auth.isAdmin(this.props.user)) {
       return {
         path: 'delete',
         label: 'Handle',

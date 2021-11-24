@@ -41,6 +41,10 @@ function getCurrentUser() {
   }
 }
 
+function isAdmin(user) {
+  return user ? user.isAdmin : null;
+}
+
 function logout() {
   localStorage.removeItem(config.tokenKey);
 }
@@ -49,6 +53,7 @@ const auth = {
   login,
   autoLogin,
   getCurrentUser,
+  isAdmin,
   logout,
 };
 
