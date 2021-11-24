@@ -44,6 +44,7 @@ function NavBar(props) {
           <div className="container text-end py-2">
             <NavLink className="nav-item nav-link text-white d-inline" to="/profile">
               {props.user.name} <i className="bi-person-circle ps-1" />
+              {props.user.isAdmin ? ' Admin' : ''}
             </NavLink>
           </div>
         </div>

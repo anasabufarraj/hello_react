@@ -30,18 +30,23 @@ class App extends React.Component {
     this.setState({ user });
   }
 
+  handleIsAdmin() {
+    const user = this.state.user;
+    return user ? user.isAdmin : null;
+  }
+
   render() {
     return (
       <React.Fragment>
         <ToastContainer limit={3} />
-        <NavBar user={this.state.user} />
+        <NavBar user={this.state.user} isAdmin={this.handleIsAdmin()} />
         <div className="container fw-light my-4">
           <Switch>
             <Route path="/register" component={RegisterForm} />
             <Route path="/login" component={LoginForm} />
             <Route path="/logout" component={Logout} />
             <Route path="/movies/:id" component={MovieForm} />
-            <Route path="/movies" component={Movies} />
+            <Route path="/movies" render={() => <Movies user={this.state.user} />} />
             <Route path="/customers" component={Customers} />
             <Route path="/rentals" component={Rentals} />
             <Route path="/not-found" component={NotFound} />

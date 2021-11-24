@@ -143,9 +143,11 @@ class Movies extends React.Component {
             selectedItem={this.state.selectedGenre}
             onItemSelect={this.handleGenreSelect}
           />
-          <Link to="/movies/new" className="btn btn-primary d-grid g-1 mb-3">
-            Add Movie
-          </Link>
+          {this.props.user && (
+            <Link to="/movies/new" className="btn btn-primary d-grid g-1 mb-3">
+              Add Movie
+            </Link>
+          )}
         </div>
         <div className="col">
           <p className="fw-normal">
@@ -165,6 +167,7 @@ class Movies extends React.Component {
             onLike={this.handleMovieLike}
             onSort={this.handleSorting}
             sortColumn={this.state.sortColumn}
+            user={this.props.user}
           />
           <Pagination
             itemsInTable={data.filteredMovies.length}

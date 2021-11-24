@@ -33,17 +33,23 @@ class MoviesTable extends React.Component {
           label: 'Like',
           button: (movie) => <Like liked={movie.liked} onLike={() => this.props.onLike(movie)} />,
         },
-        {
-          path: 'delete',
-          label: 'Handle',
-          button: (movie) => (
-            <button onClick={() => this.props.onDelete(movie)} className="btn btn-outline-danger btn-sm">
-              Delete
-            </button>
-          ),
-        },
+        this.handleDeleteColumn(),
       ],
     };
+  }
+
+  handleDeleteColumn() {
+    if (this.props.user) {
+      return {
+        path: 'delete',
+        label: 'Handle',
+        button: (movie) => (
+          <button onClick={() => this.props.onDelete(movie)} className="btn btn-outline-danger btn-sm">
+            Delete
+          </button>
+        ),
+      };
+    } else return {};
   }
 
   render() {

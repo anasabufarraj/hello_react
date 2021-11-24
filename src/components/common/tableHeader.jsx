@@ -43,7 +43,7 @@ class TableHeader extends React.Component {
           {this.props.columns.map((column) => (
             <th
               style={this.renderCursor(column)}
-              key={column.path}
+              key={column.path + column.label}
               onClick={() => this.raiseSort(column.path, column)}
             >
               {column.label} {this.renderSortIcon(column)}
