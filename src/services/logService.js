@@ -5,9 +5,9 @@
 // import { Integrations } from '@sentry/tracing';
 
 function init() {
-  // TODO: Uncomment lines for log Service before production deployment.
+  // TODO: Uncomment for log Service before production deployment.
   // Sentry.init({
-  //   dsn: 'https://912776ff1dbb4f54a317916e7f337b16@o1071144.ingest.sentry.io/6067889',
+  //   dsn: 'https://bc2f27a10bf640d5bb0af8be53d57365@o1071144.ingest.sentry.io/6079029',
   //   integrations: [new Integrations.BrowserTracing()],
   //
   //   // Set tracesSampleRate to 1.0 to capture 100%

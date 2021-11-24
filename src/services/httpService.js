@@ -11,7 +11,7 @@ axios.interceptors.response.use(null, (err) => {
   const expectedErrors = err.response && err.response.status >= 400 && err.response.status < 500;
 
   if (!expectedErrors) {
-    // logService.log(err); // TODO: Uncomment lines for log Service before production deployment.
+    // logService.log(err); // TODO: Uncomment for log Service before production deployment.
     toast.error('An unexpected error occurred!', config.toastOptions);
   }
 
