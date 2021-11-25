@@ -32,12 +32,10 @@ class App extends React.Component {
   }
 
   render() {
-    const { user } = this.state;
-
     return (
       <React.Fragment>
         <ToastContainer limit={3} />
-        <NavBar user={user} isAdmin={auth.isAdmin(user)} />
+        <NavBar />
         <div className="container fw-light my-4">
           <Switch>
             <Route path="/register" component={RegisterForm} />

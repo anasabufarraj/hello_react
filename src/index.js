@@ -10,8 +10,6 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-// TODO [] Replace 'props' with object destructuring assignment.
-
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>

@@ -134,6 +134,7 @@ class Movies extends React.Component {
 
   render() {
     const data = this.handleData();
+    const user = auth.getCurrentUserToken();
 
     return this.state.movies.length === 0 ? (
       <p className="lead text-center text-muted">You've no content to show!</p>
@@ -145,7 +146,7 @@ class Movies extends React.Component {
             selectedItem={this.state.selectedGenre}
             onItemSelect={this.handleGenreSelect}
           />
-          {auth.getCurrentUserToken() && (
+          {user && (
             <Link to="/movies/new" className="btn btn-primary d-grid g-1 mb-3">
               Add Movie
             </Link>

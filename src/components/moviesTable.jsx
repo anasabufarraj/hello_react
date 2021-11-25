@@ -34,16 +34,16 @@ class MoviesTable extends React.Component {
           label: 'Like',
           button: (movie) => <Like liked={movie.liked} onLike={() => this.props.onLike(movie)} />,
         },
-        this.handleDeleteColumn(),
       ],
     };
   }
 
-  handleDeleteColumn() {
+  componentDidMount() {
     const user = auth.getCurrentUserToken();
+    const columns = this.state.columns;
 
-    if (auth.isAdmin(user)) {
-      return {
+    if (user && user.isAdmin) {
+      columns.push({
         path: 'delete',
         label: 'Handle',
         button: (movie) => (
@@ -51,8 +51,10 @@ class MoviesTable extends React.Component {
             Delete
           </button>
         ),
-      };
-    } else return {};
+      });
+    }
+
+    this.setState({ columns });
   }
 
   render() {

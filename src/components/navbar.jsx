@@ -2,9 +2,12 @@
 // Copyright 2021. Anas Abu Farraj.
 //------------------------------------------------------------------------------
 import React from 'react';
+import auth from '../services/authService';
 import { NavLink } from 'react-router-dom';
 
-function NavBar({ user }) {
+function NavBar() {
+  const user = auth.getCurrentUserToken();
+
   return (
     <React.Fragment>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
@@ -44,7 +47,7 @@ function NavBar({ user }) {
           <div className="container text-end py-2">
             <NavLink className="nav-item nav-link text-white d-inline" to="/profile">
               {user.name} <i className="bi-person-circle ps-1" />
-              {user.isAdmin ? ' Admin' : ''}
+              {user && user.isAdmin ? ' Admin' : ''}
             </NavLink>
           </div>
         </div>

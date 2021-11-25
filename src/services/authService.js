@@ -41,8 +41,9 @@ function getCurrentUserToken() {
   }
 }
 
-function isAdmin(user) {
-  return user ? user.isAdmin : false;
+function isAdmin() {
+  const user = getCurrentUserToken();
+  return user.isAdmin;
 }
 
 function logout() {
