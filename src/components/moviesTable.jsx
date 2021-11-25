@@ -12,7 +12,15 @@ class MoviesTable extends React.Component {
     super(props);
     this.state = {
       columns: [
-        this.handleTitleColumn(),
+        {
+          path: 'title',
+          label: 'Title',
+          link: (movie) => (
+            <Link style={{ textDecoration: 'none' }} to={`/movies/${movie._id}`}>
+              {movie.title}
+            </Link>
+          ),
+        },
         {
           path: 'genre.name',
           label: 'Genre',
@@ -31,24 +39,25 @@ class MoviesTable extends React.Component {
     };
   }
 
-  handleTitleColumn() {
-    if (auth.getCurrentUserToken()) {
-      return {
-        path: 'title',
-        label: 'Title',
-        link: (movie) => (
-          <Link style={{ textDecoration: 'none' }} to={`/movies/${movie._id}`}>
-            {movie.title}
-          </Link>
-        ),
-      };
-    } else {
-      return {
-        path: 'title',
-        label: 'Title',
-      };
-    }
-  }
+  // TODO: Uncomment to hide movie title link
+  // handleTitleColumn() {
+  //   if (auth.getCurrentUserToken()) {
+  //     return {
+  //       path: 'title',
+  //       label: 'Title',
+  //       link: (movie) => (
+  //         <Link style={{ textDecoration: 'none' }} to={`/movies/${movie._id}`}>
+  //           {movie.title}
+  //         </Link>
+  //       ),
+  //     };
+  //   } else {
+  //     return {
+  //       path: 'title',
+  //       label: 'Title',
+  //     };
+  //   }
+  // }
 
   handleDeleteColumn() {
     const user = auth.getCurrentUserToken();

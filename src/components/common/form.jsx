@@ -31,6 +31,7 @@ class Form extends React.Component {
       for (let _i of error.details) {
         errors[_i.path[0]] = _i.message;
       }
+
       return errors;
     }
   }
@@ -39,6 +40,7 @@ class Form extends React.Component {
     // DOC: Handle form validation and submit to server.
     e.preventDefault();
     const errors = this.handleFormValidation();
+
     this.setState({ errors: errors || {} });
     this.handleFormSubmitToServer();
   }
@@ -48,7 +50,6 @@ class Form extends React.Component {
     const input = { [name]: value };
     const inputSchema = { [name]: this.schema[name] };
     const { error } = Joi.validate(input, inputSchema);
-
     return error ? error.details[0].message : null;
   }
 
@@ -65,6 +66,7 @@ class Form extends React.Component {
 
     // DOC: Update the state with an event listener to the current target value.
     const data = this.state.data;
+
     data[e.currentTarget.name] = e.currentTarget.value;
     this.setState({ errors, data });
   }

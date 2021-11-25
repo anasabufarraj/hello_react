@@ -11,6 +11,7 @@ class TableBody extends React.Component {
     } else if (column.link) {
       return column.link(item);
     }
+
     return _.get(item, column.path);
   }
 

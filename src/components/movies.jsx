@@ -41,6 +41,7 @@ class Movies extends React.Component {
     const { data } = await getGenres();
     const { data: movies } = await getMovies();
     const genres = [{ _id: '', name: 'All Genres' }, ...data];
+
     this.setState({ movies, genres });
   }
 
@@ -73,6 +74,7 @@ class Movies extends React.Component {
   handleMovieLike(movie) {
     const movies = this.state.movies;
     const index = movies.indexOf(movie);
+
     movies[index].liked = !movies[index].liked;
     this.setState({ movies });
   }
@@ -119,7 +121,6 @@ class Movies extends React.Component {
 
     // DOC: Paginating sorted movies.
     const moviesInPage = paginate(sortedMovies, activePage, maxItemsInPage);
-
     return { filteredMovies, moviesInPage };
   }
 

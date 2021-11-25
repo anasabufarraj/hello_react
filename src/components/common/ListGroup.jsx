@@ -8,6 +8,7 @@ class ListGroup extends React.Component {
     if (!this.props.selectedItem && genre.name === 'All Genres') {
       return 'list-group-item list-group-item-action active';
     }
+
     return genre === this.props.selectedItem
       ? 'list-group-item list-group-item-action active'
       : 'list-group-item list-group-item-action';

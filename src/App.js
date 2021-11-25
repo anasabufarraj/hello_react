@@ -5,7 +5,6 @@ import React from 'react';
 import NavBar from './components/navbar';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import ProtectedRoute from './components/common/protectedRoute';
-import HiddenRoute from './components/common/hiddenRoute';
 import RegisterForm from './components/registerForm';
 import LoginForm from './components/loginForm';
 import Logout from './components/logout';
@@ -41,11 +40,8 @@ class App extends React.Component {
         <NavBar user={user} isAdmin={auth.isAdmin(user)} />
         <div className="container fw-light my-4">
           <Switch>
-            {/* NOTE: Use the following method to add props to Route components. For example:
-                 <Route path="/movies" render={(props) => <Movies user={} {...props} />} />
-                 Component props include history, location, and match properties.*/}
-            <HiddenRoute path="/register" component={RegisterForm} />
-            <HiddenRoute path="/login" component={LoginForm} />
+            <Route path="/register" component={RegisterForm} />
+            <Route path="/login" component={LoginForm} />
             <Route path="/logout" component={Logout} />
             <ProtectedRoute path="/movies/:id" component={MovieForm} />
             <Route path="/movies" component={Movies} />
@@ -54,6 +50,9 @@ class App extends React.Component {
             <Route path="/not-found" component={NotFound} />
             <Redirect exact from="/" to="/movies" />
             <Redirect to="not-found" />
+            {/* NOTE: Use the following method to add properties directly in the Route component:
+                 <Route path="/movies" render={(props) => <Movies user={} {...props} />} />
+                 Component props include history, location, and match properties.*/}
           </Switch>
         </div>
         <Footer />

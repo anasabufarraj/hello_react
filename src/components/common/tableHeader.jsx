@@ -30,9 +30,7 @@ class TableHeader extends React.Component {
   }
 
   renderCursor(column) {
-    if (!column.button) {
-      return { cursor: 'pointer' };
-    }
+    if (!column.button) return { cursor: 'pointer' };
     return { cursor: 'default' };
   }
 

@@ -3,6 +3,7 @@
 //------------------------------------------------------------------------------
 import React from 'react';
 import Form from './common/form';
+import { Redirect } from 'react-router-dom';
 import Joi from 'joi-browser';
 import auth from '../services/authService';
 import { toast } from 'react-toastify';
@@ -27,7 +28,10 @@ class LoginForm extends Form {
     // DOC: Login the user then reset the current window location to the home page.
     try {
       await auth.login(this.state.data);
-      window.location = '/';
+
+      // DOC: Redirect to the current window location when login.
+      const { state: currentLocation } = this.props.location;
+      window.location = currentLocation ? currentLocation : '/';
     } catch (err) {
       if (err.response && err.response.status === 400) {
         toast.error('Invalid username or password!', config.toastOptions);
@@ -36,6 +40,8 @@ class LoginForm extends Form {
   }
 
   render() {
+    if (auth.getCurrentUserToken()) return <Redirect to="/" />;
+
     return (
       <React.Fragment>
         <h2 className="mb-3">Log In</h2>
