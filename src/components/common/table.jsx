@@ -4,12 +4,12 @@
 import TableHeader from './tableHeader';
 import TableBody from './tableBody';
 
-function Table(props) {
+function Table({ columns, sortColumn, onSort, data }) {
   // NOTE: props are read-only arguments
   return (
     <table className="table">
-      <TableHeader columns={props.columns} sortColumn={props.sortColumn} onSort={props.onSort} />
-      <TableBody columns={props.columns} data={props.data} />
+      <TableHeader columns={columns} sortColumn={sortColumn} onSort={onSort} />
+      <TableBody columns={columns} data={data} />
     </table>
   );
 }

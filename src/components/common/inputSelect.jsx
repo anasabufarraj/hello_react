@@ -3,25 +3,19 @@
 //------------------------------------------------------------------------------
 import React from 'react';
 
-function InputSelect(props) {
+function InputSelect({ name, label, value, onChange, options, error }) {
   return (
     <div className="mb-3">
-      <label htmlFor={props.name}>{props.label}</label>
-      <select
-        name={props.name}
-        value={props.value}
-        id={props.name}
-        className="form-select"
-        onChange={props.onChange}
-      >
+      <label htmlFor={name}>{label}</label>
+      <select name={name} value={value} id={name} className="form-select" onChange={onChange}>
         <option value="">--Select--</option>
-        {props.options.map((_g) => (
+        {options.map((_g) => (
           <option key={_g._id} value={_g._id}>
             {_g.name}
           </option>
         ))}
       </select>
-      <div className="form-text fw-light text-danger">{props.error}</div>
+      <div className="form-text fw-light text-danger">{error}</div>
     </div>
   );
 }

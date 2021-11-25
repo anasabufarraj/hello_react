@@ -39,26 +39,6 @@ class MoviesTable extends React.Component {
     };
   }
 
-  // TODO: Uncomment to hide movie title link
-  // handleTitleColumn() {
-  //   if (auth.getCurrentUserToken()) {
-  //     return {
-  //       path: 'title',
-  //       label: 'Title',
-  //       link: (movie) => (
-  //         <Link style={{ textDecoration: 'none' }} to={`/movies/${movie._id}`}>
-  //           {movie.title}
-  //         </Link>
-  //       ),
-  //     };
-  //   } else {
-  //     return {
-  //       path: 'title',
-  //       label: 'Title',
-  //     };
-  //   }
-  // }
-
   handleDeleteColumn() {
     const user = auth.getCurrentUserToken();
 

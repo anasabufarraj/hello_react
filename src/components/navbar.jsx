@@ -4,7 +4,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-function NavBar(props) {
+function NavBar({ user }) {
   return (
     <React.Fragment>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
@@ -20,7 +20,7 @@ function NavBar(props) {
               <NavLink className="nav-item nav-link" to="/rentals">
                 Rentals
               </NavLink>
-              {!props.user && (
+              {!user && (
                 <React.Fragment>
                   <NavLink className="nav-item nav-link" to="/login">
                     Login
@@ -30,7 +30,7 @@ function NavBar(props) {
                   </NavLink>
                 </React.Fragment>
               )}
-              {props.user && (
+              {user && (
                 <NavLink className="nav-item nav-link" to="/logout">
                   Logout
                 </NavLink>
@@ -39,12 +39,12 @@ function NavBar(props) {
           </div>
         </div>
       </nav>
-      {props.user && (
+      {user && (
         <div className="bg-primary">
           <div className="container text-end py-2">
             <NavLink className="nav-item nav-link text-white d-inline" to="/profile">
-              {props.user.name} <i className="bi-person-circle ps-1" />
-              {props.user.isAdmin ? ' Admin' : ''}
+              {user.name} <i className="bi-person-circle ps-1" />
+              {user.isAdmin ? ' Admin' : ''}
             </NavLink>
           </div>
         </div>

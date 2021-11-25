@@ -10,9 +10,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-// TODO [x] Simplify if, else, and return statements those with single line.
 // TODO [] Replace 'props' with object destructuring assignment.
-// TODO [] Replace this.props.user with function in authService.js or use the auth.getCurrentUserToken().
 
 ReactDOM.render(
   <React.StrictMode>

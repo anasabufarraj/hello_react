@@ -3,16 +3,12 @@
 //------------------------------------------------------------------------------
 import React from 'react';
 
-function Like(props) {
+function Like({ liked, onLike }) {
   // NOTE: props are read-only arguments
-  const icon = props.liked ? 'bi-suit-heart-fill' : 'bi-suit-heart';
+  const icon = liked ? 'bi-suit-heart-fill' : 'bi-suit-heart';
 
   return (
-    <i
-      style={{ fontSize: 20, cursor: 'pointer' }}
-      className={`bi ${icon} text-danger`}
-      onClick={props.onLike}
-    />
+    <i style={{ fontSize: 20, cursor: 'pointer' }} className={`bi ${icon} text-danger`} onClick={onLike} />
   );
 }
 

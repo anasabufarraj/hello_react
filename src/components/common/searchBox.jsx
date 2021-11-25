@@ -3,19 +3,19 @@
 //------------------------------------------------------------------------------
 import React from 'react';
 
-function SearchBox(props) {
+function SearchBox({ value, onChange, onClear }) {
   return (
     <div className="input-group">
       <input
         type="text"
         name="searchQuery"
-        value={props.value}
+        value={value}
         id="search"
-        onChange={(e) => props.onChange(e.currentTarget.value)}
+        onChange={(e) => onChange(e.currentTarget.value)}
         placeholder="Search"
         className="form-control"
       />
-      <button className="btn btn-primary" onClick={props.onClear} disabled={!props.value}>
+      <button className="btn btn-primary" onClick={onClear} disabled={!value}>
         Clear
       </button>
     </div>

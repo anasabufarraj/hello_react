@@ -3,22 +3,22 @@
 //------------------------------------------------------------------------------
 import React from 'react';
 
-function Input(props) {
+function Input({ name, label, type, value, onChange, autofocus, error }) {
   return (
     <div className="mb-3">
-      <label htmlFor={props.name} className="form-label">
-        {props.label}
+      <label htmlFor={name} className="form-label">
+        {label}
       </label>
       <input
-        type={props.type}
-        name={props.name}
-        value={props.value}
-        id={props.name}
+        type={type}
+        name={name}
+        value={value}
+        id={name}
         className="form-control"
-        onChange={props.onChange}
-        autoFocus={props.autofocus}
+        onChange={onChange}
+        autoFocus={autofocus}
       />
-      <div className="form-text fw-light text-danger">{props.error}</div>
+      <div className="form-text fw-light text-danger">{error}</div>
     </div>
   );
 }
