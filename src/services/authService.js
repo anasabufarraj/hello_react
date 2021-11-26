@@ -14,7 +14,7 @@ function getToken() {
 
 async function login(user) {
   // DOC: Get the data JSON Web Token (JWT) and store in the browser's localStorage object.
-  const { data: jwt } = await httpService.post(`${config.APIEndpointBase}/auth`, {
+  const { data: jwt } = await httpService.post('/auth', {
     // NOTE: Map the submit object to the database architecture.
     //  data: { username: '', password: '' }
     //  username.toLowerCase() => email

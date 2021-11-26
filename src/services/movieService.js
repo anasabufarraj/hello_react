@@ -2,18 +2,17 @@
 // Copyright 2021. Anas Abu Farraj.
 //------------------------------------------------------------------------------
 import httpService from './httpService';
-import config from '../config';
 
 export function getMovies() {
-  return httpService.get(`${config.APIEndpointBase}/movies`);
+  return httpService.get('/movies');
 }
 
 export function getMovie(movieId) {
-  return httpService.get(`${config.APIEndpointBase}/movies/${movieId}`);
+  return httpService.get(`/movies/${movieId}`);
 }
 
 export function deleteMovie(movieId) {
-  return httpService.delete(`${config.APIEndpointBase}/movies/${movieId}`);
+  return httpService.delete(`/movies/${movieId}`);
 }
 
 export function saveMovie(movie) {
@@ -23,8 +22,8 @@ export function saveMovie(movie) {
   if (movie._id) {
     const body = { ...movie };
     delete body._id;
-    return httpService.put(`${config.APIEndpointBase}/movies/${movie._id}`, body);
+    return httpService.put(`/movies/${movie._id}`, body);
   }
 
-  return httpService.post(`${config.APIEndpointBase}/movies`, movie);
+  return httpService.post(`/movies`, movie);
 }

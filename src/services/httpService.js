@@ -6,6 +6,8 @@ import { toast } from 'react-toastify';
 import config from '../config.json';
 // import logService from './logService';
 
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+
 // DOC: Handle unexpected errors.
 axios.interceptors.response.use(null, (err) => {
   const expectedErrors = err.response && err.response.status >= 400 && err.response.status < 500;

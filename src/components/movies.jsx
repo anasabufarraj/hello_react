@@ -136,9 +136,7 @@ class Movies extends React.Component {
     const data = this.handleData();
     const user = auth.getCurrentUserToken();
 
-    return this.state.movies.length === 0 ? (
-      <p className="lead text-center text-muted">You've no content to show!</p>
-    ) : (
+    return (
       <div className="row">
         <div className="col-6 col-md-3">
           <ListGroup
