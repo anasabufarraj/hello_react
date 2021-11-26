@@ -2,8 +2,8 @@
 // Copyright 2021. Anas Abu Farraj.
 //------------------------------------------------------------------------------
 import React from 'react';
-import auth from '../services/authService';
 import { NavLink } from 'react-router-dom';
+import auth from '../services/authService';
 
 function NavBar() {
   const user = auth.getCurrentUserToken();

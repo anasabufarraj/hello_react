@@ -2,11 +2,12 @@
 // Copyright 2021. Anas Abu Farraj.
 //------------------------------------------------------------------------------
 import React from 'react';
-import Joi from 'joi-browser';
 import Form from './common/form';
 import { getMovie, saveMovie } from '../services/movieService';
 import { getGenres } from '../services/genreService';
+import Joi from 'joi-browser';
 import { toast } from 'react-toastify';
+import auth from '../services/authService';
 import config from '../config.json';
 
 class MovieForm extends Form {
@@ -76,6 +77,8 @@ class MovieForm extends Form {
   }
 
   render() {
+    const user = auth.getCurrentUserToken();
+
     return (
       <React.Fragment>
         <h2 className="mb-3">{this.props.match.params.id === 'new' ? 'Add Movie' : 'Edit Movie'}</h2>
@@ -86,6 +89,11 @@ class MovieForm extends Form {
               {this.renderInputSelect('Genre', 'genreId', this.state.genres)}
               {this.renderInput('Number in Stock', 'number', 'numberInStock')}
               {this.renderInput('Rate', 'number', 'dailyRentalRate')}
+              {!user.isAdmin && this.props.match.params.id === 'new' && (
+                <p className="mb-3 text-danger small">
+                  <b>Note!</b> Deleting movies need an admin privileges.
+                </p>
+              )}
               {this.renderSubmitButton('Save')}
               {this.props.match.params.id === 'new' ? null : this.renderCancelButton('Cancel')}
             </form>
