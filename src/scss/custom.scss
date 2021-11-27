@@ -1,0 +1,20 @@
+//------------------------------------------------------------------------------
+// Copyright 2021. Anas Abu Farraj.
+//------------------------------------------------------------------------------
+
+// Custom variables
+$primary: #29739b;
+
+// Required Bootstrap functions and variables
+@import '../../node_modules/bootstrap/scss/functions';
+@import '../../node_modules/bootstrap/scss/variables';
+
+// Custom color themes
+$custom-theme-colors: (
+  'rose': #e6564e,
+);
+
+$theme-colors: map-merge($custom-theme-colors, $theme-colors);
+
+// Required Bootstrap
+@import '../../node_modules/bootstrap/scss/bootstrap';
