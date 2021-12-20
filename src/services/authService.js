@@ -50,6 +50,6 @@ const auth = {
   autoLogin,
   getCurrentUserToken,
   logout,
-};
+}; // DOC: Omit object value if key and value identical (ES6)
 
 export default auth;

@@ -4,7 +4,6 @@
 import React from 'react';
 
 function Like({ liked, onLike }) {
-  // NOTE: props are read-only arguments
   const icon = liked ? 'bi-suit-heart-fill' : 'bi-suit-heart';
 
   return (
