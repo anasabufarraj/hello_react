@@ -1,7 +1,7 @@
 {
   "name": "hello_react",
   "version": "0.9.7",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@sentry/react": "^6.15.0",
     "@sentry/tracing": "^6.15.0",
