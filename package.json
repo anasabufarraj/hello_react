@@ -1,6 +1,6 @@
 {
   "name": "hello_react",
-  "version": "0.9.7",
+  "version": "1.0.0",
   "private": false,
   "dependencies": {
     "@sentry/react": "^6.15.0",
